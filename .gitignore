@@ -1,0 +1,6 @@
+*.jeg		#忽略所有图片
+*.jpeg
+*.png
+*.gif
+assets/		#忽略运行时产生的资产
+protected/runtime/	#忽略运行时产生的日志
