@@ -21,6 +21,8 @@ drop table if exists mis_category;
 drop table if exists mis_article;
 drop table if exists mis_article_index;
 drop table if exists mis_comment;
+drop table if exists mis_dictionary;
+
 
 
 /*
@@ -118,6 +120,21 @@ create table mis_comment(
       
       constraint pk_comment_id		primary key (comment_id)
 )engine='InnoDB' default charset='utf8' comment='评论表';
+
+/*
+字典表，用于存储通用的KV数据
+*/
+
+create table mis_dictionary(
+      dictionary_id 	int unsigned not null auto_increment comment '字典id',
+      dictionary_type 	varchar(128) not null default '' comment '字典类型',
+      item_key		int unsigned not null default 0  comment '字典键',
+      item_value	varchar(256) not null default '' comment '字典值',
+      display_order	int unsigned not null default 0  comment '显示顺序',
+
+      constraint pk_dictionary_id 	primary key (dictionary_id),
+      index idx_type_key_value (dictionary_type, item_key, item_value)
+)engine='InnoDB' default charset='utf8' comment='字典表';
 
 
 
