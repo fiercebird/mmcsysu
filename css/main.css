@@ -4,7 +4,9 @@ body
 	padding: 0;
 	color: #555;
 	font: normal 10pt Arial,Helvetica,sans-serif;
-	background: #EFEFEF;
+/*	background: #EFEFEF;*/
+	
+	background: url(body_bg.jpg) repeat-x left top;
 }
 
 #page
@@ -12,14 +14,13 @@ body
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background: white;
-	border: 1px solid #C9E0ED;
 }
 
 #header
 {
 	margin: 0;
 	padding: 0;
-	border-top: 3px solid #C9E0ED;
+	background: url(header_bg.jpg) repeat-x left top;
 }
 
 #content
@@ -43,13 +44,11 @@ body
 
 #logo
 {
-	padding: 10px 20px;
-	font-size: 200%;
 }
 
 #mainmenu
 {
-	background:white url(bg.gif) repeat-x left top;
+	background: url(nav_bg.jpg) repeat-x left top;
 }
 
 #mainmenu ul
