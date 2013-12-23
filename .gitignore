@@ -2,6 +2,7 @@
 *.jpeg
 *.png
 *.gif
+*.swp		#临时文件
 assets/		#忽略运行时产生的资产
 protected/runtime/	#忽略运行时产生的日志
 tags		#忽略ctags索引文件
