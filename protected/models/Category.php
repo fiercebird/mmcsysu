@@ -10,6 +10,17 @@
 class Category extends CActiveRecord
 {
 	/**
+	*  5 fixed category CAN NOT be deleted or modifid
+	*/
+
+	static $CATE_SPECIAL_CLASSROOM=0;
+	static $CATE_REGULATION_RULES=1;
+	static $CATE_MULTIMEDIA_STYLE=2;
+	static $CATE_SERVICE_NEWS=3;
+	static $CATE_TECHNIQUE_SHARED=4;
+
+
+	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
 	 * @return Category the static model class

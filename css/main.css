@@ -13,6 +13,7 @@ body
 	margin-top: 5px;
 	margin-bottom: 5px;
 	background: white;
+	width:998px;
 }
 
 #header
@@ -259,3 +260,47 @@ div.search-form
 	padding:20px 10px;		
 	border:1px solid #CCCCCC;
 }
+
+#news .articleItem
+{
+	height:40px;
+}
+
+#news a
+{
+	float:left;
+	color:#000000;
+      	display:inline-block;
+	overflow: hidden; 
+	white-space: nowrap;   
+	-o-text-overflow:ellipsis; 
+	text-overflow:ellipsis; 
+	vertical-align:middle; 
+}
+
+
+.ruleItem
+{
+	margin:20px 0px 0px 0px;
+	border: 2px dashed #d6d6d6; 
+	border-width:0px 0px 2px 0px;
+}
+
+.ruleTitle
+{
+	margin:10px 0px 10px 0px;
+       	font-size:18px;
+       	font-weight:bold;
+}
+
+.ruleText
+{
+      	margin:10px 0px 5px 0px;
+      	color:#000000;
+      	width:96%;
+	text-indent:2em;
+       	line-height:150%;
+       	font-size:15px;
+       	word-break:break-all;
+}
+

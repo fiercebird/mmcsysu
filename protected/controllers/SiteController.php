@@ -1,4 +1,13 @@
 <?php
+/**
+ *Author: hehao
+ *Email:  mickeymousesysu@gmail.com
+ *Date: 2013-12-20
+ *Function:
+ *       Site Controller
+ *
+ */
+
 
 class SiteController extends Controller
 {
@@ -29,7 +38,8 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
+	   	$articles=Article::model()->published()->recently()->findAll();
+		$this->render('index', array('articles'=>$articles));
 	}
 
 	
@@ -112,5 +122,11 @@ class SiteController extends Controller
 	{
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
+	}
+
+	public function actionRule()
+	{
+		$rules=Article::model()->regulationRules()->findAll();			   
+		$this->render('rule', array('rules'=>$rules));
 	}
 }

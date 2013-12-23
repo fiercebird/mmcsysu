@@ -18,6 +18,12 @@
  */
 class Article extends CActiveRecord
 {
+
+	static $STATUS_DRAFT=0;
+	static $STATUS_PUBLISHED=1;
+     	static $STATUS_GARBAGE=2;
+	static $STATUS_DELETED=3;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -114,4 +120,29 @@ class Article extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+	
+	/**
+	 * Namedscope
+	 */
+	public function scopes()
+	{
+		return array(
+		     	'draft'=>array('condition'=>'status=' . self::$STATUS_DRAFT),
+			'published'=>array('condition'=>'status=' . self::$STATUS_PUBLISHED),      
+			'garbage'=>array('condition'=>'status=2'. self::$STATUS_GARBAGE),      
+			'deleted'=>array('condition'=>'status=3'. self::$STATUS_DELETED),
+			'recently'=>array(
+			   	'select'=>'article_id, campus_id, publisher, title, create_time',
+				'order'=>'create_time DESC',
+				'limit'=>'10',
+			),
+			'specialClassroom'=>array('condition'=>'category_id=' . Category::$CATE_SPECIAL_CLASSROOM),
+			'regulationRules'=>array(
+			   'select'=>"article_id, title,left(content,600) as content",
+			   'condition'=>'category_id='. Category::$CATE_REGULATION_RULES),
+		);
+	}
+
+
 }

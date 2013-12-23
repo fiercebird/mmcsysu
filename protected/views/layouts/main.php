@@ -32,10 +32,10 @@
 		<?php $this->widget('zii.widgets.CMenu',array(
 			'items'=>array(
 				array('label'=>'首页', 'url'=>array('/site/index')),
-				array('label'=>'课室介绍', 'url'=>array('/site/index')),
-				array('label'=>'特色课室', 'url'=>array('/site/index')),
-				array('label'=>'服务列表', 'url'=>array('/site/index')),
-				array('label'=>'规章制度', 'url'=>array('/site/index')),
+				array('label'=>'课室介绍', 'url'=>array('/site/introduce')),
+				array('label'=>'特色课室', 'url'=>array('/site/special')),
+				array('label'=>'服务列表', 'url'=>array('/site/service')),
+				array('label'=>'规章制度', 'url'=>array('/site/rule')),
 				array('label'=>'技术探索', 'url'=>array('/site/test')),
 				array('label'=>'多媒体风采', 'url'=>array('/site/index')),
 				array('label'=>'意见收集', 'url'=>array('/site/index')),

@@ -14,6 +14,12 @@
  */
 class Comment extends CActiveRecord
 {
+	static $STATUS_NOT_PASS=0;
+	static $STATUS_PASS=1;
+	static $STATUS_PASS_TOP=2;
+	static $STATUS_GARBAGE=3;
+
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
