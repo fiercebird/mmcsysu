@@ -93,4 +93,22 @@ class Dictionary extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+
+
+	/**
+	*  NamedScope
+	*/
+	public function scopes()
+	{
+		return array(
+			'specialClassroomItems'=>array(
+				'select'=>'item_key, item_value, display_order',
+				'condition'=>'dictionary_type="' . Yii::app()->params['dictTypeSpecialClassroom'] . '"',
+			),
+		
+		);
+	
+	}
+
+	
 }

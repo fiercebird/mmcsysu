@@ -137,10 +137,13 @@ class Article extends CActiveRecord
 				'order'=>'create_time DESC',
 				'limit'=>Yii::app()->params['recentlyNewsCount'],
 			),
-			'specialClassroom'=>array('condition'=>'category_id=' . Category::$CATE_SPECIAL_CLASSROOM),
+			'specialClassroom'=>array(
+			   'condition'=>'category_id=' . Category::$CATE_SPECIAL_CLASSROOM
+			),
 			'regulationRules'=>array(
 			   'select'=>"article_id, title,left(content,600) as content",
-			   'condition'=>'category_id='. Category::$CATE_REGULATION_RULES),
+			   'condition'=>'category_id='. Category::$CATE_REGULATION_RULES
+			),
 		);
 	}
 

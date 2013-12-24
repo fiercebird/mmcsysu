@@ -142,11 +142,17 @@ div.breadcrumbs
 {
 	font-size: 0.9em;
 	padding: 5px 20px;
+	background:rgb(245,245,245);
+	/*
+	border-width:0 0 1px 0;
+	border-style:dotted;
+	border-color:#CCCCCC;
+*/
 }
 
 div.breadcrumbs span
 {
-	font-weight: bold;
+   	color:rgb(153,153,153);
 }
 
 div.search-form
@@ -247,7 +253,7 @@ div.search-form
 .hr1{ height:1px;border:none;border-top:1px solid #555555;}
 .hr2{ height:3px;border:none;border-top:3px double #259CA4;margin:3px 0 15px 0; }
 .hr3{ height:5px;border:none;border-top:5px ridge green;}
-.hr4{ height:10px;border:none;border-top:10px groove skyblue;}
+.hr4{ height:3px;border:none;border-top:3px groove #A1D4D7;}
 
 #info
 {
@@ -310,3 +316,40 @@ div.search-form
 
 }
 
+
+#specialLeftNavbar
+{
+   	display:inline-block;
+	float:left;
+	width:18%;
+	border:1px solid #CCCCCC;
+	min-height:600px;
+	padding:10px 0px 0px 0px;
+	background:url("special_bottom_left.jpg") no-repeat scroll bottom left;
+}
+
+#specialRightContent
+{
+	display:inline-block;
+	float:right;	
+	width:80%;
+}
+
+
+#specialClassroom .nav-header
+{
+	font-size:18px;
+	border-width:0 0 2px 0;
+	border-style:dotted;
+	border-color:#CCCCCC;
+}
+
+
+#specialClassroom a
+{
+	padding: 7px 15px;
+	color:#000000;
+	border-width:0px 0px 1px 0px;
+	border-style:solid;
+	border-color:#CCCCCC;
+}

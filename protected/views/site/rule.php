@@ -7,13 +7,14 @@
  *  
  */
 
+
+$this->pageTitle=Yii::app()->name . ' - 规章制度';
+$this->breadcrumbs=array(
+           '规章制度',
+);
+
 $ruleList="";
-//foreach($rules as $rule)
-//{
-//	$ruleList.='<div class="ruleItem"><div class="ruleTitle"><a href="' . Yii::app()->createUrl("article/ruleDetail",array('articleId'=>$rule['article_id'])) . '">'. $rule['title'] .'</a></div><div class="RuleText">'.strip_tags($rule['content']).'......</div></div>';
-//
-//}
-//
+
 foreach($rules as $rule)
 {
 	$ruleList.='<div class="ruleItem"><div class="ruleTitle"><a href="' . Yii::app()->createUrl("article/ruleDetail",array('articleId'=>$rule->article_id)) . '">'. $rule->title .'</a></div><div class="ruleText">'. strip_tags($rule->content) .'......</div></div>';

@@ -133,7 +133,9 @@ class SiteController extends Controller
 
 	public function actionSpecial()
 	{
-		$specialClassRooms=Article::model()->specialClassroom()->findAll();
-		$this->render('specialClassRoom',array(''));
+		$specialClassroomItems=Dictionary::model()->specialClassroomItems()->findAll();
+		$specialClassroomSummary=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['classroomSummary']));
+		$this->render('specialClassroom',array('classroomItems'=>$specialClassroomItems, 'classroomSummary'=>$specialClassroomSummary));
+	
 	}
 }
