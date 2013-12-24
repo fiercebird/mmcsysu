@@ -11,6 +11,7 @@
 
 class SiteController extends Controller
 {
+   	
 	/**
 	 * Declares class-based actions.
 	 */
@@ -128,5 +129,11 @@ class SiteController extends Controller
 	{
 		$rules=Article::model()->regulationRules()->findAll();			   
 		$this->render('rule', array('rules'=>$rules));
+	}
+
+	public function actionSpecial()
+	{
+		$specialClassRooms=Article::model()->specialClassroom()->findAll();
+		$this->render('specialClassRoom',array(''));
 	}
 }

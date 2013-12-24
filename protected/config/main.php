@@ -142,5 +142,7 @@ return array(
 	'params'=>array(
 		// this is used in contact page
 		'adminEmail'=>'hehao5@mail2.sysu.edu.cn',
+		'recentlyNewsCount'=>12,	//首页上显示的最近服务咨询的条数
+		'dictTypeSpecialClassRomm'=>'SpecialClassRoom',  //特色课室在KV字典表的类型名称
 	),
 );

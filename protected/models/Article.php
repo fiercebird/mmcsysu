@@ -130,12 +130,12 @@ class Article extends CActiveRecord
 		return array(
 		     	'draft'=>array('condition'=>'status=' . self::$STATUS_DRAFT),
 			'published'=>array('condition'=>'status=' . self::$STATUS_PUBLISHED),      
-			'garbage'=>array('condition'=>'status=2'. self::$STATUS_GARBAGE),      
-			'deleted'=>array('condition'=>'status=3'. self::$STATUS_DELETED),
+			'garbage'=>array('condition'=>'status='. self::$STATUS_GARBAGE),      
+			'deleted'=>array('condition'=>'status='. self::$STATUS_DELETED),
 			'recently'=>array(
 			   	'select'=>'article_id, campus_id, publisher, title, create_time',
 				'order'=>'create_time DESC',
-				'limit'=>'10',
+				'limit'=>Yii::app()->params['recentlyNewsCount'],
 			),
 			'specialClassroom'=>array('condition'=>'category_id=' . Category::$CATE_SPECIAL_CLASSROOM),
 			'regulationRules'=>array(

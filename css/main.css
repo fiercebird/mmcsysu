@@ -298,9 +298,15 @@ div.search-form
       	margin:10px 0px 5px 0px;
       	color:#000000;
       	width:96%;
+	max-height:70px;
 	text-indent:2em;
        	line-height:150%;
        	font-size:15px;
        	word-break:break-all;
+	overflow: hidden; 
+/*	white-space: nowrap;  */   
+	-o-text-overflow:ellipsis; 
+	text-overflow:ellipsis; 
+
 }
 
