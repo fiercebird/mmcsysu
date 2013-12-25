@@ -47,12 +47,18 @@ class SiteController extends Controller
 	
 	public function actionTest()
 	{
-	      // renders the view file 'protected/views/site/index.php'
-	      // using the default layout 'protected/views/layouts/main.php'
-	
-            $tt= file_get_contents('http://home3.sysu.edu.cn/zwc/news/news01/39586.htm'); 
-              $tt=strip_tags($tt,'div span table tr td tbody a p');
-           $this->render('test',array('tt'=>$tt));
+                $html=new simple_html_dom();
+                $html->load_file('./protected/data/zongwuchuCampusBus.html');	
+                $content=$html->find('div.cont',0)->children(3);
+                $res='';
+                while($content!=null)
+                {
+                        $res.=$content->outertext;
+                        $content=$content->next_sibling();
+                }
+                $html->clear();
+
+           $this->render('test',array('tt'=>$res));
       	}
 	/**
 	 * This is the action to handle external exceptions.
@@ -148,5 +154,21 @@ class SiteController extends Controller
                 $this->layout='column3';
                 $siteIntroduceArticle=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['siteIntroduceArticle']));
                 $this->render('classroomIntroduce', array('siteIntroduceArticle'=>$siteIntroduceArticle));
+        }
+
+        public function actionCampusBus()
+        {
+                $this->layout='column3';
+                $html=new simple_html_dom();
+                $html->load_file('./protected/data/zongwuchuCampusBus.html');	
+                $content=$html->find('div.cont',0)->children(3);
+                $res='';
+                while($content!=null)
+                {
+                        $res.=$content->outertext;
+                        $content=$content->next_sibling();
+                }
+                $html->clear();
+                $this->render('campusBus',array('campusBus'=>$res));
         }
 }

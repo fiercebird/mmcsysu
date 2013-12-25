@@ -21,6 +21,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+                'ext.simple_html_dom',
 	),
 
 	'modules'=>array(

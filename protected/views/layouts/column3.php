@@ -15,7 +15,7 @@
                         array('label'=>'北校区','url'=>array('/site/page', 'view'=>'classroom.north'), 'icon'=>'th'),
                         array('label'=>'校区交通', 'icon'=>'plane'),
                         array('label'=>'购票信息','url'=>array('/site/page', 'view'=>'ticketInfo'), 'icon'=>'th-list'),
-                        array('label'=>'校车时刻表','url'=>array('/site/page', 'view'=>'campusBus'), 'icon'=>'time'),
+                        array('label'=>'校车时刻表','url'=>array('/site/campusBus' ), 'icon'=>'time'),
                         array('label'=>'地图查询', 'icon'=>'search'),
                     ),
 		 )); ?>
