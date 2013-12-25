@@ -27,6 +27,7 @@ class SiteController extends Controller
 			// They can be accessed via: index.php?r=site/page&view=FileName
 			'page'=>array(
 				'class'=>'CViewAction',
+                                'layout'=>'column3',
 			),
 		);
 	}
@@ -48,7 +49,10 @@ class SiteController extends Controller
 	{
 	      // renders the view file 'protected/views/site/index.php'
 	      // using the default layout 'protected/views/layouts/main.php'
-	      $this->render('test');
+	
+            $tt= file_get_contents('http://home3.sysu.edu.cn/zwc/news/news01/39586.htm'); 
+              $tt=strip_tags($tt,'div span table tr td tbody a p');
+           $this->render('test',array('tt'=>$tt));
       	}
 	/**
 	 * This is the action to handle external exceptions.
@@ -134,8 +138,15 @@ class SiteController extends Controller
 	public function actionSpecial()
 	{
 		$specialClassroomItems=Dictionary::model()->specialClassroomItems()->findAll();
-		$specialClassroomSummary=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['classroomSummary']));
-		$this->render('specialClassroom',array('classroomItems'=>$specialClassroomItems, 'classroomSummary'=>$specialClassroomSummary));
+		$siteSpecialArticle=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['siteSpecialArticle']));
+		$this->render('specialClassroom',array('classroomItems'=>$specialClassroomItems, 'siteSpecialArticle'=>$siteSpecialArticle));
 	
 	}
+
+        public function actionIntroduce()
+        {
+                $this->layout='column3';
+                $siteIntroduceArticle=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['siteIntroduceArticle']));
+                $this->render('classroomIntroduce', array('siteIntroduceArticle'=>$siteIntroduceArticle));
+        }
 }

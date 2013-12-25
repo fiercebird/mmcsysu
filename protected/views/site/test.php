@@ -2,9 +2,13 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name;
+
+echo $tt;
+
 ?>
 
 <div></div>
+
 
 
 <div class="row">
@@ -43,7 +47,7 @@ $gridDataProvider = new CArrayDataProvider(array(
 
 
 <?php $this->widget('bootstrap.widgets.TbGridView', array(
-	 'type'=>'striped bordered condensed',
+	 'type'=>'striped bordered condensed text-center',
 	 'dataProvider'=>$gridDataProvider,
 	 'template'=>"{items}",
 	 'columns'=>array(

@@ -66,3 +66,15 @@
 
 </body>
 </html>
+
+
+<!--
+左侧导航栏目自适应右侧内容高度
+-->
+
+<script language='javascript'  type='text/javascript' />
+$(document).ready(function(){
+        var height=$('div.leftNavbar').next().height();
+        $('div.leftNavbar ul').css('height',height);
+});
+</script>
