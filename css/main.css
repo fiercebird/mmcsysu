@@ -438,3 +438,43 @@ div.search-form
         width:500px;
         margin:20px auto;
 }
+
+
+.siteLink a
+{
+        margin:0px 2px;
+        display:inline-block;
+        width:238px;
+        height:45px;
+        float:left;
+        position:relative;
+        background:#CCCCCC url('link_icon.jpg') no-repeat;
+        text-align:center;                 
+        font-size:20px;
+}
+
+.siteLink a span
+{
+        display:block;
+        margin:10px; auto;
+}
+
+#link1
+{
+        background-position:0.15% 0%;
+}
+
+#link2
+{
+        background-position:33.50% 0%;
+}
+
+#link3
+{
+        background-position:67.15% 0%;
+}
+
+#link4
+{
+        background-position:100% 0%;
+}

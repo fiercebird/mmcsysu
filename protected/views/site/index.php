@@ -31,5 +31,10 @@ foreach($articles as $article)
 <div class="row-fliud">
 <div class="font1">常用链接</div>
 <br />
-<img src="<?php echo Yii::app()->baseUrl . '/images/link.jpg'; ?> " />
+<div>
+<div class="siteLink"><a  id='link1' target='_blank' href='http://home.sysu.edu.cn/zdnl/2013/'><span>中大校历</span></a></div>
+<div class="siteLink"><a  id='link2'  target='_blank' href='http://bbs.sysu.edu.cn/'><span>逸仙时空</span></a></div>
+<div class="siteLink"><a  id='link3'  target='_blank' href='http://www.bojistudio.org/'><span>博济在线</span></a></div>
+<div class="siteLink"><a  id='link4'  target='_blank'  href='http://lecture.sysu.edu.cn/'><span>逸仙讲坛</span></a></div>
+</div>
 </div>
