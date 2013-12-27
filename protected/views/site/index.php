@@ -6,13 +6,13 @@ $this->pageTitle=Yii::app()->name;
 $articleList="";
 foreach($articles as $article)
 {
-  $articleList.='<div class="aritcleItem"><a class="row-fluid" title="' . $article->title . '" href="'. Yii::app()->createUrl("article/detail", array("articleid"=>$article->article_id))  .'">'. $article->title .'</a></div>';
+  $articleList.='<div class="aritcleItem"><a class="row-fluid" title="' . $article->title . '" href="'. Yii::app()->createUrl("site/article", array("id"=>$article->article_id,"cate"=>'index'))  .'">'. $article->title .'</a></div>';
 }
 ?>
 
 <div class="row-fluid">
 <div id='info' class="span7  pull-left" >
-<div class='row-fluid'><span class='font1'>服务信息</span><a style="width:50px;float:right;" href="/modules/InfoNotice/infoindex.php?CateId=1&CatyName=信息公告">更多>></a></div>
+<div class='row-fluid'><span class='font1'>服务信息</span><a  class='pull-right'  href="#">更多>></a></div>
 <hr class="hr2"/>
 <div id="news">
 <?php echo $articleList; ?>

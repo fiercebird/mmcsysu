@@ -26,13 +26,14 @@ $this->breadcrumbs=array(
 <div id='test'><div>
 
 
-<script language="javascript" type="text/javascript"> 
+<script language='javascript'  type='text/javascript' />
 $(document).ready(function(){
         //替换table样式，改为横向可滑动
         $('#content table').each(function(){
                 var innerHtml=$(this).html();
-                $(this).before('<div class="mytable1" style="width:100%;overflow-x:scroll;overflow-y:auto;"><table class="items table table-striped table-bordered table-condensed" style="min-width:1500px;">'+ innerHtml +'</table></div>');
+                $(this).before('<div class="mytable1" style="width:100%;max-height:600px;overflow-x:scroll;overflow-y:auto;"><table class="items table table-striped table-bordered table-condensed" style="min-width:1500px;">'+ innerHtml +'</table></div>');
                 $(this).remove();
         });
        });
+
 </script>

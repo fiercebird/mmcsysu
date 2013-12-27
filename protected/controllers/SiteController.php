@@ -41,6 +41,8 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 	   	$articles=Article::model()->published()->recently()->findAll();
+                if(empty($articles))
+                   Yii::log('Article titles is null','warning','db.actionIndex');
 		$this->render('index', array('articles'=>$articles));
 	}
 
@@ -138,13 +140,17 @@ class SiteController extends Controller
 	public function actionRule()
 	{
 		$rules=Article::model()->regulationRules()->findAll();			   
-		$this->render('rule', array('rules'=>$rules));
+                if(empty($rules))
+                       Yii::log('Article about rule is null', 'warning', 'db.actionRule');
+                $this->render('rule', array('rules'=>$rules));
 	}
 
 	public function actionSpecial()
 	{
 		$specialClassroomItems=Dictionary::model()->specialClassroomItems()->findAll();
 		$siteSpecialArticle=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['siteSpecialArticle']));
+                if(empty($specialClassroomItems) || empty($siteSpecialArticle))
+                        Yii::log('Article about specialclassroom is null', 'warning', 'db.actionSpecial');
 		$this->render('specialClassroom',array('classroomItems'=>$specialClassroomItems, 'siteSpecialArticle'=>$siteSpecialArticle));
 	
 	}
@@ -153,6 +159,8 @@ class SiteController extends Controller
         {
                 $this->layout='column3';
                 $siteIntroduceArticle=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['siteIntroduceArticle']));
+                if(empty($siteIntroduceArticle))
+                        Yii::log('Articla about classroom introduce is null','warning', 'db.actionIntroduce');
                 $this->render('classroomIntroduce', array('siteIntroduceArticle'=>$siteIntroduceArticle));
         }
 
@@ -169,6 +177,31 @@ class SiteController extends Controller
                         $content=$content->next_sibling();
                 }
                 $html->clear();
+                if(empty($res))
+                   Yii::log('Article abou campus bus is null', 'warning', 'uc.actionCampusBus');
                 $this->render('campusBus',array('campusBus'=>$res));
+        }
+
+
+        public function actionArticle()
+        {
+                $id=Yii::app()->request->getParam('id');
+                $cate=Yii::app()->request->getParam('cate');
+                if(!isset($id) || !isset($cate))
+                   throw new CHttpException(404,'非法请求');
+                $article=Article::model()->findByPk($id);
+                if(empty($article))
+                    Yii::log('CAN NOT find article id='. $id, 'warning', 'db.actionArticle');
+                $this->render('article',array('article'=>$article,'cate'=>$cate));
+        }
+
+
+        public function actionClassroomDetail()
+        {
+                $this->layout='column3';
+                $bid=Yii::app()->request->getParam('bid');
+                $className=Yii::app()->request->getParam('className');
+                $classroom=$bid.'_'. $className;
+                $this->render('classroomDetail',array('classroom'=>$classroom,'bid'=>1));
         }
 }

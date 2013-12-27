@@ -478,3 +478,21 @@ div.search-form
 {
         background-position:100% 0%;
 }
+
+
+#article 
+{
+        width:730px;
+        margin:auto auto;
+}
+
+.articleInfo
+{
+        color:rgb(127,127,127);
+        text-align:center;
+}
+
+.articleInfo span
+{
+        margin:0px 30px;
+}
