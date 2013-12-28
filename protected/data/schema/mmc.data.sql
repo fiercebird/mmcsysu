@@ -10,7 +10,8 @@
 **/
 
 use mis;
-insert into mis_category (category_name) values ('特色课室'), ('规章制度'), ('多媒体风采'), ('服务资讯'), ('技术探索');
+insert into mis_category (category_name) values
+('特色课室'), ('规章制度'),  ('服务资讯'), ('技术探索'),('优秀助理'), ('活动报道'), ('工作感想');
 
 
 /*

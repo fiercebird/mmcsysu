@@ -56,11 +56,13 @@ foreach($classroomItems as $classroom)
 			data:{"id":id },
 			dataType: 'json',
 			success:function(response)
-			{
+                        {
+                            if(response.article!=null){
                                 $('#articleTitle').html(response.article.title);
                                 $('#articleContent').html(response.article.content);
                                 var height=$('div.leftNavbar').next().height();//自适应高度:w
                                 $('div.leftNavbar ul').css('height',height);
+                             }
 			},
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                                 alert('错误码：'+ XMLHttpRequest.status);

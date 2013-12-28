@@ -216,7 +216,7 @@ class SiteController extends Controller
                         $id=Yii::app()->request->getParam('id');
                         $article=Article::model()->findByPk($id);
                         if(empty($article))
-                                Yii::log('CAN NOT find article id='. $id, 'warning', 'db.actionArticle');
+                                Yii::log('CAN NOT find article id='. $id, 'error', 'db.actionArticle');
                         $res=array('article'=>$article); 
                          echo CJSON::encode($res);
                 }else
