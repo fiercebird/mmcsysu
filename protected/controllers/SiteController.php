@@ -207,4 +207,19 @@ class SiteController extends Controller
                 $classroom=$bid.'_'. $className;
                 $this->render('classroomDetail',array('classroom'=>$classroom,'bid'=>$bid, 'className'=>$className));
         }
+
+
+        public function actionGetSpecialRoom()
+        {
+                if(Yii::app()->request->isAjaxRequest)
+                {
+                        $id=Yii::app()->request->getParam('id');
+                        $article=Article::model()->findByPk($id);
+                        if(empty($article))
+                                Yii::log('CAN NOT find article id='. $id, 'warning', 'db.actionArticle');
+                        $res=array('article'=>$article); 
+                         echo CJSON::encode($res);
+                }else
+                   throw new CHttpException('404','非法请求');
+        }
 }

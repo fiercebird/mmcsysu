@@ -39,9 +39,9 @@ foreach($classroomItems as $classroom)
 	</div>
 	<div  class='rightContent'>
 		<?php  if(isset($siteSpecialArticle)) {   ?>  
-			<div class='text-center'><h4><?php echo $siteSpecialArticle->title; ?></h4> </div>
+			<div class='text-center'><h4  id='articleTitle'><?php echo $siteSpecialArticle->title; ?></h4> </div>
 			<hr class='hr4'/>
-			<div><?php echo $siteSpecialArticle->content; ?></div>
+			<div id='articleContent'><?php echo $siteSpecialArticle->content; ?></div>
 
 		<?php } ?>
 	</div>
@@ -50,21 +50,22 @@ foreach($classroomItems as $classroom)
 <script language="javascript" type="text/javascript"> 
 	$('#specialClassroom li a').click(function(){
 		var id=$(this).attr('id');
-                //alert(id);
-                //alert(typeof(id));
 		$.ajax({
-                        url: 'article/getSpeicalRoom',
-			method: 'post',
+                        url:"/mmcsysu/index.php/site/getSpecialRoom",
+			method:'post',
+			data:{"id":id },
 			dataType: 'json',
-			data:'{"articleId":'+ id +'}',
 			success:function(response)
 			{
+                                $('#articleTitle').html(response.article.title);
+                                $('#articleContent').html(response.article.content);
+                                var height=$('div.leftNavbar').next().height();//自适应高度:w
+                                $('div.leftNavbar ul').css('height',height);
 			},
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
-                                return ;
-                                alert(XMLHttpRequest.status);
-                                alert(XMLHttpRequest.readyState);
-                                alert(textStatus);
+                                alert('错误码：'+ XMLHttpRequest.status);
+                                //alert(XMLHttpRequest.readyState);
+                                //alert(textStatus);
                         },
 		});
 	});
