@@ -198,10 +198,13 @@ class SiteController extends Controller
 
         public function actionClassroomDetail()
         {
+                Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/slider.js',CClientScript::POS_HEAD);
                 $this->layout='column3';
                 $bid=Yii::app()->request->getParam('bid');
                 $className=Yii::app()->request->getParam('className');
+                if(!isset($bid) || !isset($className))
+                   throw new CHttpException(404,'非法请求');
                 $classroom=$bid.'_'. $className;
-                $this->render('classroomDetail',array('classroom'=>$classroom,'bid'=>1));
+                $this->render('classroomDetail',array('classroom'=>$classroom,'bid'=>$bid, 'className'=>$className));
         }
 }
