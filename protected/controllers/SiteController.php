@@ -222,4 +222,12 @@ class SiteController extends Controller
                 }else
                    throw new CHttpException('404','非法请求');
         }
+
+
+        public function actionTeamStyle()
+        {
+        
+                $this->render('teamStyle',array());
+        }
+
 }
