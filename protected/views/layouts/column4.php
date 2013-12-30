@@ -19,10 +19,10 @@
 	         'id'=>'teamStyle',
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'多媒体风采', 'icon'=>'th-large'),
-                        array('label'=>'优秀助理','url'=>array('/site/page', 'view'=>'classroom.east'), 'icon'=>'th'),
-                        array('label'=>'工作感想','url'=>array('/site/page', 'view'=>'classroom.zhuhai'),'icon'=>'th'),
-                        array('label'=>'活动报道','url'=>array('/site/page', 'view'=>'classroom.north'), 'icon'=>'th'),
+                        array('label'=>'多媒体风采', 'icon'=>'flag'),
+                        array('label'=>'优秀助理','url'=>array('/site/page', 'view'=>'classroom.east'), 'icon'=>'thumbs-up'),
+                        array('label'=>'工作感想','url'=>array('/site/page', 'view'=>'classroom.zhuhai'),'icon'=>'pencil'),
+                        array('label'=>'活动报道','url'=>array('/site/page', 'view'=>'classroom.north'), 'icon'=>'bullhorn'),
                     ),
 		 )); ?>
 	</div>

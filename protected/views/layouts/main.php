@@ -72,7 +72,9 @@
 //左侧导航栏目自适应右侧内容高度
 $(document).ready(function(){
         var height=$('div.leftNavbar').next().height();
-        $('div.leftNavbar ul').css('height',height);
+        if(height>600){
+                $('div.leftNavbar ul').css('height',height);
+        }
 });
 
 </script>

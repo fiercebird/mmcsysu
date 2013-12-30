@@ -508,3 +508,194 @@ div.search-form
         height:310px;
 }
 
+
+
+
+.slideContainer 
+{
+        -moz-box-shadow: 6px 6px 5px #969696;
+        -webkit-box-shadow: 6px 6px 5px #969696;
+        box-shadow: 6px 6px 5px #969696;
+        border:inset 1px #E6E6E6;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        width:500px;
+        height:350px;
+        padding:10px;
+        margin:0 auto;
+        position:relative;
+        z-index:0;
+}
+
+#slides1 ,#slides2,#slides3{
+        position:absolute;
+        top:15px;
+        left:14px;
+        z-index:100;
+}
+
+
+
+/*
+ * Slides container
+ * Important:
+ * Set the width of your slides container
+ * Set to display none, prevents content flash
+ * */
+
+.slides_container {
+        width:490px;
+        overflow:hidden;
+        position:relative;
+        display:none;
+}
+
+/*
+ * Each slide
+ * Important:
+ * Set the width of your slides
+ * If height not specified height will be set by the slide content
+ * Set to display block
+ * */
+
+.slides_container div.slide {
+        width:450px;
+        height:300px;
+        display:block;
+}
+
+
+/*
+ * Next/prev buttons
+ * */
+
+
+.prev 
+{
+        position:absolute;
+        top:150px;
+        left:-39px;
+        width:24px;
+        height:43px;
+        display:block;
+        background:url("/mmcsysu/images/mmintro/arrow-prev.png") ;
+}
+
+.next 
+{
+        position:absolute;
+        top:150px;
+        left:607px;
+        width:24px;
+        height:43px;
+        display:block;
+        background:url("/mmcsysu/images/mmintro/arrow-next.png");
+}
+
+
+/*
+ * Pagination
+ * */
+
+.pagination {
+        margin:18px auto 0;
+        width:100px;
+
+}
+
+.pagination li {
+        float:left;
+        margin:0 1px;
+        list-style:none;
+
+}
+
+.pagination li a {
+        display:block;
+        width:12px;
+        height:0;
+        padding-top:12px;
+        background-image:url(mmcsysu/images/mmintro/pagination.png);
+        background-position:0 0;
+        float:left;
+        overflow:hidden;
+}
+
+.pagination li.current a {
+        background-position:0 -12px;
+}
+
+
+.caption {
+        z-index:500;
+        position:absolute;
+        bottom:-35px;
+        left:0;
+        height:30px;
+        width:550px;
+        padding:5px 20px 0 20px;
+        background:#000;
+        background:rgba(0,0,0,.5);
+        filter:alpha(opacity=50); /*IE系列除了IE8之外*/
+        -ms-filter:alpha(opacity=50);/*IE8*/
+        opacity:0.5;   /*CSS标准.该属性支持firefox, Safari和 Opera*/
+        -moz-opacity:0.5;  /*老版本的Mozilla浏览器*/
+        -khtml-opacity: 0.5;  /*老版本的Safari浏览器*/
+        line-height:1.33;
+        color:#fff;
+        border-top:1px solid #000;
+        text-shadow:none;
+}
+
+.caption  p
+{
+        color:#FFFFFF;
+        font-size:1.1em;
+        font-weight:bold;
+}
+
+
+
+
+#about
+{
+        width:1000px;
+        min-height:600px;
+}
+
+.about_us
+{
+        float:left;
+        width:250px;
+        padding:20px;
+}
+
+.PicSlide
+{
+        width:480px; 
+        height:330px;
+        float:left;
+}
+
+.about_content
+{
+        margin:10px 10px 10px 10px;
+        padding:5px 5px 5px 5px;
+        -moz-box-shadow:inset 4px 4px 34px #969696;
+        -webkit-box-shadow:inset 4px 4px 34px #969696;
+        box-shadow:inset 4px 4px 34px #969696;
+        -moz-border-radius: 5px;
+        -webkit-border-radius: 5px;
+        border-radius: 5px;
+        display:inline-block;
+        background-image:url("/mmcsysu/images/mmintro/bg.jpg");
+        background-repeat:no-repeat;
+}
+
+.image 
+{
+        width:450px;
+        height:300px;
+        border:0px;
+}

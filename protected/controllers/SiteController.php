@@ -227,6 +227,8 @@ class SiteController extends Controller
         public function actionTeamStyle()
         {
         
+                Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/slides.min.jquery.js',CClientScript::POS_HEAD);
+                $this->layout='column4';
                 $this->render('teamStyle',array());
         }
 

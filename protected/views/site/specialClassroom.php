@@ -61,7 +61,9 @@ foreach($classroomItems as $classroom)
                                 $('#articleTitle').html(response.article.title);
                                 $('#articleContent').html(response.article.content);
                                 var height=$('div.leftNavbar').next().height();//自适应高度:w
-                                $('div.leftNavbar ul').css('height',height);
+                                if(height>500){
+                                 $('div.leftNavbar ul').css('height',height);
+                                 }
                              }
 			},
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
