@@ -101,25 +101,26 @@ create table mis_article_index(
 /**
  
   status
-  0	未审核的评论
-  1	页面上的评论
-  2	页面上置顶的评论
-  3	垃圾箱的评论
+  0	未审核的留言
+  1	页面上的留言
+  2	页面上置顶的留言
+  3	垃圾箱的留言
  
  */
 
 
-create table mis_comment(
-      comment_id 	int unsigned not null auto_increment comment '评论id',
-      article_id	int unsigned not null default 0 comment '所属文章id',
+create table mis_note(
+      note_id 	        int unsigned not null auto_increment comment '留言id',
       create_time	datetime not null default '0000-00-00 00:00:00' comment '发布时间',
-      author		varchar(128) not null default '' comment '评论人',
-      emial		varchar(256) not null default '' comment '评论人邮箱',
-      content 		text not null default '' comment '评论内容',
-      status 		tinyint(4) not null default 0 comment '评论状态',
-      
-      constraint pk_comment_id		primary key (comment_id)
-)engine='InnoDB' default charset='utf8' comment='评论表';
+      author		varchar(128) not null default '' comment '留言人',
+      emial		varchar(256) not null default '' comment '留言人邮箱',
+      content 		varchar(1024) not null default '' comment '留言内容',
+      status 		tinyint(4) not null default 0 comment '审核状态',
+      reply             varchar(1024) not null default '' comment '管理员回复', 
+
+      constraint pk_comment_id		primary key (note_id)
+)engine='InnoDB' default charset='utf8' comment='留言表';
+
 
 /*
 字典表，用于存储通用的KV数据
@@ -135,6 +136,5 @@ create table mis_dictionary(
       constraint pk_dictionary_id 	primary key (dictionary_id),
       index idx_type_key_value (dictionary_type, item_key, item_value)
 )engine='InnoDB' default charset='utf8' comment='字典表';
-
 
 

@@ -1,29 +1,30 @@
 <?php
 
 /**
- * This is the model class for table "mis_comment".
+ * This is the model class for table "mis_note".
  *
- * The followings are the available columns in table 'mis_comment':
- * @property string $comment_id
- * @property string $article_id
+ * The followings are the available columns in table 'mis_note':
+ * @property string $note_id
  * @property string $create_time
  * @property string $author
  * @property string $emial
  * @property string $content
  * @property integer $status
+ * @property string $reply
  */
-class Comment extends CActiveRecord
+class Note extends CActiveRecord
 {
+
 	static $STATUS_NOT_PASS=0;
 	static $STATUS_PASS=1;
 	static $STATUS_PASS_TOP=2;
-	static $STATUS_GARBAGE=3;
-
-
-	/**
+	static $STATUS_GARBAGE=3;    
+       
+        
+        /**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Comment the static model class
+	 * @return Note the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -35,7 +36,7 @@ class Comment extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'mis_comment';
+		return 'mis_note';
 	}
 
 	/**
@@ -46,15 +47,14 @@ class Comment extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('content', 'required'),
 			array('status', 'numerical', 'integerOnly'=>true),
-			array('article_id', 'length', 'max'=>10),
 			array('author', 'length', 'max'=>128),
 			array('emial', 'length', 'max'=>256),
+			array('content, reply', 'length', 'max'=>1024),
 			array('create_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('comment_id, article_id, create_time, author, emial, content, status', 'safe', 'on'=>'search'),
+			array('note_id, create_time, author, emial, content, status, reply', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -75,13 +75,13 @@ class Comment extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'comment_id' => 'Comment',
-			'article_id' => 'Article',
+			'note_id' => 'Note',
 			'create_time' => 'Create Time',
 			'author' => 'Author',
 			'emial' => 'Emial',
 			'content' => 'Content',
 			'status' => 'Status',
+			'reply' => 'Reply',
 		);
 	}
 
@@ -96,13 +96,13 @@ class Comment extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('comment_id',$this->comment_id,true);
-		$criteria->compare('article_id',$this->article_id,true);
+		$criteria->compare('note_id',$this->note_id,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('author',$this->author,true);
 		$criteria->compare('emial',$this->emial,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('status',$this->status);
+		$criteria->compare('reply',$this->reply,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

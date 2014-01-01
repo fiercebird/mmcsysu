@@ -60,11 +60,10 @@ addSlide(i);
 
 
 
-<div id="about">
-<h6 style="margin:10px 0px 10px 20px;">关于我们</h6>
+<div >
 
-<div class="about_content">
-<div class="PicSlide"  >
+<div class="slideBorder">
+<div class="slidePicture"  >
 <div class="slideContainer">
 <div id="slides1">
 <div class="slides_container">
@@ -75,28 +74,25 @@ addSlide(i);
 </div>
 </div>
 </div>
-<div class="about_us" >
-<br /><h4>我们的工作</h4><br />
-<ul>
-<li>每天的清晨</li><li>我们准时为有课的教室打开多媒体设备</li><br />
-<li>每次教室的多媒体设备出现故障</li><li>我们总会第一时间赶到</li><li>为您排除故障</li><br />
-<li>每天傍晚</li><li>我们都安排专人对每个教室的多媒体设备进行故障检查</li><br />
-<li>每周一次的周检</li><li>保证多媒体设备处于良好的工作状态</li>
-</ul>
+<div class="slideText" >
+<h4>我们的工作</h4>
+<p>每天的清晨<br />我们准时为有课的教室打开多媒体设备</p>
+<p>每次多媒体设备出现故障<br />我们会第一时间赶到教室为您排除故障</p>
+<p>每天傍晚<br />我们都安排专人对每个教室的多媒体设备进行故障检查</p>
+<p>日检周检<br />保证多媒体设备处于良好的工作状态</p>
 </div>
 </div>
 
-<div  class="about_content">
-<div class="about_us">
-<br /><h4>我们是一个有爱的部门</h4><br />
-<ul >
-<li>每一年</li><li>我们都会为毕业的助理办一个送旧活动</li><li>多媒体就像我们的家</li><br />
-<li>一年一度的篮球赛</li><li>无论是球员还是拉拉队</li><li>都可以享受运动的喜悦</li><br />
-<li>集体出游</li><li>让多媒体每一个人享受出游的喜悦</li><br />
-<li>我们互帮互助</li><li>我们有如家人</li><li>我们一起享受在多媒体的时光</li>
+<div  class="slideBorder">
+<div class="slideText">
+<h4>我们是一个有爱的部门</h4>
+<p>每一年<br />多媒体会为毕业助理们办一个送旧活动</p>
+<p>一年一度的篮球赛<br />无论是球员还是拉拉队<br />都可以感受运动的快感</p>
+<p>户外踏青<br />让每个人享受出游的喜悦</p>
+<p>互爱互助 &#12288;有如家人<br />一起享受多媒体的静好时光</p>
 </ul>
 </div>
-<div class="PicSlide" >
+<div class="slidePicture" >
 <div class="slideContainer">
 <div id="slides2">
 <div class="slides_container">
@@ -114,8 +110,8 @@ addSlide(i);
 </div>
 </div>
 
-<div  class="about_content">            
-<div class="PicSlide"  >
+<div  class="slideBorder">            
+<div class="slidePicture"  >
 <div class="slideContainer">
 <div id="slides3">
 <div class="slides_container">
@@ -129,14 +125,12 @@ addSlide(i);
 </div>
 </div>
 </div>
-<div class="about_us">
-<br /><h4>我们的宗旨</h4><br />
-<ul >
-<li>帮助师生解决多媒体设备问题</li><li>是我们的责任</li><br />
-<li>团结、互助是我们一贯的作风</li><br />
-<li>耐心、认真地解决每一个问题</li><br />
-<li>我们竭诚为师生服务</li><li>努力维护好我们的学习环境</li><br />
-</ul>
+<div class="slideText">
+<h4>我们的宗旨</h4>
+<p>帮助师生<br />解决多媒体设备问题<br />是我们的责任</p>
+<p>团结&#12288;互助<br />是我们一贯的作风</p>
+<p>耐心&#12288;认真<br />地解决每一个问题</p>
+<p>我们竭诚为师生服务<br />努力维护好我们的学习环境</p>
 </div>
 </div>
 

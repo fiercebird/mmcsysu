@@ -232,4 +232,10 @@ class SiteController extends Controller
                 $this->render('teamStyle',array());
         }
 
+        public function actionService()
+        {
+                $this->layout='column5';
+                
+                $this->render('service',array());
+        }
 }
