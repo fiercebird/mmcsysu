@@ -7,7 +7,7 @@
  * @property string $note_id
  * @property string $create_time
  * @property string $author
- * @property string $emial
+ * @property string $email
  * @property string $content
  * @property integer $status
  * @property string $reply
@@ -49,12 +49,12 @@ class Note extends CActiveRecord
 		return array(
 			array('status', 'numerical', 'integerOnly'=>true),
 			array('author', 'length', 'max'=>128),
-			array('emial', 'length', 'max'=>256),
+			array('email', 'length', 'max'=>256),
 			array('content, reply', 'length', 'max'=>1024),
 			array('create_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('note_id, create_time, author, emial, content, status, reply', 'safe', 'on'=>'search'),
+			array('note_id, create_time, author, email, content, status, reply', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -78,7 +78,7 @@ class Note extends CActiveRecord
 			'note_id' => 'Note',
 			'create_time' => 'Create Time',
 			'author' => 'Author',
-			'emial' => 'Emial',
+			'email' => 'Email',
 			'content' => 'Content',
 			'status' => 'Status',
 			'reply' => 'Reply',
@@ -99,7 +99,7 @@ class Note extends CActiveRecord
 		$criteria->compare('note_id',$this->note_id,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('author',$this->author,true);
-		$criteria->compare('emial',$this->emial,true);
+		$criteria->compare('email',$this->email,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('status',$this->status);
 		$criteria->compare('reply',$this->reply,true);
