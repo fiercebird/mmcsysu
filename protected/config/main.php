@@ -34,7 +34,8 @@ return array(
 			'password'=>'123456',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 		//	'ipFilters'=>array('127.0.0.1','::1'),
-			'ipFilters'=>array('172.18.60.62','::1'),
+		//	'ipFilters'=>array('172.18.60.62','::1'),
+                     //   'ipFilters'=>array("*","*"),
 		),
 		
 	),

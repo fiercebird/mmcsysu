@@ -21,7 +21,9 @@ class SiteController extends Controller
 			// captcha action renders the CAPTCHA image displayed on the contact page
 			'captcha'=>array(
 				'class'=>'CCaptchaAction',
-				'backColor'=>0xFFFFFF,
+				'backColor'=>0xDDDDDD,
+                                'height'=>40,
+                                'width'=>100,
 			),
 			// page action renders "static" pages stored under 'protected/views/site/pages'
 			// They can be accessed via: index.php?r=site/page&view=FileName
@@ -49,17 +51,7 @@ class SiteController extends Controller
 	
 	public function actionTest()
 	{
-                $html=new simple_html_dom();
-                $html->load_file('./protected/data/zongwuchuCampusBus.html');	
-                $content=$html->find('div.cont',0)->children(3);
-                $res='';
-                while($content!=null)
-                {
-                        $res.=$content->outertext;
-                        $content=$content->next_sibling();
-                }
-                $html->clear();
-
+           $res=Yii::app()->user->name;
            $this->render('test',array('tt'=>$res));
       	}
 	/**
@@ -110,7 +102,7 @@ class SiteController extends Controller
 		$model=new LoginForm;
 
 		// if it is ajax validation request
-		if(isset($_POST['ajax']) && $_POST['ajax']==='login-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='loginForm')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
@@ -237,5 +229,29 @@ class SiteController extends Controller
                 $this->layout='column5';
                 
                 $this->render('service',array());
+        }
+
+
+        public function actionFeedback()
+        {
+           	$model=new Comment;
+
+		// if it is ajax validation request
+		if(isset($_POST['ajax']) && $_POST['ajax']==='commentForm')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+
+		// collect user input data
+		if(isset($_POST['CommentForm']))
+		{
+			$model->attributes=$_POST['CommentForm'];
+			// validate user input and redirect to the previous page if valid
+			if($model->validate() && $model->login())
+				$this->redirect(Yii::app()->user->returnUrl);
+		}
+		// display the login form
+		$this->render('feedBack',array('model'=>$model));
         }
 }

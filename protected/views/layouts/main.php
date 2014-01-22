@@ -12,9 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/ie.css" media="screen, projection" />
 	<![endif]-->
 
-
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
 	  <?php Yii::app()->bootstrap->register(); ?>
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
@@ -39,7 +37,7 @@
 				array('label'=>'技术探索', 'url'=>array('/site/test')),
 				array('label'=>'多媒体风采', 'url'=>array('/site/teamStyle')),
 				array('label'=>'意见收集', 'url'=>array('/site/feedback')),
-				array('label'=>'内部管理', 'url'=>array('/site/admin')),
+				array('label'=>'内部管理', 'url'=>array('/site/login')),
 			//	array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 			//	array('label'=>'Contact', 'url'=>array('/site/contact')),
 			//	array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
