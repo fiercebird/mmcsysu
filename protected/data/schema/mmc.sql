@@ -109,8 +109,8 @@ create table mis_article_index(
  */
 
 
-create table mis_note(
-      note_id 	        int unsigned not null auto_increment comment '留言id',
+create table mis_comment(
+      comment_id 	int unsigned not null auto_increment comment '留言id',
       create_time	datetime not null default '0000-00-00 00:00:00' comment '发布时间',
       author		varchar(128) not null default '' comment '留言人',
       email		varchar(256) not null default '' comment '留言人邮箱',
@@ -118,7 +118,7 @@ create table mis_note(
       status 		tinyint(4) not null default 0 comment '审核状态',
       reply             varchar(1024) not null default '' comment '管理员回复', 
 
-      constraint pk_comment_id		primary key (note_id)
+      constraint pk_comment_id		primary key (comment_id)
 )engine='InnoDB' default charset='utf8' comment='留言表';
 
 

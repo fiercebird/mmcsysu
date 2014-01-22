@@ -3,51 +3,38 @@
 /* @var $model LoginForm */
 /* @var $form CActiveForm  */
 
-$this->pageTitle=Yii::app()->name . ' - Login';
+$this->pageTitle=Yii::app()->name . ' - 后台管理';
 $this->breadcrumbs=array(
-	'Login',
+	'后台管理',
 );
 ?>
-
-<h1>Login</h1>
-
-<p>Please fill out the following form with your login credentials:</p>
-
-<div class="form">
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'login-form',
+<div>
+<?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+	'id'=>'loginForm',
 	'enableClientValidation'=>true,
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,
 	),
-)); ?>
+        'type'=>'horizontal',
+        'htmlOptions'=>array('class'=>'well'),
+        )); ?>
+<fieldset>
+<legend class='text-center'><strong>多媒体信息服务后台管理</strong></legend>
+<?php
+        echo $form->textFieldRow($model,'username', array('prepend'=>"<i class='icon-user'></i>", 'placeholder'=>'用户名')  ); 
+        echo $form->passwordFieldRow($model,'password', array('prepend'=>"<i class='icon-lock'></i>", 'placeholder'=>'密码')  ); 
+        echo $form->textFieldRow($model,'verifyCode', array('prepend'=>'<i class="icon-barcode"></i>',  'placeholder'=>'验证码')); 
+        if(CCaptcha::checkRequirements()) { ?>
+	<div class="control-group"><div class='controls'>
+		<?php $this->widget('CCaptcha', array('buttonLabel'=>'换一张', 'buttonOptions'=>array('style'=>'display:inline-block;margin:0px 5px;'))); ?>
+	</div></div>
+	<?php } ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+<?php  echo $form->checkBoxRow($model,'rememberMe' );  ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'username'); ?>
-		<?php echo $form->textField($model,'username'); ?>
-		<?php echo $form->error($model,'username'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'password'); ?>
-		<?php echo $form->passwordField($model,'password'); ?>
-		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			Hint: You may login with <kbd>demo</kbd>/<kbd>demo</kbd> or <kbd>admin</kbd>/<kbd>admin</kbd>.
-		</p>
-	</div>
-
-	<div class="row rememberMe">
-		<?php echo $form->checkBox($model,'rememberMe'); ?>
-		<?php echo $form->label($model,'rememberMe'); ?>
-		<?php echo $form->error($model,'rememberMe'); ?>
-	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
-	</div>
-
-<?php $this->endWidget(); ?>
+</fieldset>
+ <div class='control-group'><div class='controls'>
+<?php    $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'登录', 'htmlOptions'=>array('class'=>'span2') )); ?>
+</div></div>
+<?php    $this->endWidget(); ?>
 </div><!-- form -->

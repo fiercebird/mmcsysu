@@ -10,7 +10,7 @@ class LoginForm extends CFormModel
 	public $username;
 	public $password;
 	public $rememberMe;
-
+        public $verifyCode;
 	private $_identity;
 
 	/**
@@ -27,6 +27,7 @@ class LoginForm extends CFormModel
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
 			array('password', 'authenticate'),
+			array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
 	}
 
@@ -36,7 +37,10 @@ class LoginForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-			'rememberMe'=>'Remember me next time',
+			'rememberMe'=>'下次自动登录',
+			'verifyCode'=>'验证码',
+                        'username'=>'用户名',
+                        'password'=>'密码',
 		);
 	}
 
