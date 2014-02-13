@@ -34,6 +34,33 @@ class SiteController extends Controller
 		);
 	}
 
+        public function filters(){
+           return array(
+                 'accessControl + admin,logout', //权限控制只用于该2个动作，其余动作不需要权限控制
+                 );
+        }
+
+
+        /*
+         * @对于通过验证的用户, ?对应匿名用户，*两者包含起来
+         * 验证规则将会按它们在此列出的顺序匹配
+         * */
+        public function accessRules()
+        {
+           return array(
+                 array(
+                    'allow',             
+                    'users'=>array('@'),
+                    ),
+                 array(
+                    'deny',
+                    'users'=>array('*'),
+                   ),
+
+                 );
+        }
+
+
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -114,7 +141,8 @@ class SiteController extends Controller
 			$model->attributes=$_POST['LoginForm'];
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+                         //  $this->redirect(Yii::app()->user->returnUrl);
+                           $this->redirect(Yii::app()->createUrl("site/admin"));
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
@@ -234,7 +262,7 @@ class SiteController extends Controller
 
         public function actionFeedback()
         {
-           	$model=new Comment;
+           	$model=new CommentForm;
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='commentForm')
@@ -253,5 +281,12 @@ class SiteController extends Controller
 		}
 		// display the login form
 		$this->render('feedBack',array('model'=>$model));
+        }
+
+
+        public function actionAdmin()
+        {
+                $this->layout='column6'; 
+                $this->render('admin', array());
         }
 }

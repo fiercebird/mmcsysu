@@ -18,12 +18,12 @@
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
-<body>
+<body id='body1'>
 
 <div class="container" id="page">
 
 	<div id="header">
-		<div id="logo"><img  src="<?php echo Yii::app()->baseUrl.'/images/header.jpg';  ?>"  /> </div>
+		<div id="logo"><img  src="<?php echo Yii::app()->baseUrl.'/images/header.jpg';  ?>"  width= /> </div>
 	</div><!-- header -->
 
 	<div id="mainmenu">

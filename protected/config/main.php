@@ -11,7 +11,6 @@ Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'中山大学多媒体信息服务平台',
-	'homeUrl'=>'?r=site/index',
 	'language'=>'zh_cn',
 
 	// preloading 'log' component
