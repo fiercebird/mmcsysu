@@ -21,7 +21,7 @@
 		 'items'=>array(
                         array('label'=>'多媒体风采', 'icon'=>'flag'),
                         array('label'=>'优秀助理','url'=>array(''), 'icon'=>'thumbs-up'),
-                        array('label'=>'工作感想','url'=>array(''),'icon'=>'pencil'),
+                        array('label'=>'工作感想','url'=>array(''), 'icon'=>'pencil'),
                         array('label'=>'活动报道','url'=>array(''), 'icon'=>'bullhorn'),
                     ),
 		 )); ?>
