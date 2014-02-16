@@ -30,4 +30,34 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_NONE;
 		return !$this->errorCode;
 	}
+
+
+        // get a new salt - 8 hexadecimal characters long
+        // on dechex( mt_rand() )
+        public static function getNewPasswordSalt()
+        {
+                return substr( str_pad( dechex( mt_rand() ), 8, '0', STR_PAD_LEFT ), -8 );
+        }
+
+        // calculate the hash from a salt and a password
+        public static function getPasswordHash( $salt, $password )
+        {
+                return $salt . ( hash( 'sha256', $salt . $password ) );
+        }
+
+        // compare a password to a hash
+        public static function comparePassword( $password, $hash )
+        {
+                $salt = substr( $hash, 0, 8 );
+                return $hash == self::getPasswordHash( $salt, $password );
+        }
+
+        public function getPasswordSaltFromDb($username)
+        {
+        
+                
+        }
+
+        
+
 }

@@ -34,7 +34,18 @@ $this->breadcrumbs=array(
 
 </fieldset>
  <div class='control-group'><div class='controls'>
-<?php    $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary', 'label'=>'登录', 'htmlOptions'=>array('class'=>'span2') )); ?>
+<?php    $this->widget('bootstrap.widgets.TbButton', array(  'type'=>'primary', 'label'=>'登录', 'htmlOptions'=>array('class'=>'span2', 'id'=>'loginBtn') )); ?>
 </div></div>
 <?php    $this->endWidget(); ?>
 </div><!-- form -->
+
+
+<script language='javascript' type="text/javascript">
+$('#loginBtn').bind('click', function(){
+        
+
+        $('#loginForm').submit();
+});
+
+
+</script>

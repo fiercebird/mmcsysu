@@ -79,6 +79,7 @@ class SiteController extends Controller
 	public function actionTest()
 	{
            $res=Yii::app()->user->name;
+           Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/sha256.js',CClientScript::POS_HEAD);
            $this->render('test',array('tt'=>$res));
       	}
 	/**
