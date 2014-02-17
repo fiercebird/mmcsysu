@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 	'后台管理',
 );
 $token=UserIdentity::createLoginToken();
-$test;
 ?>
 <div>
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -90,7 +89,6 @@ $('#loginBtn').bind('click', function(){
                 $('#LoginForm_password').attr('value',newPwd);
                 $('#Origin_password').attr('value',"");
                 $('#loginForm').submit();
-
         },
         error:function(XMLHttpRequest, textStatus, errorThrown){
                 var errorMes ="状态: " + textStatus + "\n" + XMLHttpRequest.status 
