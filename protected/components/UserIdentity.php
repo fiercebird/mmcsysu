@@ -17,18 +17,27 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-		$users=array(
+                $user = Users::model()->findByAttributes(array('username' => $this->username));
+                $token = self::getLoginToken();
+                if(!isset($user))
+			$this->errorCode=self::ERROR_USERNAME_INVALID;
+                elseif(hash('sha256', $user->password . $token)!==$this->password)
+			$this->errorCode=self::ERROR_PASSWORD_INVALID;
+		else
+			$this->errorCode=self::ERROR_NONE;
+                /*
+                $users=array(
 			// username => password
 			'demo'=>'1237731905566108b221e32b450f3438fb05cbdb4376a9b8e918abd66ab870f6191',
 			'admin'=>'admin',
 		);
-                $token = self::getLoginToken();
 		if($token && !isset($users[$this->username]))
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
 		elseif(hash('sha256', $users[$this->username] . $token)!==$this->password)
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
 			$this->errorCode=self::ERROR_NONE;
+                        i*/
 		return !$this->errorCode;
 	}
 

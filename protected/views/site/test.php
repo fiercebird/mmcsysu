@@ -2,18 +2,19 @@
 /* @var $this SiteController */
 
 $this->pageTitle=Yii::app()->name;
-
+$salt= UserIdentity::getNewPasswordSalt();
 echo $tt;
 echo '<br \>';
-echo hash( 'sha256', '123' );
+echo $salt . hash( 'sha256', $salt . 'hh' );
 echo '<br \>';
 echo '<br \>';
+echo $salt;
 echo '<br \>';
 ?>
 
 <script language='javascript'  type='text/javascript'>
     var hash = CryptoJS.SHA256("123demo");
-    alert(hash);
+//    alert(hash);
     </script>
 
 

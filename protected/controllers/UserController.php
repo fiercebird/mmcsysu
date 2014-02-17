@@ -49,9 +49,16 @@ class UserController extends Controller
                 $username = Yii::app()->request->getParam('username'); 
                 $resCode = 0;
                 $resMes = 'OK';
-                
-                echo CJSON::encode(array('salt'=>'123', 'resCode'=>$resCode, 'resMes'=>$resMes));
-           
+                $salt = 0;
+                $user = Users::model()->findByAttributes(array('username' => $username)); 
+                if(!isset($user))
+                {
+                        $resCode = 1;
+                        $resMEs = "用户名不存在";
+                }else{
+                        $salt = substr($user->password, 0, 8);
+                }
+                echo CJSON::encode(array('salt'=>$salt, 'resCode'=>$resCode, 'resMes'=>$resMes));
            }else
               throw new CHttpException(404, "非法请求！");
         }

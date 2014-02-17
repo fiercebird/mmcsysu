@@ -8,6 +8,7 @@ $this->breadcrumbs=array(
 	'后台管理',
 );
 $token=UserIdentity::createLoginToken();
+$verifyCode = strtolower($this->createAction('captcha')->verifyCode);  
 ?>
 <div>
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -24,7 +25,6 @@ $token=UserIdentity::createLoginToken();
 <?php
         echo $form->textFieldRow($model,'username', array('prepend'=>"<i class='icon-user'></i>", 'placeholder'=>'用户名')  ); 
         echo '<div class="control-group"><label class="control-label required" for="Origin_password">密码 <span class="required">*</span></label><div class="controls"><div class="input-prepend"><span class="add-on"><i class="icon-lock"></i></span><input placeholder="密码" name="Origin[password]" id="Origin_password" type="password"></div><span class="help-inline error" id="Origin_password_em_" style="display: none"></span></div></div>';
-        echo $form->passwordField($model,'password', array( 'style'=>'display:none; visibility: collapse' )  ); 
         echo $form->textFieldRow($model,'verifyCode', array('prepend'=>'<i class="icon-barcode"></i>',  'placeholder'=>'验证码')); 
         if(CCaptcha::checkRequirements()) { ?>
 	<div class="control-group"><div class='controls'>
@@ -38,11 +38,16 @@ $token=UserIdentity::createLoginToken();
 <?php    $this->widget('bootstrap.widgets.TbButton', array(  'type'=>'primary', 'label'=>'登录', 'htmlOptions'=>array('class'=>'span2', 'id'=>'loginBtn') )); ?>
 </div></div>
 <?php   
+        echo $form->passwordFieldRow($model,'password', array( 'style'=>'display:none; visibility: collapse' )  ); 
         $this->endWidget(); ?>
 </div><!-- form -->
 
 
 <script language='javascript' type="text/javascript">
+var verifyCode='<?php echo $verifyCode; ?>';
+var oldHash=0;
+for(var i=verifyCode.length-1; i >= 0; --i) 
+        oldHash+=verifyCode.charCodeAt(i);
 $('#Origin_password').blur(function(){
         var pwd=$(this).attr('value');
         if($.trim(pwd) == "")
@@ -50,7 +55,7 @@ $('#Origin_password').blur(function(){
                 $('#Origin_password').parent().parent().parent().addClass('error');
                 $('#Origin_password_em_').removeAttr("style");
                 $('#Origin_password_em_').html('密码 不可为空白');
-                }else{
+        }else{
                 $('#Origin_password').parent().parent().parent().addClass('success');
                 $('#Origin_password_em_').attr("style","display:none");
                 $('#Origin_password_em_').html('');
@@ -61,13 +66,12 @@ $('#Origin_password').blur(function(){
 $('#loginBtn').bind('click', function(){
       var username=$('#LoginForm_username').attr('value');
       var originPwd=$('#Origin_password').attr('value');
+      var verifyCodeValue=$('#LoginForm_verifyCode').attr('value');
       var csrfToken='<?php echo Yii::app()->request->csrfToken; ?>';
       var loginToken=$('#LoginForm_token').attr('value');
       if($.trim(username) == "")
       {
-        $('#LoginForm_username').parent().parent().parent().addClass('error');
-        $('#LoginForm_username_em_').removeAttr("style");
-        $('#LoginForm_username_em_').html('用户名 不可为空白');
+        $('#LoginForm_username').blur();
         return false;
       }
       if($.trim(originPwd) == "")
@@ -76,8 +80,19 @@ $('#loginBtn').bind('click', function(){
         $('#Origin_password_em_').removeAttr("style");
         $('#Origin_password_em_').html('密码 不可为空白');
         return false;
-      } 
-
+      }
+      var hash = jQuery('body').data('captcha.hash');
+      if (hash == null)
+          hash = oldHash;
+      else
+          hash = hash[1];
+      for(var i=verifyCodeValue.length-1, h=0; i >= 0; --i) 
+         h+=verifyCodeValue.toLowerCase().charCodeAt(i);
+      if(h != hash) {
+        $('#LoginForm_verifyCode').blur();
+        return false;
+      }
+      
       $.ajax({
         type:'post',
         url:'<?php echo Yii::app()->createUrl('user/getLoginSalt')?>',
@@ -96,8 +111,6 @@ $('#loginBtn').bind('click', function(){
                 alert(errorMes);        
         }
       });
-        
-      //$('#loginForm').submit();
 });
 
 
