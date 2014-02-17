@@ -8,7 +8,6 @@ $this->breadcrumbs=array(
 	'后台管理',
 );
 $token=UserIdentity::createLoginToken();
-$test;
 ?>
 <div>
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
