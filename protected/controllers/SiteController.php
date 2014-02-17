@@ -127,7 +127,9 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
-		$model=new LoginForm;
+
+                Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/sha256.js',CClientScript::POS_HEAD);
+                $model=new LoginForm;
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='loginForm')
