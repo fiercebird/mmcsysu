@@ -22,7 +22,7 @@ class LoginForm extends CFormModel
 	{
 		return array(
 			// username and password are required
-			array('username, password', 'required'),
+			array('username', 'required'),
 			// rememberMe needs to be a boolean
 			array('rememberMe', 'boolean'),
 			// password needs to be authenticated
@@ -40,7 +40,7 @@ class LoginForm extends CFormModel
 			'rememberMe'=>'下次自动登录',
 			'verifyCode'=>'验证码',
                         'username'=>'用户名',
-                        'password'=>'密码',
+                        'password'=>'',
 		);
 	}
 

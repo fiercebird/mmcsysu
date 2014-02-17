@@ -17,7 +17,7 @@ class UserController extends Controller
 
         public function filters(){
            return array(
-                 'accessControl',             
+                 'accessControl - getLoginSalt',             
                  );
         }
 
@@ -41,6 +41,20 @@ class UserController extends Controller
         }
 
 
+
+        public function actionGetLoginSalt()
+        {
+           if(Yii::app()->request->isAjaxRequest)
+           {
+                $username = Yii::app()->request->getParam('username'); 
+                $resCode = 0;
+                $resMes = 'OK';
+                
+                echo CJSON::encode(array('salt'=>'123', 'resCode'=>$resCode, 'resMes'=>$resMes));
+           
+           }else
+              throw new CHttpException(404, "非法请求！");
+        }
 
 
 }

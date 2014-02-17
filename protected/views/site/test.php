@@ -4,8 +4,18 @@
 $this->pageTitle=Yii::app()->name;
 
 echo $tt;
-
+echo '<br \>';
+echo hash( 'sha256', '123' );
+echo '<br \>';
+echo '<br \>';
+echo '<br \>';
 ?>
+
+<script language='javascript'  type='text/javascript'>
+    var hash = CryptoJS.SHA256("123demo");
+    alert(hash);
+    </script>
+
 
 <div></div>
 <div class="accordion" id="accordion2">

@@ -19,12 +19,13 @@ class UserIdentity extends CUserIdentity
 	{
 		$users=array(
 			// username => password
-			'demo'=>'demo',
+			'demo'=>'1237731905566108b221e32b450f3438fb05cbdb4376a9b8e918abd66ab870f6191',
 			'admin'=>'admin',
 		);
-		if(!isset($users[$this->username]))
+                $token = self::getLoginToken();
+		if($token && !isset($users[$this->username]))
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif($users[$this->username]!==$this->password)
+		elseif(hash('sha256', $users[$this->username] . $token)!==$this->password)
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
 		else
 			$this->errorCode=self::ERROR_NONE;
@@ -52,12 +53,33 @@ class UserIdentity extends CUserIdentity
                 return $hash == self::getPasswordHash( $salt, $password );
         }
 
+        public static function createLoginToken()
+        {
+                if(Yii::app()->user->IsGuest)
+                        $token = md5(Yii::app()->session->sessionID . mt_rand());
+                else
+                        $token = md5(Yii::app()->user->id . Yii::app()->user->name . Yii::app()->session->sessionId . mt_rand()); 
+                Yii::app()->session['loginFormToken'] = $token;
+                return $token;
+        }
+
+        public static function getLoginToken() 
+        {
+                $token = Yii::app()->session['loginFormToken'];
+                if(!isset($token) || empty($token) )
+                   return false;
+                else{   
+                   unset(Yii::app()->session['loginFormToken']);
+                   return $token;
+                }
+        }
+
         public function getPasswordSaltFromDb($username)
         {
         
                 
         }
 
-        
+                
 
 }
