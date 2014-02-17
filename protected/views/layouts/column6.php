@@ -9,14 +9,16 @@
 
 /* @var $this Controller */
 
+$auth = Yii::app()->user->auth;
 ?>
 <?php $this->beginContent('//layouts/backend'); ?>
 
 <div class="row-fluid">
 	<div class='leftNavbarBE' >
-
-
 <div class="accordion" id="accordion1">
+<?php 
+if($auth & ModuleAuth::AUTH_HOMEPAGE_ADMIN){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse1"><i class="icon-home"></i>&emsp;首页管理</a>
@@ -34,7 +36,9 @@
         </div>
 </div>
 </div>
-
+<?php }
+if($auth & ModuleAuth::AUTH_SPECIAL_CLASSROOM){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse2"><i class="icon-star"></i>&emsp;特色课室</a>
@@ -51,7 +55,9 @@
         </div>
 </div>
 </div>
-
+<?php }
+if($auth & ModuleAuth::AUTH_SERVICE_ADMIN){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse3"><i class="icon-list"></i>&emsp;服务列表</a>
@@ -71,7 +77,9 @@
         </div>
 </div>
 </div>
-
+<?php }
+if($auth & ModuleAuth::AUTH_RULE_ADMIN){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse4"><i class="icon-tasks"></i>&emsp;规章制度</a>
@@ -91,7 +99,9 @@
         </div>
 </div>
 </div>
-
+<?php }
+if($auth & ModuleAuth::AUTH_TECH_EXPLORE){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse5"><i class="icon-eye-open"></i>&emsp;技术探索</a>
@@ -109,7 +119,9 @@
         </div>
 </div>
 </div>
-
+<?php }
+if($auth & ModuleAuth::AUTH_TEAMSTYLE){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse6"><i class="icon-flag"></i>&emsp;多媒体风采</a>
@@ -128,7 +140,9 @@
         </div>
 </div>
 </div>
-
+<?php }
+if($auth & ModuleAuth::AUTH_COMMENT_ADMIN){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse7"><i class="icon-comment"></i>&emsp;评论管理</a>
@@ -146,7 +160,9 @@
         </div>
 </div>
 </div>
-
+<?php }
+if($auth & ModuleAuth::AUTH_USER_ADMIN){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse8"><i class="icon-user"></i>&emsp;用户管理</a>
@@ -164,8 +180,9 @@
         </div>
 </div>
 </div>
-
-
+<?php }
+if($auth & ModuleAuth::AUTH_TRASH_ADMIN){
+?>
 <div class="accordion-group">
 <div class="accordion-heading">
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse9"><i class="icon-trash"></i>&emsp;回收站</a>
@@ -183,6 +200,7 @@
         </div>
 </div>
 </div>
+<?php } ?>
 
 </div>
 	</div>

@@ -7,6 +7,9 @@
  */
 class UserIdentity extends CUserIdentity
 {
+
+         private $_id;
+
 	/**
 	 * Authenticates a user.
 	 * The example implementation makes sure if the username and password
@@ -23,23 +26,19 @@ class UserIdentity extends CUserIdentity
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
                 elseif(hash('sha256', $user->password . $token)!==$this->password)
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
+		else{
+                        $this->setState('auth', $user->authority);
+                        $this->_id=$user->user_id ;
 			$this->errorCode=self::ERROR_NONE;
-                /*
-                $users=array(
-			// username => password
-			'demo'=>'1237731905566108b221e32b450f3438fb05cbdb4376a9b8e918abd66ab870f6191',
-			'admin'=>'admin',
-		);
-		if($token && !isset($users[$this->username]))
-			$this->errorCode=self::ERROR_USERNAME_INVALID;
-		elseif(hash('sha256', $users[$this->username] . $token)!==$this->password)
-			$this->errorCode=self::ERROR_PASSWORD_INVALID;
-		else
-			$this->errorCode=self::ERROR_NONE;
-                        i*/
+                }
 		return !$this->errorCode;
 	}
+        
+        
+        public function getId(){
+                return $this->_id;
+        }
+
 
 
         // get a new salt - 8 hexadecimal characters long
@@ -82,13 +81,5 @@ class UserIdentity extends CUserIdentity
                    return $token;
                 }
         }
-
-        public function getPasswordSaltFromDb($username)
-        {
-        
-                
-        }
-
-                
 
 }

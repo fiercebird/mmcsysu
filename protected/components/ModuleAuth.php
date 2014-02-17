@@ -16,7 +16,7 @@ interface ModuleAuth
    const AUTH_RULE_ADMIN = 16;
    const AUTH_TECH_EXPLORE = 32;
    const AUTH_TEAMSTYLE = 64;
-   const AUTH_COMMENT = 128;
+   const AUTH_COMMENT_ADMIN = 128;
    const AUTH_USER_ADMIN = 256;
    const AUTH_TRASH_ADMIN = 512;
 }
