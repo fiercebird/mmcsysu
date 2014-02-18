@@ -172,8 +172,8 @@ if($auth & ModuleAuth::AUTH_USER_ADMIN){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'添加用户','url'=>array(''), 'icon'=>'plus'),
-                        array('label'=>'管理用户','url'=>array(''),'icon'=>'th'),
+                        array('label'=>'添加用户','url'=>array('user/createUser'), 'icon'=>'plus'),
+                        array('label'=>'管理用户','url'=>array('user/manageUser'),'icon'=>'th'),
                     ),
 		 )); ?>
 

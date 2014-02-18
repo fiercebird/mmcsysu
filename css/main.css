@@ -354,7 +354,8 @@ div.search-form
         display:inline-block;
 	float:left;
 	width:180px;
-	border:1px solid #CCCCCC;
+        height:700px;
+        border:1px solid #CCCCCC;
 	padding:10px 0px 0px 0px;
 }
 

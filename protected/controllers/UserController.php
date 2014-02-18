@@ -14,6 +14,7 @@
 class UserController extends Controller
 {
 
+        public $layout='columnBE';
 
         public function filters(){
            return array(
@@ -21,7 +22,7 @@ class UserController extends Controller
                  );
         }
 
-
+        
         /*
          * @对于通过验证的用户, ?对应匿名用户，*两者包含起来
          * 验证规则将会按它们在此列出的顺序匹配
@@ -62,6 +63,18 @@ class UserController extends Controller
            }else
               throw new CHttpException(404, "非法请求！");
         }
+        
+        public function actionCreateUser()
+        {
+        
+                $this->render('createUser',array());
+        }
 
+
+        public function actionManageUser()
+        {
+                
+                $this->render('manageUser',array());
+        }
 
 }

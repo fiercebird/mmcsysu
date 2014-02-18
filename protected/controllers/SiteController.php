@@ -289,7 +289,7 @@ class SiteController extends Controller
 
         public function actionAdmin()
         {
-                $this->layout='column6'; 
+                $this->layout='columnBE'; 
                 $this->render('admin', array());
         }
 }

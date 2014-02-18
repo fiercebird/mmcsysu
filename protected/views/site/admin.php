@@ -27,7 +27,7 @@ function showAuthIcon ($bit)
 当前用户
 </div>
 <div id="currentUser" class="collapse in"> 
-<div class="alert">申请权限请把账号和模块权限发邮件至mickeymousesysu@gmail.com</div>
+<div class="alert">申请模块权限请把账号和模块名发邮件至mickeymousesysu@gmail.com</div>
 <table class="table table-striped table-hover">
 <thead><tr><th>用户名</th><th><?php echo Yii::app()->user->name;?></th></tr></thead>
 <tbody>
