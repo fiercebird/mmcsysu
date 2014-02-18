@@ -14,7 +14,7 @@ $auth = Yii::app()->user->auth;
 <?php $this->beginContent('//layouts/backend'); ?>
 
 <div class="row-fluid">
-	<div class='leftNavbarBE' >
+<div class='leftNavbarBE'>
 <div class="accordion" id="accordion1">
 <?php 
 if($auth & ModuleAuth::AUTH_HOMEPAGE_ADMIN){
@@ -205,8 +205,8 @@ if($auth & ModuleAuth::AUTH_TRASH_ADMIN){
 </div>
 	</div>
 
-        <div  class='rightContent'>
-                 <div id='content'>
+        <div  class='rightContentBE'>
+                <div class='row-fluid'>
                 <?php echo $content; ?>
                 </div>
 	</div>

@@ -356,8 +356,16 @@ div.search-form
 	width:180px;
 	border:1px solid #CCCCCC;
 	padding:10px 0px 0px 0px;
-
 }
+
+.rightContentBE
+{
+	display:inline-block;
+	float:left;
+        width:80%;
+        padding:10px 0px 0px 10px;
+}
+
 
 a.accordion-toggle:active, a.accordion-toggle:link, a.accordion-toggle:visited
 {
