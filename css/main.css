@@ -698,7 +698,7 @@ a.accordion-toggle:active, a.accordion-toggle:link, a.accordion-toggle:visited
  * */
 
 
-.prev 
+.slidePrev 
 {
         position:absolute;
         top:130px;
@@ -709,7 +709,7 @@ a.accordion-toggle:active, a.accordion-toggle:link, a.accordion-toggle:visited
         background:url("/mmcsysu/images/mmintro/arrow-prev.png") ;
 }
 
-.next 
+.slideNext 
 {
         position:absolute;
         top:130px;
@@ -783,4 +783,11 @@ div.caption  p
 }
 
 
-
+.pager li > a
+{
+        display: inline-block;
+        padding: 5px 14px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        font-size:12px;
+}

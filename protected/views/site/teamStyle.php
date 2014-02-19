@@ -70,7 +70,7 @@ addSlide(i);
 <div class="slide"><img src="/mmcsysu/images/mmslide/slide1-1.jpg" class='image1' alt="Slide 1"><div class="caption" style="bottom:0"><p>每天一早打开多媒体设备</p></div></div>
 <div class="slide"><img src="/mmcsysu/images/mmslide/slide1-2.jpg" class='image1' alt="Slide 2"><div class="caption"><p>维修多媒体设备</p></div></div>
 <div class="slide"><img src="/mmcsysu/images/mmslide/slide1-3.jpg" class='image1' alt="Slide 3"><div class="caption"><p>办公室</p></div></div></div>
-<a  class="prev"></a><a  class="next"></a>
+<a  class="slidePrev"></a><a  class="slideNext"></a>
 </div>
 </div>
 </div>
@@ -104,7 +104,7 @@ addSlide(i);
 <div class="slide"><img src="/mmcsysu/images/mmslide/slide2-6.jpg"  class='image1' alt="Slide 6"><div class="caption"><p>金星农庄出游</p></div></div>
 <div class="slide"><img src="/mmcsysu/images/mmslide/slide2-7.jpg"  class='image1' alt="Slide 7"><div class="caption"><p>长兴乐园出游</p></div></div>
 </div>
-<a class="prev"></a><a class="next"></a>
+<a class="slidePrev"></a><a class="slideNext"></a>
 </div>
 </div>
 </div>
@@ -121,7 +121,7 @@ addSlide(i);
 <div class="slide"><img src="/mmcsysu/images/mmslide/slide3-4.jpg" class='image1' alt="Slide 4"><div class="caption" style="bottom:0"><p>Stay hungry!Stay foolish!</p></div></div>
 <div class="slide"><img src="/mmcsysu/images/mmslide/slide3-5.jpg" class='image1' alt="Slide 5"><div class="caption"><p>2009年助理的好建议</p></div></div>
 <div class="slide"><img src="/mmcsysu/images/mmslide/slide3-6.jpg" class='image1' alt="Slide 6"><div class="caption"><p>2013年主力军</p></div></div></div>
-<a  class="prev"></a><a  class="next"></a>
+<a  class="slidePrev"></a><a  class="slideNext"></a>
 </div>
 </div>
 </div>

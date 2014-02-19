@@ -16,7 +16,7 @@ create database mis;
 
 
 use mis;
-drop table if exists mis_users;
+drop table if exists mis_user;
 drop table if exists mis_category;
 drop table if exists mis_article;
 drop table if exists mis_article_index;
@@ -28,7 +28,7 @@ drop table if exists mis_dictionary;
 /*
  *为了兼容旧版格式
  */
-create table mis_users (
+create table mis_user (
       user_id 		int unsigned not null auto_increment comment '用户id',
       username 		varchar(128) not null default '' comment '用户名',
       password 		varchar(128)  not null default '' comment '密码',

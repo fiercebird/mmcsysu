@@ -20,7 +20,7 @@ class UserIdentity extends CUserIdentity
 	 */
 	public function authenticate()
 	{
-                $user = Users::model()->findByAttributes(array('username' => $this->username));
+                $user = User::model()->findByAttributes(array('username' => $this->username));
                 $token = self::getLoginToken();
                 if(!isset($user))
 			$this->errorCode=self::ERROR_USERNAME_INVALID;

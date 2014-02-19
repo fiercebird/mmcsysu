@@ -20,4 +20,7 @@ $this->breadcrumbs=array(
 ?>
 
 
+<script language="javascript" type="text/javascript">
+$('#collapse8').addClass('in');
 
+</script>

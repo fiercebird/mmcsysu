@@ -20,6 +20,7 @@
 .grid-view .filters input, .grid-view .filters select {
   margin-bottom:0;
   width:100%;
+  padding:0px 0px;
 }
 .grid-view .button-column {
   text-align:center;

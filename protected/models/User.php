@@ -10,7 +10,7 @@
  * @property integer $campus_id
  * @property string $authority
  */
-class Users extends CActiveRecord
+class User extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
@@ -27,7 +27,7 @@ class Users extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'mis_users';
+		return 'mis_user';
 	}
 
 	/**
@@ -43,7 +43,7 @@ class Users extends CActiveRecord
 			array('authority', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('user_id, username, password, campus_id, authority', 'safe', 'on'=>'search'),
+			array('username,campus_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,11 +64,11 @@ class Users extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'user_id' => 'User',
-			'username' => 'Username',
-			'password' => 'Password',
-			'campus_id' => 'Campus',
-			'authority' => 'Authority',
+			'user_id' => '用户ID',
+			'username' => '用户名',
+			'password' => '密码',
+			'campus_id' => '校区',
+			'authority' => '权限',
 		);
 	}
 
@@ -82,15 +82,12 @@ class Users extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('user_id',$this->user_id,true);
+	//	$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('username',$this->username,true);
-		$criteria->compare('password',$this->password,true);
-		$criteria->compare('campus_id',$this->campus_id);
-		$criteria->compare('authority',$this->authority,true);
-
+		//$criteria->compare('campus_id',$this->campus_id);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+
 }

@@ -51,11 +51,12 @@ class UserController extends Controller
                 $resCode = 0;
                 $resMes = 'OK';
                 $salt = 0;
-                $user = Users::model()->findByAttributes(array('username' => $username)); 
+                $user = User::model()->findByAttributes(array('username' => $username)); 
                 if(!isset($user))
                 {
                         $resCode = 1;
                         $resMEs = "用户名不存在";
+                        Yii::log('username' . $username .' is not exist','info','db.actionGetLoginSalt');
                 }else{
                         $salt = substr($user->password, 0, 8);
                 }
@@ -66,6 +67,7 @@ class UserController extends Controller
         
         public function actionCreateUser()
         {
+                
         
                 $this->render('createUser',array());
         }
@@ -73,8 +75,10 @@ class UserController extends Controller
 
         public function actionManageUser()
         {
-                
-                $this->render('manageUser',array());
+                $model = new User('search');
+                if(isset($_GET['User']))
+                        $model->attributes=$_GET['User'];
+                $this->render('manageUser',array('model'=>$model));
         }
 
 }
