@@ -17,7 +17,7 @@ $auth = Yii::app()->user->auth;
 <div class='leftNavbarBE'>
 <div class="accordion" id="accordion1">
 <?php 
-if($auth & ModuleAuth::AUTH_HOMEPAGE_ADMIN){
+if($auth & ModuleAuth::MMC_HOMEPAGE_ADMIN){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
@@ -37,7 +37,7 @@ if($auth & ModuleAuth::AUTH_HOMEPAGE_ADMIN){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::AUTH_SPECIAL_CLASSROOM){
+if($auth & ModuleAuth::MMC_SPECIAL_CLASSROOM){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
@@ -56,7 +56,7 @@ if($auth & ModuleAuth::AUTH_SPECIAL_CLASSROOM){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::AUTH_SERVICE_ADMIN){
+if($auth & ModuleAuth::MMC_SERVICE_ADMIN){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
@@ -78,7 +78,7 @@ if($auth & ModuleAuth::AUTH_SERVICE_ADMIN){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::AUTH_RULE_ADMIN){
+if($auth & ModuleAuth::MMC_RULE_ADMIN){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
@@ -100,7 +100,7 @@ if($auth & ModuleAuth::AUTH_RULE_ADMIN){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::AUTH_TECH_EXPLORE){
+if($auth & ModuleAuth::MMC_TECH_EXPLORE){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
@@ -120,7 +120,7 @@ if($auth & ModuleAuth::AUTH_TECH_EXPLORE){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::AUTH_TEAMSTYLE){
+if($auth & ModuleAuth::MMC_TEAMSTYLE){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
@@ -141,7 +141,7 @@ if($auth & ModuleAuth::AUTH_TEAMSTYLE){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::AUTH_COMMENT_ADMIN){
+if($auth & ModuleAuth::MMC_COMMENT_ADMIN){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
@@ -161,7 +161,7 @@ if($auth & ModuleAuth::AUTH_COMMENT_ADMIN){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::AUTH_USER_ADMIN){
+if($auth & ModuleAuth::MMC_USER_ADMIN){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
@@ -181,7 +181,7 @@ if($auth & ModuleAuth::AUTH_USER_ADMIN){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::AUTH_TRASH_ADMIN){
+if($auth & ModuleAuth::MMC_TRASH_ADMIN){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
