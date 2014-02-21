@@ -8,6 +8,7 @@
  */
 
 /* @var $this Controller */
+Yii::app()->clientScript->registerScript('myHideEffect','$(".mesFade").animate({opacity: 1.0}, 2000).fadeOut(3000);', CClientScript::POS_READY);
 
 $auth = Yii::app()->user->auth;
 ?>

@@ -28,3 +28,25 @@ insert into mis_dictionary (dictionary_type, item_key, item_value, display_order
 ('SpecialClassroom', 3, '视屏会议（软）', 4);
 
 
+insert into mis_dictionary (dictionary_type, item_key, item_value, display_order) values
+('Campus', 1, '东校区',  1),
+('Campus', 2, '南校区',  2),
+('Campus', 3, '北校区',  3),
+('Campus', 4, '珠海校区',  4);
+
+
+insert into mis_dictionary (dictionary_type, item_key, item_value, display_order) values
+('Module' , 2, '首页管理', 1),
+('Module' , 4, '特色课室', 2),
+('Module' , 8, '服务列表', 3),
+('Module' , 16, '规章制度', 4),
+('Module' , 32, '技术探索', 5),
+('Module' , 64, '多媒体风采', 6),
+('Module' , 128, '评论管理', 7),
+('Module' , 256, '用户管理', 8),
+('Module' , 512, '回收站管理', 9),
+
+('Module' , 65536, '设备检查登记', 10),
+('Module' , 131072, '设备信息查询', 11),
+('Module' , 262144, '设备操作管理', 12),
+('Module' , 524288, '服务调查统计', 13);

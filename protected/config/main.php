@@ -145,6 +145,8 @@ return array(
 		'adminEmail'=>'hehao5@mail2.sysu.edu.cn',
 		'recentlyNewsCount'=>12,	//首页上显示的最近服务咨询的条数
 		'dictTypeSpecialClassroom'=>'SpecialClassroom',  //特色课室在KV字典表的类型名称
+		'dictTypeCampus'=>'Campus',                      //校区名称在KV字典表的类型名称
+		'dictTypeModule'=>'Module',                      //校区名称在KV字典表的类型名称
 		'siteSpecialArticle'=>'SpecialArticle',		//特色课室页面的文章在Article表中的Publisher字段
                 'siteIntroduceArticle'=>'IntroduceArticle',     //课室介绍页面的文章在Article表中的Publisher字段
 	),

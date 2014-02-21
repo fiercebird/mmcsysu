@@ -791,3 +791,15 @@ div.caption  p
         border: 1px solid #ddd;
         font-size:12px;
 }
+
+.filters > td > select:nth-child(1)
+{
+        height:auto;
+}
+
+tr> td > span.label
+{
+        font-weight:normal;
+        margin:1px 1px;
+}
+

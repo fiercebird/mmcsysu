@@ -128,7 +128,7 @@ class SiteController extends Controller
 	public function actionLogin()
 	{
 
-                Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/sha256.js',CClientScript::POS_HEAD);
+           Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/sha256.js',CClientScript::POS_HEAD);
                 $model=new LoginForm;
 
 		// if it is ajax validation request
@@ -157,7 +157,7 @@ class SiteController extends Controller
 	public function actionLogout()
 	{
 		Yii::app()->user->logout();
-		$this->redirect(Yii::app()->homeUrl);
+		$this->redirect(Yii::app()->createUrl('site/login'));
 	}
 
 	public function actionRule()

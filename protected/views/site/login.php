@@ -22,20 +22,20 @@ $verifyCode = strtolower($this->createAction('captcha')->verifyCode);
         )); ?>
 <fieldset>
 <legend class='text-center'><strong>多媒体信息服务后台管理</strong></legend>
+<input name="LoginForm[token]" id="LoginForm_token"  style="display:none;visibility:collapse" value="<?php echo $token;?>" >
 <?php
         echo $form->textFieldRow($model,'username', array('prepend'=>"<i class='icon-user'></i>", 'placeholder'=>'用户名')  ); 
         echo '<div class="control-group"><label class="control-label required" for="Origin_password">密码 <span class="required">*</span></label><div class="controls"><div class="input-prepend"><span class="add-on"><i class="icon-lock"></i></span><input placeholder="密码" name="Origin[password]" id="Origin_password" type="password"></div><span class="help-inline error" id="Origin_password_em_" style="display: none"></span></div></div>';
-        echo $form->textFieldRow($model,'verifyCode', array('prepend'=>'<i class="icon-barcode"></i>',  'placeholder'=>'验证码')); 
+        echo $form->textFieldRow($model,'verifyCode', array('prepend'=>'<i class="icon-barcode"></i>',  'placeholder'=>'验证码',  'onkeydown'=>"javascript:keyLogin(event)")); 
         if(CCaptcha::checkRequirements()) { ?>
 	<div class="control-group"><div class='controls'>
 		<?php $this->widget('CCaptcha', array('buttonLabel'=>'换一张', 'buttonOptions'=>array('style'=>'display:inline-block;margin:0px 5px;'))); ?>
 	</div></div>
 	<?php } 
         echo $form->checkBoxRow($model,'rememberMe' );  ?>
-        <input name="LoginForm[token]" id="LoginForm_token"  style="display:none;visibility:collapse" value="<?php echo $token;?>" >
 </fieldset>
- <div class='control-group'><div class='controls'>
-<?php    $this->widget('bootstrap.widgets.TbButton', array(  'type'=>'primary', 'label'=>'登录', 'htmlOptions'=>array('class'=>'span2', 'id'=>'loginBtn') )); ?>
+<div class='control-group'><div class='controls'>
+<?php    $this->widget('bootstrap.widgets.TbButton', array(  'type'=>'primary', 'label'=>'登录', 'htmlOptions'=>array('class'=>'span2', 'id'=>'loginBtn', 'name'=>'loginForm') )); ?>
 </div></div>
 <?php   
         echo $form->passwordFieldRow($model,'password', array( 'style'=>'display:none; visibility: collapse' )  ); 
@@ -44,6 +44,12 @@ $verifyCode = strtolower($this->createAction('captcha')->verifyCode);
 
 
 <script language='javascript' type="text/javascript">
+function keyLogin(event){
+   if(event.keyCode==13)  //按下回车键， 则触发登陆按钮
+      $("#loginBtn").click(); 
+}
+
+
 var verifyCode='<?php echo $verifyCode; ?>';
 var oldHash=0;
 for(var i=verifyCode.length-1; i >= 0; --i) 
@@ -76,9 +82,7 @@ $('#loginBtn').bind('click', function(){
       }
       if($.trim(originPwd) == "")
       {
-        $('#Origin_password').parent().parent().parent().addClass('error');
-        $('#Origin_password_em_').removeAttr("style");
-        $('#Origin_password_em_').html('密码 不可为空白');
+        $('#Origin_username').blur();
         return false;
       }
       var hash = jQuery('body').data('captcha.hash');
@@ -99,15 +103,19 @@ $('#loginBtn').bind('click', function(){
         data:{"username":username, "YII_CSRF_TOKEN":csrfToken},
         dataType:'json',
         success:function(resData){
+                if(resData.resCode==0){
                 var salt=resData.salt;
                 var newPwd=CryptoJS.SHA256( salt+CryptoJS.SHA256(salt+originPwd) + loginToken);
                 $('#LoginForm_password').attr('value',newPwd);
                 $('#Origin_password').attr('value',"");
                 $('#loginForm').submit();
+                }else{
+                        $('#LoginForm_password_em_').removeAttr("style");
+                        $('#LoginForm_password_em_').html('用户名或者密码错误!');
+                }
         },
         error:function(XMLHttpRequest, textStatus, errorThrown){
-                var errorMes ="状态: " + textStatus + "\n" + XMLHttpRequest.status 
-                + " : " + XMLHttpRequest.statusText + "\n操作失败: \n" +XMLHttpRequest.responseText;
+                var errorMes ="状态: " + textStatus + "\n" + XMLHttpRequest.status  + " : " + XMLHttpRequest.statusText + "\n操作失败: \n" +XMLHttpRequest.responseText;
                 alert(errorMes);        
         }
       });

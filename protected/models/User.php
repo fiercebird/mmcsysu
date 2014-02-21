@@ -38,14 +38,33 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('campus_id', 'numerical', 'integerOnly'=>true),
+			array('username, password,  campus_id', 'required'),
+                        array('campus_id', 'numerical', 'integerOnly'=>true),
 			array('username, password', 'length', 'max'=>128),
-			array('authority', 'length', 'max'=>10),
+			array('authority', 'normalizeAuth'),
+			array('username', 'existInTable', 'on'=>'createUser'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('username,campus_id', 'safe', 'on'=>'search'),
 		);
 	}
+        
+        public function existInTable($attribute, $params)
+        {
+                $user=User::Model()->findbyAttributes(array('username'=>$this->username));
+                if(isset($user))
+                      $this->addError('username','用户名已存在');
+        }
+
+        public function normalizeAuth($attribute, $params)
+        {
+                $auth= 0;
+                if(isset($this->authority) && !empty($this->authority)){
+                   foreach ( $this->authority as $k=>$v)
+                       $auth = $auth | $v; 
+                }
+                $this->authority = $auth;
+        }
 
 	/**
 	 * @return array relational rules.
@@ -82,12 +101,44 @@ class User extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-	//	$criteria->compare('user_id',$this->user_id,true);
 		$criteria->compare('username',$this->username,true);
-		//$criteria->compare('campus_id',$this->campus_id);
+	        $criteria->compare('campus_id',$this->campus_id);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
 	}
+
+
+        /**
+         * @return string the URL that shows the detail of the user
+         */
+        public function getUrl()
+        {
+           return Yii::app()->createUrl('user/view', array(
+                    'id'=>$this->user_id,
+                    ));
+        }
+
+        /**
+         * This is invoked after the record is deleted.
+         * 把该用户的文章转改为author_id=0
+         */
+        protected function afterDelete()
+        {                
+           parent::afterDelete();    
+//           Article::model()->updateAll(array('author_id'=>0), array('author_id'=>$this->user_id));
+        }
+
+        //如果当前用户更新了自己的用户信息，则更新sess中的用户信息
+        protected function afterSave()
+        {                
+           parent::afterSave();    
+           if(!$this->isNewRecord && Yii::app()->user->id == $this->user_id)
+           {
+              Yii::app()->user->name = $this->username;
+              Yii::app()->user->auth = $this->authority;
+              Yii::app()->user->campusId = $this->campus_id;
+           }
+        }
 
 }
