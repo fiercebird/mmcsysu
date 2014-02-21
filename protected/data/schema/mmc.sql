@@ -73,7 +73,7 @@ create table mis_article(
       update_time	datetime not null default '0000-00-00 00:00:00' comment '更新时间',
       title 		varchar(256) not null default '' comment '文章标题',
       content 		mediumtext not null default '' comment '文章内容',
-      tag 		tinytext not null default '' comment '文章标题',
+      tag 		tinytext not null default '' comment '文章标签',
       status		tinyint(4) not null default 0 comment '文章状态',
 
       constraint pk_article_id	primary key (article_id),
