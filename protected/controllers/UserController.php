@@ -34,6 +34,7 @@ class UserController extends Controller
                  array(
                     'allow',             
                     'users'=>array('@'),
+                    'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_USER_ADMIN',
                     ),
                  array(
                     'deny',
@@ -195,7 +196,7 @@ class UserController extends Controller
          *   [@return]   generate the output for the column
          */
 
-        public function authorityColumnLayout($data, $row)
+        protected function authorityColumnLayout($data, $row)
         {
                 $htmlStyle="";
                 if($data->authority & ModuleAuth::MMC_HOMEPAGE_ADMIN)
