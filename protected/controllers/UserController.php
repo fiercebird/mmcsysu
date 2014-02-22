@@ -99,22 +99,21 @@ class UserController extends Controller
                 if(isset($_POST['User']))
                 {
                         $model->attributes = $_POST['User'];
-                     try{
-                        if($model->save())
-                                $this->redirect(array('view', 'id'=>$model->user_id));
-                        else
-                        {
-                                $errors="";
-                                foreach($model->getErrors() as $k=>$a)
-                                       $errors .= implode($a,';');
-                                $data= serialize($model->attributes);
-                                Yii::app()->user->setFlash('error', '不能创建用户！错误:' . $errors);
-                                Yii::log( '不能创建用户！错误：' . $errors. '数据：' . $data ,'warning','db' . $this->action->id);
+                        try{
+                                if($model->save())
+                                        $this->redirect(array('view', 'id'=>$model->user_id));
+                                else
+                                {
+                                   $errors="";
+                                   foreach($model->getErrors() as $k=>$a)
+                                      $errors .= implode($a,';');
+                                   $data= serialize($model->attributes);
+                                   Yii::app()->user->setFlash('error', '不能创建用户！错误:' . $errors);
+                                   Yii::log( '不能创建用户！错误：' . $errors. '数据：' . $data ,'warning','db' . $this->action->id);
+                                }
+                        }catch(CDbException $e){
+                           throw new CHttpException(400,  implode($e->errorInfo,':'));
                         }
-                     }catch(CDbException $e){
-                                echo implode($e->errorInfo,':');
-                                Yii::app()->end();
-                     }
                 }
                 $this->render('createUser',array('model'=>$model));
         }
@@ -129,6 +128,7 @@ class UserController extends Controller
         public function actionUpdate()
         {
                 $model=$this->loadModel();
+                $model->scenario = 'updateUser';
                 if(isset($_POST['ajax']) && $_POST['ajax']==='userForm')
 		{
 			echo CActiveForm::validate($model);
@@ -137,18 +137,23 @@ class UserController extends Controller
                 
                 if(isset($_POST['User']))
                 {
-                   $model->attributes=$_POST['User'];
-                   if($model->save())
-                      $this->redirect(array('view','id'=>$model->user_id));
-                   else
-                   {
-                      $errors="";
-                      foreach($model->getErrors() as $k=>$a)
-                         $errors .= implode($a,';');
-                      $data= serialize($model->attributes);
-                      Yii::app()->user->setFlash('error', '不能更新用户！错误:' . $errors);
-                      Yii::log( '不能更新用户！错误：' . $errors. '数据：' . $data ,'warning','db' . $this->action->id);
-                   }
+                        $model->attributes=$_POST['User'];
+                        try{
+                           if($model->save())
+                              $this->redirect(array('view','id'=>$model->user_id));
+                           else
+                           {
+                              $errors="";
+                              foreach($model->getErrors() as $k=>$a)
+                                 $errors .= implode($a,';');
+                              $data= serialize($model->attributes);
+                              Yii::app()->user->setFlash('error', '不能更新用户！错误:' . $errors);
+                              Yii::log( '不能更新用户！错误：' . $errors. '数据：' . $data ,'warning','db' . $this->action->id);
+                           }
+                        }catch(CDbException $e){
+                           throw new CHttpException(400,  implode($e->errorInfo,':'));
+
+                        }
                 }
                 $this->render('updateUser',array('model'=>$model));
         }

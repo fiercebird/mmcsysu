@@ -43,6 +43,7 @@ class User extends CActiveRecord
 			array('username, password', 'length', 'max'=>128),
 			array('authority', 'normalizeAuth'),
 			array('username', 'existInTable', 'on'=>'createUser'),
+			array('username', 'uniqueInTable', 'on'=>'updateUser'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('username,campus_id', 'safe', 'on'=>'search'),
@@ -53,6 +54,13 @@ class User extends CActiveRecord
         {
                 $user=User::Model()->findbyAttributes(array('username'=>$this->username));
                 if(isset($user))
+                      $this->addError('username','用户名已存在');
+        }
+        
+        public function uniqueInTable($attribute, $params)
+        {
+                $user=User::Model()->findbyAttributes(array('username'=>$this->username));
+                if(isset($user) &&  $user->user_id != $this->user_id && $user->username == $this->username)
                       $this->addError('username','用户名已存在');
         }
 
