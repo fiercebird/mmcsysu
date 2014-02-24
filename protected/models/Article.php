@@ -102,6 +102,7 @@ class Article extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
+                $criteria->select = 'campus_id, publisher, create_time, update_time, title, status';
 		$criteria->compare('campus_id',$this->campus_id);
 		$criteria->compare('publisher',$this->publisher,true);
 		$criteria->compare('create_time',$this->create_time,true);
