@@ -34,6 +34,19 @@ insert into mis_dictionary (dictionary_type, item_key, item_value, display_order
 ('Campus', 3, '北校区',  3),
 ('Campus', 4, '珠海校区',  4);
 
+insert into mis_dictionary (dictionary_type, item_key, item_value, display_order) values
+('Category', 0, '特色课室',  1),
+('Category', 1, '规章制度',  2),
+('Category', 2, '服务信息',  3),
+('Category', 3, '技术探索',  4),
+('Category', 4, '优秀助理',  5),
+('Category', 5, '活动报道',  6),
+('Category', 6, '工作感想',  7);
+
+insert into mis_dictionary (dictionary_type, item_key, item_value, display_order) values
+('Article', 0, '草稿',  1),
+('Article', 1, '置顶',  2),
+('Article', 2, '发布',  3);
 
 insert into mis_dictionary (dictionary_type, item_key, item_value, display_order) values
 ('Module' , 2, '首页管理', 1),

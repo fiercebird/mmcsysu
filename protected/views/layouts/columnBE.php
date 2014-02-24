@@ -29,7 +29,8 @@ if($auth & ModuleAuth::MMC_HOMEPAGE_ADMIN){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'服务信息','url'=>array(''), 'icon'=>'list-alt'),
+                        array('label'=>'添加服务信息','url'=>array('article/createArticle', 'cate'=>Category::$CATE_SERVICE_NEWS), 'icon'=>'plus'),
+                        array('label'=>'管理服务信息','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_SERVICE_NEWS), 'icon'=>'list-alt'),
                         array('label'=>'联系我们','url'=>array(''),'icon'=>'retweet'),
                     ),
 		 )); ?>
@@ -49,7 +50,7 @@ if($auth & ModuleAuth::MMC_SPECIAL_CLASSROOM){
 	<?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'新增特色课室','url'=>array(''), 'icon'=>'plus'),
+                        array('label'=>'新增特色课室','url'=>array('article/createArticle','cate'=>Category::$CATE_SERVICE_NEWS), 'icon'=>'plus'),
                         array('label'=>'编辑特色课室','url'=>array(''),'icon'=>'wrench'),
                     ),
 		 )); ?>
@@ -90,8 +91,8 @@ if($auth & ModuleAuth::MMC_RULE_ADMIN){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'新增规章制度','url'=>array(''), 'icon'=>'plus'),
-                        array('label'=>'编辑规章制度','url'=>array(''), 'icon'=>'wrench'),
+                        array('label'=>'新增规章制度','url'=>array('article/createArticle','cate'=>Category::$CATE_REGULATION_RULE), 'icon'=>'plus'),
+                        array('label'=>'编辑规章制度','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_REGULATION_RULE), 'icon'=>'wrench'),
                     ),
 		 )); ?>
 
@@ -112,8 +113,8 @@ if($auth & ModuleAuth::MMC_TECH_EXPLORE){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'新增技术文章','url'=>array(''), 'icon'=>'plus'),
-                        array('label'=>'编辑技术探索','url'=>array(''),'icon'=>'wrench'),
+                        array('label'=>'新增技术文章','url'=>array('article/createArticle','cate'=>Category::$CATE_TECHNIQUE_SHARE), 'icon'=>'plus'),
+                        array('label'=>'编辑技术探索','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_TECHNIQUE_SHARE),'icon'=>'wrench'),
                     ),
 		 )); ?>
 

@@ -20,8 +20,8 @@ class Article extends CActiveRecord
 {
 
 	static $STATUS_DRAFT=0;
-	static $STATUS_PUBLISHED=1;
-     	static $STATUS_GARBAGE=2;
+	static $STATUS_SET_TOP=1;
+	static $STATUS_PUBLISHED=2;
 	static $STATUS_DELETED=3;
 
 	/**
@@ -50,15 +50,13 @@ class Article extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('content, tag', 'required'),
-			array('category_id, campus_id, status', 'numerical', 'integerOnly'=>true),
-			array('author_id', 'length', 'max'=>10),
+			array('campus_id, publisher, title, content', 'required'),
 			array('publisher', 'length', 'max'=>128),
 			array('title', 'length', 'max'=>256),
-			array('create_time, update_time', 'safe'),
+			array('author_id, category_id, status, create_time, update_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('article_id, category_id, author_id, campus_id, publisher, create_time, update_time, title, content, tag, status', 'safe', 'on'=>'search'),
+			array('campus_id, publisher, create_time, update_time, title, status', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -79,17 +77,17 @@ class Article extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'article_id' => 'Article',
-			'category_id' => 'Category',
-			'author_id' => 'Author',
-			'campus_id' => 'Campus',
-			'publisher' => 'Publisher',
-			'create_time' => 'Create Time',
-			'update_time' => 'Update Time',
-			'title' => 'Title',
-			'content' => 'Content',
-			'tag' => 'Tag',
-			'status' => 'Status',
+			'article_id' => '文章ID',
+			'category_id' => '类别',
+			'author_id' => '作者',
+			'campus_id' => '校区',
+			'publisher' => '发布方',
+			'create_time' => '创建时间',
+			'update_time' => '更新时间',
+			'title' => '文章标题',
+			'content' => '文章内容',
+			'tag' => '文章标签',
+			'status' => '文章状态',
 		);
 	}
 
@@ -103,19 +101,13 @@ class Article extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('article_id',$this->article_id,true);
-		$criteria->compare('category_id',$this->category_id);
-		$criteria->compare('author_id',$this->author_id,true);
 		$criteria->compare('campus_id',$this->campus_id);
 		$criteria->compare('publisher',$this->publisher,true);
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('update_time',$this->update_time,true);
 		$criteria->compare('title',$this->title,true);
-		$criteria->compare('content',$this->content,true);
-		$criteria->compare('tag',$this->tag,true);
 		$criteria->compare('status',$this->status);
-
+		$criteria->addCondition('status!=' . Article::$STATUS_DELETED);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -129,8 +121,8 @@ class Article extends CActiveRecord
 	{
 		return array(
 		     	'draft'=>array('condition'=>'status=' . self::$STATUS_DRAFT),
+			'setTop'=>array('condition'=>'status='. self::$STATUS_SET_TOP),      
 			'published'=>array('condition'=>'status=' . self::$STATUS_PUBLISHED),      
-			'garbage'=>array('condition'=>'status='. self::$STATUS_GARBAGE),      
 			'deleted'=>array('condition'=>'status='. self::$STATUS_DELETED),
 			'recently'=>array(
 			   	'select'=>'article_id, campus_id, publisher, title, create_time',
@@ -142,10 +134,48 @@ class Article extends CActiveRecord
 			),
 			'regulationRules'=>array(
 			   'select'=>"article_id, title,left(content,600) as content",
-			   'condition'=>'category_id='. Category::$CATE_REGULATION_RULES
+			   'condition'=>'category_id='. Category::$CATE_REGULATION_RULE
 			),
 		);
 	}
 
+
+        /**
+         * @return string the URL that shows the detail of the user
+         */
+        public function getUrl()
+        {
+           return Yii::app()->createUrl('article/view', array(
+                    'id'=>$this->article_id,
+                    'cate'=>$this->category_id,
+                    ));
+        }
+
+        /**
+         * This is invoked after the record is deleted.
+         */
+        protected function afterDelete()
+        {                
+           parent::afterDelete();    
+        }
+
+        //更新update_time,设置create_time
+        protected function beforeSave()
+        {                
+           if(parent::beforeSave())
+           {
+              if($this->isNewRecord)
+              {
+                 $this->create_time = date( 'Y-m-d H:i:s', time() );
+                 $this->update_time = date( 'Y-m-d H:i:s', time() );
+                 $this->author_id=Yii::app()->user->id;
+              }
+              else
+                 $this->update_time=time();
+              return true;
+           }
+           else
+              return false;
+        }
 
 }

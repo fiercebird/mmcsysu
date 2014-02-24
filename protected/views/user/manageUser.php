@@ -36,7 +36,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
                'htmlOptions'=>array('style'=>'width:8%; text-align:center; '),
                'value'=>'Dictionary::item(Yii::app()->params["dictTypeCampus"], $data->campus_id)',
                'filter'=>Dictionary::items(Yii::app()->params["dictTypeCampus"]),
-               'filterHtmlOptions'=>array('style'=>'height:20px;')
                ),            
             array(
                'name'=>'username',

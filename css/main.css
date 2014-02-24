@@ -803,3 +803,12 @@ tr> td > span.label
         margin:1px 1px;
 }
 
+#articleForm div.control-group >label.control-label
+{
+        width:auto;
+}
+
+#articleForm  fieldset  div.control-group >div.controls
+{
+        margin:0px 0px 0px 80px; 
+}

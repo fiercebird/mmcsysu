@@ -33,7 +33,7 @@ return array(
 			'password'=>'123456',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 		//	'ipFilters'=>array('127.0.0.1','::1'),
-		//	'ipFilters'=>array('172.18.60.62','::1'),
+			'ipFilters'=>array('172.18.60.62','::1'),
                      //   'ipFilters'=>array("*","*"),
 		),
 		
@@ -147,6 +147,8 @@ return array(
 		'dictTypeSpecialClassroom'=>'SpecialClassroom',  //特色课室在KV字典表的类型名称
 		'dictTypeCampus'=>'Campus',                      //校区名称在KV字典表的类型名称
 		'dictTypeModule'=>'Module',                      //校区名称在KV字典表的类型名称
+		'dictTypeArticle'=>'Article',                      //校区名称在KV字典表的类型名称
+		'dictTypeCategory'=>'Category',                      //校区名称在KV字典表的类型名称
 		'siteSpecialArticle'=>'SpecialArticle',		//特色课室页面的文章在Article表中的Publisher字段
                 'siteIntroduceArticle'=>'IntroduceArticle',     //课室介绍页面的文章在Article表中的Publisher字段
 	),
