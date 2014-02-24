@@ -127,7 +127,7 @@ class Article extends CActiveRecord
 			'recently'=>array(
 			   	'select'=>'article_id, campus_id, publisher, title, create_time',
 				'order'=>'create_time DESC',
-				'limit'=>Yii::app()->params['recentlyNewsCount'],
+				'limit'=>Yii::app()->params['recentlyNewsPerPage'],
 			),
 			'specialClassroom'=>array(
 			   'condition'=>'category_id=' . Category::$CATE_SPECIAL_CLASSROOM

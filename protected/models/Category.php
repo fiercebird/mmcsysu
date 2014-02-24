@@ -16,7 +16,7 @@ class Category extends CActiveRecord
 	static $CATE_SPECIAL_CLASSROOM=0;
 	static $CATE_REGULATION_RULE=1;
 	static $CATE_SERVICE_NEWS=2;
-	static $CATE_TECHNIQUE_SHARE=3;
+	static $CATE_TECH_EXPLORE=3;
 	static $CATE_PERFECT_ASSISTANT=4;
 	static $CATE_ACTIVITY_REPORT=5;
 	static $CATE_WORK_FEELING=6;

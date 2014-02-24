@@ -31,7 +31,7 @@
 				array('label'=>'特色课室', 'url'=>array('/site/special')),
 				array('label'=>'服务列表', 'url'=>array('/site/service')),
 				array('label'=>'规章制度', 'url'=>array('/site/rule')),
-				array('label'=>'技术探索', 'url'=>array('/site/test')),
+				array('label'=>'技术探索', 'url'=>array('/site/techExplore')),
 				array('label'=>'多媒体风采', 'url'=>array('/site/teamStyle')),
 				array('label'=>'意见收集', 'url'=>array('/site/feedback')),
 				array('label'=>'内部管理', 'url'=>array('/site/login')),

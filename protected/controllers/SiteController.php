@@ -75,13 +75,6 @@ class SiteController extends Controller
 		$this->render('index', array('articles'=>$articles));
 	}
 
-	
-	public function actionTest()
-	{
-           $res=Yii::app()->user->name;
-           Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/sha256.js',CClientScript::POS_HEAD);
-           $this->render('test',array('tt'=>$res));
-      	}
 	/**
 	 * This is the action to handle external exceptions.
 	 */
@@ -167,6 +160,22 @@ class SiteController extends Controller
                        Yii::log('Article about rule is null', 'warning', 'db.actionRule');
                 $this->render('rule', array('rules'=>$rules));
 	}
+	
+	public function actionTechExplore()
+        {
+                $criteria=new CDbCriteria(array(
+                    'select'=>'article_id, category_id, title, left(content,800) as content',
+                    'condition'=>'category_id='. Category::$CATE_TECH_EXPLORE,
+                    'order'=>'create_time DESC',
+                    ));
+                $dataProvider=new CActiveDataProvider('Article', array(
+                    'pagination'=>array(
+                       'pageSize'=>Yii::app()->params['techArticlesPerPage'],
+                       ),
+                    'criteria'=>$criteria,
+                    ));
+                $this->render('techExplore', array('dataProvider'=>$dataProvider));
+      	}
 
 	public function actionSpecial()
 	{

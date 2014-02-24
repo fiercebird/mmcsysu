@@ -113,8 +113,8 @@ if($auth & ModuleAuth::MMC_TECH_EXPLORE){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'新增技术文章','url'=>array('article/createArticle','cate'=>Category::$CATE_TECHNIQUE_SHARE), 'icon'=>'plus'),
-                        array('label'=>'编辑技术探索','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_TECHNIQUE_SHARE),'icon'=>'wrench'),
+                        array('label'=>'新增技术文章','url'=>array('article/createArticle','cate'=>Category::$CATE_TECH_EXPLORE), 'icon'=>'plus'),
+                        array('label'=>'编辑技术探索','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_TECH_EXPLORE),'icon'=>'wrench'),
                     ),
 		 )); ?>
 
