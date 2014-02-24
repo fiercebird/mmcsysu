@@ -23,7 +23,7 @@ foreach($articles as $article)
 <div id='contact' class="span5 pull-left">
 <div class='row-fulid'><span class='font1'>联系我们</span></div>
 <hr class='hr0' />
- <p style="line-height: 150%;">【南校区】<br />第一、二教学楼：卜老师&nbsp;&nbsp;&nbsp;84110459&nbsp;<br />第三教学楼、文科楼：洪老师&nbsp;&nbsp;&nbsp;84113453&nbsp;<br />逸夫楼:&nbsp;张老师&nbsp;&nbsp;&nbsp;84115148<br />【东校区】<br />教学楼:&nbsp;李文杰&nbsp;&nbsp;&nbsp;&nbsp;39332701&nbsp;39332702&nbsp;<br />【北校区】<br />教学楼:&nbsp;岑老师&nbsp;&nbsp;&nbsp;&nbsp;87331669&nbsp;87331626<br />【珠海校区】&nbsp;<br />教学楼：蔡家明&nbsp;&nbsp;&nbsp;&nbsp;0756－3668187										  </p>    
+<?php echo (isset($contactWay->content)?$contactWay->content:""); ?>
 </div>
 </div>
 

@@ -147,10 +147,11 @@ return array(
 		'techNewsPerPage'=>12,	//技术探索上显示的最近服务咨询的条数
 		'dictTypeSpecialClassroom'=>'SpecialClassroom',  //特色课室在KV字典表的类型名称
 		'dictTypeCampus'=>'Campus',                      //校区名称在KV字典表的类型名称
-		'dictTypeModule'=>'Module',                      //校区名称在KV字典表的类型名称
-		'dictTypeArticle'=>'Article',                      //校区名称在KV字典表的类型名称
-		'dictTypeCategory'=>'Category',                      //校区名称在KV字典表的类型名称
+		'dictTypeModule'=>'Module',                      //模块权限名称在KV字典表的类型名称
+		'dictTypeArticle'=>'Article',                      //文章状态在KV字典表的类型名称
+		'dictTypeCategory'=>'Category',                      //文章类型在KV字典表的类型名称
 		'siteSpecialArticle'=>'SpecialArticle',		//特色课室页面的文章在Article表中的Publisher字段
                 'siteIntroduceArticle'=>'IntroduceArticle',     //课室介绍页面的文章在Article表中的Publisher字段
+                'contactTelTitle'=>'contactTel',     //首页联系人设置的文章在Article表中的Publisher字段
 	),
 );

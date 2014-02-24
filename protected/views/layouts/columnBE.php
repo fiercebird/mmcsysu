@@ -31,7 +31,7 @@ if($auth & ModuleAuth::MMC_HOMEPAGE_ADMIN){
 		 'items'=>array(
                         array('label'=>'添加服务信息','url'=>array('article/createArticle', 'cate'=>Category::$CATE_SERVICE_NEWS), 'icon'=>'plus'),
                         array('label'=>'管理服务信息','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_SERVICE_NEWS), 'icon'=>'list-alt'),
-                        array('label'=>'联系我们','url'=>array(''),'icon'=>'retweet'),
+                        array('label'=>'联系人设置','url'=>array('article/setContactTel'),'icon'=>'retweet'),
                     ),
 		 )); ?>
 

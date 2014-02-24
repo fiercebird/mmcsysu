@@ -114,9 +114,8 @@ class ArticleController extends Controller
                               $errors="";
                               foreach($model->getErrors() as $k=>$a)
                                  $errors .= implode($a,';');
-                              $data= serialize($model->attributes);
                               Yii::app()->user->setFlash('error', '不能更新文章！错误:' . $errors);
-                              Yii::log( '不能更新文章！错误：' . $errors. '数据：' . $data ,'warning','db' . $this->action->id);
+                              Yii::log( '不能更新文章！错误：' . $errors, 'warning','db' . $this->action->id);
                            }
                         }catch(CDbException $e){
                            throw new CHttpException(400,  implode($e->errorInfo,':'));
@@ -152,6 +151,37 @@ class ArticleController extends Controller
                    throw new CHttpException(404, "请求页面不存在！禁止删除文章!");
                
         } 
+
+
+        public function actionSetContactTel()
+        {
+                $data = Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['contactTelTitle']));
+                if(!isset($data))
+                   $data = new Article('contactTel');
+                if(isset($_POST['contactTel']))
+                {
+                        $data->content = $_POST['contactTel'];
+                        $data->title = Yii::app()->params['contactTelTitle'];
+                        $data->publisher = Yii::app()->params['contactTelTitle'];
+                        try{
+                           if($data->save())
+                              Yii::app()->user->setFlash('success', '联系人更新成功！');
+                           else
+                           {
+                              $errors="";
+                              foreach($data->getErrors() as $k=>$a)
+                                 $errors .= implode($a,';');
+                              Yii::app()->user->setFlash('error', '不能更新联系人！错误:' . $errors);
+                              Yii::log( '不能更新联系人！错误：' . $errors ,'warning','db' . $this->action->id);
+                           }
+                        }catch(CDbException $e){
+                           throw new CHttpException(400,  implode($e->errorInfo,':'));
+                        }
+                }
+                $this->render('setContactTel',array('data'=>$data));
+
+        }
+
 
         public function loadModel()
         {

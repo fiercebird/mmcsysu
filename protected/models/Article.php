@@ -51,6 +51,7 @@ class Article extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('campus_id, publisher, title, content', 'required'),
+			array('content', 'required', 'on'=>'contactTel'),
 			array('publisher', 'length', 'max'=>128),
 			array('title', 'length', 'max'=>256),
 			array('author_id, category_id, status, create_time, update_time', 'safe'),
