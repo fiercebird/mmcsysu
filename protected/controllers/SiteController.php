@@ -69,13 +69,27 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-	   	$articles=Article::model()->published()->recently()->findAll();
+	   	$articles=Article::model()->serviceInfo()->publishedandSetTop()->recently()->findAll();
                 $contactWay = Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['contactTelTitle']));
                 if(empty($articles))
                    Yii::log('Article titles is null','warning','db.actionIndex');
                 if(!isset($contactWay))
                    Yii::log( '首页不能获取联系人！错误：' . $errors ,'warning','db' . $this->action->id);
 		$this->render('index', array('articles'=>$articles, 'contactWay'=>$contactWay));
+	}
+
+        public function actionMore()
+	{
+		// renders the view file 'protected/views/site/index.php'
+		// using the default layout 'protected/views/layouts/main.php'
+                $model = new Article('search');
+                $model->dbCriteria->compare('category_id', Category::$CATE_SERVICE_INFO);
+                $model->unsetAttributes(); //campus_id默认值为0,去除默认值，则GridView中会显示所有用户
+                if(isset($_GET['Article']))
+                        $model->attributes=$_GET['Article'];
+                if(empty($articles))
+                   Yii::log('Article titles is null','warning','db.actionIndex');
+		$this->render('more', array('model'=>$model));
 	}
 
 	/**

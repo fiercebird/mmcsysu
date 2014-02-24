@@ -12,7 +12,7 @@ foreach($articles as $article)
 
 <div class="row-fluid">
 <div id='info' class="span7  pull-left" >
-<div class='row-fluid'><span class='font1'>服务信息</span><a  class='pull-right'  href="#">更多>></a></div>
+<div class='row-fluid'><span class='font1'>服务信息</span><a  class='pull-right'  href="<?php echo Yii::app()->createUrl("site/more");?>">更多>></a></div>
 <hr class="hr2"/>
 <div id="news">
 <?php echo $articleList; ?>

@@ -29,8 +29,8 @@ if($auth & ModuleAuth::MMC_HOMEPAGE_ADMIN){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'添加服务信息','url'=>array('article/createArticle', 'cate'=>Category::$CATE_SERVICE_NEWS), 'icon'=>'plus'),
-                        array('label'=>'管理服务信息','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_SERVICE_NEWS), 'icon'=>'list-alt'),
+                        array('label'=>'添加服务信息','url'=>array('article/createArticle', 'cate'=>Category::$CATE_SERVICE_INFO), 'icon'=>'plus'),
+                        array('label'=>'管理服务信息','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_SERVICE_INFO), 'icon'=>'list-alt'),
                         array('label'=>'联系人设置','url'=>array('article/setContactTel'),'icon'=>'retweet'),
                     ),
 		 )); ?>
@@ -50,7 +50,7 @@ if($auth & ModuleAuth::MMC_SPECIAL_CLASSROOM){
 	<?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'新增特色课室','url'=>array('article/createArticle','cate'=>Category::$CATE_SERVICE_NEWS), 'icon'=>'plus'),
+                        array('label'=>'新增特色课室','url'=>array('article/createArticle','cate'=>Category::$CATE_SERVICE_INFO), 'icon'=>'plus'),
                         array('label'=>'编辑特色课室','url'=>array(''),'icon'=>'wrench'),
                     ),
 		 )); ?>

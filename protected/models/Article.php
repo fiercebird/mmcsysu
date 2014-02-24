@@ -126,9 +126,11 @@ class Article extends CActiveRecord
 			'setTop'=>array('condition'=>'status='. self::$STATUS_SET_TOP),      
 			'published'=>array('condition'=>'status=' . self::$STATUS_PUBLISHED),      
 			'deleted'=>array('condition'=>'status='. self::$STATUS_DELETED),
+			'serviceInfo'=>array('condition'=>'category_id='. Category::$CATE_SERVICE_INFO),
+			'publishedandSetTop'=>array('condition'=>'status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP),      
 			'recently'=>array(
-			   	'select'=>'article_id, campus_id, publisher, title, create_time',
-				'order'=>'create_time DESC',
+			   	'select'=>'article_id, campus_id, publisher, title, create_time, update_time, status',
+				'order'=>'status, update_time DESC',
 				'limit'=>Yii::app()->params['recentlyNewsPerPage'],
 			),
 			'specialClassroom'=>array(
