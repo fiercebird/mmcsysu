@@ -12,7 +12,7 @@
 
 $cate = Dictionary::item(Yii::app()->params['dictTypeCategory'], $cateId);
 $prev = $cate;
-if($cate == Category::$CATE_SERVICE_NEWS)
+if($cate == Category::$CATE_SERVICE_INFO)
         $prev = '首页管理';
 $this->breadcrumbs=array(
 	$prev,

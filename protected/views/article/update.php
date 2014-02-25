@@ -9,7 +9,7 @@
 
 $cate = Dictionary::item(Yii::app()->params['dictTypeCategory'], $model->category_id);
 $prev = $cate;
-if($cate == Category::$CATE_SERVICE_NEWS)
+if($cate == Category::$CATE_SERVICE_INFO)
         $prev = '首页管理';
 $this->pageTitle=Yii::app()->name . ' - 更新' . $cate;
 $this->breadcrumbs=array(
