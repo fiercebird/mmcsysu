@@ -22,6 +22,22 @@ if($model->isNewRecord)
 }
 
 
+$cid = 0;
+switch($model->category_id)
+{
+   case Category::$CATE_SPECIAL_CLASSROOM:
+      $cid = 2;
+      break;
+   case Category::$CATE_REGULATION_RULE:
+      $cid = 4;
+      break;
+   case Category::$CATE_SERVICE_INFO:
+      $cid = 1;
+      break;
+   case Category::$CATE_TECH_EXPLORE:
+      $cid = 5;
+      break;
+}
 
 
 
@@ -84,5 +100,6 @@ if(!$model->isNewRecord)
 
 
 <script language="javascript" type="text/javascript">
-$('#collapse1').addClass('in');
+var cid = <?php echo $cid; ?>;
+$('#collapse'+cid).addClass('in');
 </script>

@@ -7,18 +7,34 @@
  *  
  */
 
-$cate = 'index';
-switch($cate)
+$cid = 0;
+switch($article->category_id)
 {
-        case 'index':
-           $this->pageTitle=Yii::app()->name . ' - 服务信息';
-           $this->breadcrumbs=array( '服务信息');
-           break;
-        case 'rule':
-           $this->pageTitle=Yii::app()->name . ' - 规章制度';
-           $this->breadcrumbs=array( '规章制度');
-           break;
+   case Category::$CATE_SPECIAL_CLASSROOM:
+      $cid = 2;
+      break;
+   case Category::$CATE_REGULATION_RULE:
+      $cid = 4;
+      break;
+   case Category::$CATE_SERVICE_INFO:
+      $cid = 1;
+      break;
+   case Category::$CATE_TECH_EXPLORE:
+      $cid = 5;
+      break;
 }
+
+$cate = Dictionary::item(Yii::app()->params['dictTypeCategory'], $article->category_id);
+$prev = $cate;
+if($article->category_id == Category::$CATE_SERVICE_INFO)
+        $prev = '首页管理';
+$this->pageTitle=Yii::app()->name . ' - ' . $cate;
+$this->breadcrumbs=array(
+	$prev,
+	'管理' . $cate,
+);
+
+
 
 
 ?>
@@ -40,6 +56,10 @@ switch($cate)
 
 
 <script language='javascript'  type='text/javascript' />
+var cid = <?php echo $cid; ?>;
+$('#collapse'+cid).addClass('in');
+
+
 $(document).ready(function(){
         //替换table样式，改为横向可滑动
         $('#content table').each(function(){

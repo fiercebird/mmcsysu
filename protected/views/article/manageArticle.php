@@ -19,6 +19,24 @@ $this->breadcrumbs=array(
 	'管理' . $cate,
 );
 
+$cid = 0;
+switch($cateId)
+{
+   case Category::$CATE_SPECIAL_CLASSROOM:
+      $cid = 2;
+      break;
+   case Category::$CATE_REGULATION_RULE:
+      $cid = 4;
+      break;
+   case Category::$CATE_SERVICE_INFO:
+      $cid = 1;
+      break;
+   case Category::$CATE_TECH_EXPLORE:
+      $cid = 5;
+      break;
+}
+
+
 
 $this->widget('zii.widgets.grid.CGridView', array(
          'id'=>'serviceInfoGrid',
@@ -104,7 +122,8 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
 
 <script language="javascript" type="text/javascript">
-$('#collapse1').addClass('in');
+var cid = <?php echo $cid; ?>;
+$('#collapse'+cid).addClass('in');
 </script>
 
 
