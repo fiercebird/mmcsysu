@@ -75,6 +75,11 @@ class ArticleController extends Controller
                 if(!isset($_GET['cate']))
                    throw new CHttpException(404,'非法请求'); 
                 $model->category_id = $_GET['cate'];
+                if($_GET['cate'] ==  Category::$CATE_SPECIAL_CLASSROOM)
+                {
+                         $model->campus_id = 0;
+                         $model->publisher = Yii::app()->params['dictTypeSpecialClassroom'];
+                }
                 if(isset($_POST['Article']))
                 {
                         $model->attributes = $_POST['Article'];
@@ -194,6 +199,7 @@ class ArticleController extends Controller
                 {
                         $model = new Article();
                         $model->publisher = $dictType;
+                        $model->campus_id = 0;
                 }
                 if(isset($_POST['Article']))
                 {

@@ -72,10 +72,12 @@ switch($model->category_id)
          )); ?>
 
 <fieldset><legend><strong><?php echo  $legend; ?> </strong></legend>
+<?php if($model->category_id != Category::$CATE_SPECIAL_CLASSROOM){?>
 <div class='row-fluid'>
 <div class='span5'><?php  echo $form->dropDownListRow($model,'campus_id', Dictionary::items(Yii::app()->params['dictTypeCampus']));  ?></div>
 <div class='span6'><?php echo $form->textFieldRow($model,'publisher' ,array('class'=>'inline') ); ?></div>
 </div>
+<?php } ?>
 <?
 echo $form->textFieldRow($model,'title', array('class'=>'span9') ); 
 echo $form->labelEx($model,'content');
@@ -83,7 +85,10 @@ echo $form->textArea($model,'content',  array('id'=>'serviceEditor','style'=>'he
 echo $form->error($model,'content');
 ?>
 <br />
-<?php  echo $form->dropDownListRow($model,'status', Dictionary::items(Yii::app()->params['dictTypeArticle']));  ?>
+<?php 
+ if($model->category_id != Category::$CATE_SPECIAL_CLASSROOM)
+        echo $form->dropDownListRow($model,'status', Dictionary::items(Yii::app()->params['dictTypeArticle'])); 
+?>
 </fieldset>
 <div class='control-group'><div class='controls'>
 <?php    

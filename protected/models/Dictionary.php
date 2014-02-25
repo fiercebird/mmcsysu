@@ -46,7 +46,7 @@ class Dictionary extends CActiveRecord
 			array('item_value', 'length', 'max'=>256),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('dictionary_id, dictionary_type, item_key, item_value, display_order', 'safe', 'on'=>'search'),
+			array('dictionary_type, item_key, item_value, display_order', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,11 +67,11 @@ class Dictionary extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'dictionary_id' => 'Dictionary',
-			'dictionary_type' => 'Dictionary Type',
-			'item_key' => 'Item Key',
-			'item_value' => 'Item Value',
-			'display_order' => 'Display Order',
+			'dictionary_id' => '字典自增ID',
+			'dictionary_type' => '字段类型',
+			'item_key' => '条目键',
+			'item_value' => '条目值',
+			'display_order' => '显示顺序',
 		);
 	}
 
@@ -86,11 +86,10 @@ class Dictionary extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('dictionary_id',$this->dictionary_id,true);
 		$criteria->compare('dictionary_type',$this->dictionary_type,true);
-		$criteria->compare('item_key',$this->item_key,true);
+		$criteria->compare('item_key',$this->item_key);
 		$criteria->compare('item_value',$this->item_value,true);
-		$criteria->compare('display_order',$this->display_order,true);
+		$criteria->compare('display_order',$this->display_order);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
@@ -112,6 +111,13 @@ class Dictionary extends CActiveRecord
 		);
 	
         }
+
+        public static function getTypeCount($type)
+        {   
+           if(isset(self::$_items[$type]))
+                return count(self::$_items[$type]);
+           return Dictionary::model()->count('dictionary_type="'.$type . '"');
+        }   
 
 
         /** 

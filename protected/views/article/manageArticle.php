@@ -9,7 +9,6 @@
  *  
  */
 
-
 $cate = Dictionary::item(Yii::app()->params['dictTypeCategory'], $cateId);
 $prev = $cate;
 if($cateId == Category::$CATE_SERVICE_INFO)
@@ -61,10 +60,18 @@ $this->widget('zii.widgets.grid.CGridView', array(
                'value'=>'Dictionary::item(Yii::app()->params["dictTypeCampus"], $data->campus_id)',
                'filter'=>Dictionary::items(Yii::app()->params["dictTypeCampus"]),
                ),            
+             array(
+               'name'=>'update_time',
+               'type'=>'raw',
+               'htmlOptions'=>array('style'=>'width:130px'),
+               'value'=>'substr($data->create_time,0,-3)',  
+               'visible'=>($cateId==Category::$CATE_SPECIAL_CLASSROOM),
+               ),
             array(
                'name'=>'publisher',
                'type'=>'raw',
                'htmlOptions'=>array('style'=>'width:180px'),
+               'visible'=>($cateId!=Category::$CATE_SPECIAL_CLASSROOM),
                ),  
             array(
                'name'=>'title',
@@ -76,13 +83,14 @@ $this->widget('zii.widgets.grid.CGridView', array(
                'type'=>'raw',
                'htmlOptions'=>array('style'=>'width:130px'),
                'value'=>'substr($data->create_time,0,-3)',  
-               ),  
+               ), 
             array(
                'name'=>'status',
                'type'=>'raw',
                'htmlOptions'=>array('style'=>'width:70px'),
                'value'=>'Dictionary::item(Yii::app()->params["dictTypeArticle"], $data->status)',
                'filter'=>Dictionary::items(Yii::app()->params["dictTypeArticle"]),
+               'visible'=>($cateId!=Category::$CATE_SPECIAL_CLASSROOM),
                ),  
             array(
                'header'=>'操作',

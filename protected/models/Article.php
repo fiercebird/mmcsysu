@@ -158,11 +158,38 @@ class Article extends CActiveRecord
         /**
          * This is invoked after the record is deleted.
          */
+
         protected function afterDelete()
         {                
            parent::afterDelete();    
         }
 
+        /**
+         * This is invoked after the record is deleted.
+         * 如果是特色课室，还需要往dictionary表中插入自增主键
+         */
+
+        protected function afterSave()
+        {                
+           parent::afterSave();    
+           if($this->category_id == Category::$CATE_SPECIAL_CLASSROOM)
+           {
+              if($this->isNewRecord){
+                $model = new Dictionary();
+                $model->dictionary_type = Yii::app()->params['dictTypeSpecialClassroom'];
+                $model->item_key = $this->article_id;
+                $model->item_value = $this->title;
+                $n = Dictionary::getTypeCount(Yii::app()->params['dictTypeSpecialClassroom']);
+                $model->display_order = $n+1;
+                $model->save();
+              }else if ($this->status ==self::$STATUS_DELETED)
+              {
+                      $specialRoomItem = Dictionary::model()->findByAttributes(array('item_key'=>$this->article_id, 'dictionary_type'=> Yii::app()->params['dictTypeSpecialClassroom'])); 
+                      $specialRoomItem->delete();
+              }
+           }
+           return true;
+        }
         //更新update_time,设置create_time
         protected function beforeSave()
         {                
