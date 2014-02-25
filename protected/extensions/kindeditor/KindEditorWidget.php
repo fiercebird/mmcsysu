@@ -81,7 +81,7 @@ class KindEditorWidget extends CInputWidget
 	 */
 	public function run()
 	{
-		$script = $script.'KindEditor.ready(function(K){var editor=K.create("textarea[id='.$this->id.']", {'.$this->renderItems($this->items).'})});';
+		$script = 'KindEditor.ready(function(K){var editor=K.create("textarea[id='.$this->id.']", {'.$this->renderItems($this->items).'})});';
 		/** @var CClientScript $cs */
 		$cs = Yii::app()->getClientScript();
 		$cs->registerScript($this->id, $script);
