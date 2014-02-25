@@ -30,7 +30,8 @@ body
 
 #content
 {
-    padding: 0px 20px 0px 0px;
+        padding: 0px 20px 0px 0px;
+        min-height:600px;
 }
 
 #sidebar
@@ -391,6 +392,7 @@ a.accordion-toggle:active, a.accordion-toggle:link, a.accordion-toggle:visited
 	float:right;	
         word-wrap:break-word;
 	width:80%;
+        min-height:600px;
 }
 
 

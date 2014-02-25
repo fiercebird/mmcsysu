@@ -43,15 +43,17 @@ if($auth & ModuleAuth::MMC_SPECIAL_CLASSROOM){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse2"><i class="icon-star"></i>&emsp;特色课室</a>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse2"><i class="icon-star"></i>&emsp;课室管理</a>
 </div>
 <div id="collapse2" class="accordion-body collapse ">
         <div class="accordion-inner">
 	<?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'新增特色课室','url'=>array('article/createArticle','cate'=>Category::$CATE_SERVICE_INFO), 'icon'=>'plus'),
-                        array('label'=>'编辑特色课室','url'=>array(''),'icon'=>'wrench'),
+                        array('label'=>'课室介绍概况','url'=>array('article/updateSummary', 'dictType'=>Yii::app()->params['siteIntroduceArticle']),'icon'=>'book'),
+                        array('label'=>'特色课室概况','url'=>array('article/updateSummary', 'dictType'=>Yii::app()->params['siteSpecialArticle']),'icon'=>'book'),
+                        array('label'=>'新增特色课室','url'=>array('article/createArticle', 'cate'=>Category::$CATE_SPECIAL_CLASSROOM), 'icon'=>'plus'),
+                        array('label'=>'编辑特色课室','url'=>array('article/manageArticle', 'cate'=>Category::$CATE_SPECIAL_CLASSROOM),'icon'=>'wrench'),
                     ),
 		 )); ?>
         </div>

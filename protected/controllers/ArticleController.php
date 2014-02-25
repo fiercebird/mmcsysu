@@ -164,6 +164,7 @@ class ArticleController extends Controller
                         $data->content = $_POST['contactTel'];
                         $data->title = Yii::app()->params['contactTelTitle'];
                         $data->publisher = Yii::app()->params['contactTelTitle'];
+                        $data->category_id = 100; //特殊的文章类别统一设置为100
                         try{
                            if($data->save())
                               Yii::app()->user->setFlash('success', '联系人更新成功！');
@@ -183,6 +184,38 @@ class ArticleController extends Controller
 
         }
 
+        public function actionUpdateSummary()
+        {
+                if(!isset($_GET['dictType']))
+                        throw new CHttpException(404,'请求的页面不存在！');
+                $dictType = $_GET['dictType'];
+                $model = Article::model()->findByAttributes(array('publisher'=>$dictType));
+                if(!isset($model))
+                {
+                        $model = new Article();
+                        $model->publisher = $dictType;
+                }
+                if(isset($_POST['Article']))
+                {
+                        $model->attributes = $_POST['Article'];
+                        $model->category_id = 100; //特殊的文章类别统一设置为100
+                        try{
+                           if($model->save())
+                              Yii::app()->user->setFlash('success', '课室概况更新成功！');
+                           else
+                           {
+                              $errors="";
+                              foreach($model->getErrors() as $k=>$a)
+                                 $errors .= implode($a,';');
+                              Yii::app()->user->setFlash('error', '不能更新课室概况！错误:' . $errors);
+                              Yii::log( '不能更新课室概况！错误：' . $errors ,'warning','db' . $this->action->id);
+                           }
+                        }catch(CDbException $e){
+                           throw new CHttpException(400,  implode($e->errorInfo,':'));
+                        }
+                }
+                $this->render('updateSummary',array('model'=>$model));
+        }
 
         public function loadModel()
         {
