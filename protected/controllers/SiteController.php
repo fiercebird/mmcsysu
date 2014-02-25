@@ -181,7 +181,7 @@ class SiteController extends Controller
 	public function actionTechExplore()
         {
                 $criteria=new CDbCriteria(array(
-                    'select'=>'article_id, category_id, title, left(content,800) as content',
+                    'select'=>'article_id, category_id, title, left(content,800)  as content, update_time, create_time',
                     'condition'=>'category_id='. Category::$CATE_TECH_EXPLORE,
                     'order'=>'create_time DESC',
                     ));

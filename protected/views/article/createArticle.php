@@ -11,7 +11,7 @@
 
 $cate = Dictionary::item(Yii::app()->params['dictTypeCategory'], $model->category_id);
 $prev = $cate;
-if($cate == Category::$CATE_SERVICE_INFO)
+if($model->category_id == Category::$CATE_SERVICE_INFO)
         $prev = '首页管理';
 $this->pageTitle=Yii::app()->name . ' - 添加' . $cate;
 $this->breadcrumbs=array(
