@@ -34,22 +34,18 @@ $this->breadcrumbs=array(
 	'管理' . $cate,
 );
 
-
-
-
 ?>
 
 <div id='article'>
-<?php  if(isset($article)) {   ?>  
-	<div class='text-center'><h4><?php echo $article->title; ?></h4> </div>
-	<div class='articleInfo'><span>发布方:<?php  echo $article->publisher; ?></span><span>发布时间:<?php echo substr($article->update_time, 0, -3); ?></span></div>
-        <hr class='hr4'/>
-	<div><?php  echo $article->content; ?></div>
-        <?
-        //$this->beginWidget('CMarkdown', array('purifyOutput'=>true));
-        //echo $article->content;
-        //$this->endWidget();
-        ?>
+<?php  if(isset($article)) {   ?> 
+<div class='pull-right'>
+<a class='label label-info'  href='<?php echo Yii::app()->createUrl('Article/update', array('id'=>$article->article_id, 'title'=>$article->title)) ?>' >编辑</a>
+<a class='label label-important'  id='deleteBtn'  data-id=<?php echo $article->article_id;?>  data-title='<?php echo $article->title; ?>' >删除</a>
+</div>
+<div class='text-center'><h4><?php echo $article->title; ?></h4> </div>
+<div class='articleInfo'><span>发布方:<?php  echo $article->publisher; ?></span><span>发布时间:<?php echo substr($article->update_time, 0, -3); ?></span></div>
+<hr class='hr4'/>
+<div><?php  echo $article->content; ?></div>
 <?php } ?>
 </div>
 
@@ -58,7 +54,6 @@ $this->breadcrumbs=array(
 <script language='javascript'  type='text/javascript' />
 var cid = <?php echo $cid; ?>;
 $('#collapse'+cid).addClass('in');
-
 
 $(document).ready(function(){
         //替换table样式，改为横向可滑动
@@ -69,4 +64,30 @@ $(document).ready(function(){
         });
        });
 
+var csrfToken='<?php echo Yii::app()->request->csrfToken; ?>';
+$('#deleteBtn').click(function(){
+     var articleId = $(this).data('id');
+     var title = $(this).data('title');
+     if(confirm("确定要把文章\'"+ title  +"\'放入回收站 ?"))
+     {
+        $.ajax({
+           type:'post',
+           url:'<?php echo Yii::app()->createUrl('article/delete')?>',
+           data:{"id":articleId, "title":title, "YII_CSRF_TOKEN":csrfToken},
+           dataType:'json',
+           success:function(resData){
+           if(resData.resCode)
+                   alert(resData.resMes);
+           else{
+                alert("成功删除！");
+                window.location.href = '<?php echo Yii::app()->createUrl('site/admin');?>';
+           }
+           },
+           error:function(XMLHttpRequest, textStatus, errorThrown){
+           var errorMes ="状态: " + textStatus + "\n" + XMLHttpRequest.status  + " : " + XMLHttpRequest.statusText + "\n删除用户操作失败: \n" +XMLHttpRequest.responseText;
+           alert(errorMes);        
+           }
+        });
+     }
+      });
 </script>

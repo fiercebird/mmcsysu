@@ -129,7 +129,7 @@ class ArticleController extends Controller
 
         public function actionDelete()
         {
-           if(Yii::app()->request->isAjaxRequest)
+                if(Yii::app()->request->isAjaxRequest)
                 {
                    $resCode = 0;
                    $resMes = 'OK';
@@ -141,6 +141,7 @@ class ArticleController extends Controller
                         $resCode = 1;
                         $resMes = '文章ID: '. $id .' 不存在!';
                         Yii::log($resMes,'error','db.actionDelete');
+                        echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
                    }
                    else{ 
                         $article->status = Article::$STATUS_DELETED;
