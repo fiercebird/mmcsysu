@@ -118,7 +118,28 @@ class Article extends CActiveRecord
 		));
 	}
 
-	
+	public function searchTrash()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+                $criteria->select = 'article_id, category_id, campus_id, publisher, create_time, update_time, title, status';
+		$criteria->compare('campus_id',$this->campus_id);
+		$criteria->compare('publisher',$this->publisher,true);
+		$criteria->compare('create_time',$this->create_time,true);
+		$criteria->compare('update_time',$this->update_time,true);
+		$criteria->compare('title',$this->title,true);
+		$criteria->compare('status',$this->status);
+		$criteria->addCondition('status=' . Article::$STATUS_DELETED);
+		return new CActiveDataProvider($this, array(
+                         'criteria'=>$criteria,
+                         'sort'=>array(
+                            'defaultOrder'=>'update_time DESC',
+                            ),
+		));
+	}
+
 	/**
 	 * Namedscope
 	 */

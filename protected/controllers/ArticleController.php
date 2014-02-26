@@ -32,6 +32,12 @@ class ArticleController extends Controller
         public function accessRules()
         {
            return array(
+                array('allow',
+                   'actions'=>array('trash', 'PhysicalDelete', 'restore'),
+                   'users'=>array('@'),
+                   'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_TRASH_ADMIN',
+                   ),
+
                  array(
                     'allow',             
                     'users'=>array('@'),
@@ -43,7 +49,65 @@ class ArticleController extends Controller
                  );
         }
 
- 
+
+        public function actionTrash()
+        {
+                $model=new Article('search');
+		$model->unsetAttributes();  // clear any default values
+                if(isset($_GET['Article']))
+                        $model->attributes=$_GET['Article'];
+                $this->render('trash',array('model'=>$model));
+        }
+
+        public function actionPhysicalDelete()
+        {   
+                   if(Yii::app()->request->isAjaxRequest)
+                   {   
+                      $resCode = 0;
+                      $resMes = 'OK';
+                      $id = Yii::app()->request->getParam('id'); 
+                      $article = Article::model()->findByPk($id);
+                      if(!isset($article))
+                      {   
+                         $resCode = 1;
+                         $resMes = '评论ID: '. $id .' 不存在!';
+                         Yii::log($resMes,'error','db.actionDelete');
+                         echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                      }   
+                      else{ 
+                         $article->delete();
+                         echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                      }   
+                   }else
+                      throw new CHttpException(404, "请求页面不存在！禁止删除文章!");
+        }   
+
+        public function actionRestore()
+        {   
+               if(Yii::app()->request->isAjaxRequest)
+               {   
+                  $resCode = 0;
+                  $resMes = 'OK';
+                  $id = Yii::app()->request->getParam('id'); 
+                  $article = Article::model()->findByPk($id);
+                  if(!isset($article))
+                  {   
+                     $resCode = 1;
+                     $resMes = '评论ID: '. $id .' 不存在!';
+                     Yii::log($resMes,'error','db.actionDelete');
+                     echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                  }   
+                  else{ 
+                     $article->status = Article::$STATUS_DRAFT;
+                     $article->save();
+                     echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                  }   
+    
+               }else
+                  throw new CHttpException(404, "请求页面不存在！禁止恢复文章!");
+        } 
+
+
         public function actionManageArticle()
         {
                 if(!isset($_GET['cate']))

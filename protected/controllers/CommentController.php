@@ -199,7 +199,7 @@ class CommentController extends Controller
                         echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
                    }
                 }else
-                   throw new CHttpException(404, "请求页面不存在！禁止删除文章!");
+                   throw new CHttpException(404, "请求页面不存在！禁止删除评论!");
                
         }
         
