@@ -111,7 +111,10 @@ class Article extends CActiveRecord
 		$criteria->compare('status',$this->status);
 		$criteria->addCondition('status!=' . Article::$STATUS_DELETED);
 		return new CActiveDataProvider($this, array(
-			'criteria'=>$criteria,
+                         'criteria'=>$criteria,
+                         'sort'=>array(
+                            'defaultOrder'=>'status, update_time DESC',
+                            ),
 		));
 	}
 

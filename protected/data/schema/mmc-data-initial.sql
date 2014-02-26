@@ -49,6 +49,12 @@ insert into mis_dictionary (dictionary_type, item_key, item_value, display_order
 ('Article', 2, '发布',  3);
 
 insert into mis_dictionary (dictionary_type, item_key, item_value, display_order) values
+('Comment', 0, '未审核',  1),
+('Comment', 1, '置顶',  2),
+('Comment', 2, '通过',  3);
+
+
+insert into mis_dictionary (dictionary_type, item_key, item_value, display_order) values
 ('Module' , 2, '首页管理', 1),
 ('Module' , 4, '特色课室', 2),
 ('Module' , 8, '服务列表', 3),

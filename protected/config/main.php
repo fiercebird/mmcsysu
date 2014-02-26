@@ -149,6 +149,7 @@ return array(
 		'dictTypeCampus'=>'Campus',                      //校区名称在KV字典表的类型名称
 		'dictTypeModule'=>'Module',                      //模块权限名称在KV字典表的类型名称
 		'dictTypeArticle'=>'Article',                      //文章状态在KV字典表的类型名称
+		'dictTypeComment'=>'Comment',                      //评论状态在KV字典表的类型名称
 		'dictTypeCategory'=>'Category',                      //文章类型在KV字典表的类型名称
 		'siteSpecialArticle'=>'SpecialArticle',		//特色课室页面的文章在Article表中的Publisher字段
                 'siteIntroduceArticle'=>'IntroduceArticle',     //课室介绍页面的文章在Article表中的Publisher字段

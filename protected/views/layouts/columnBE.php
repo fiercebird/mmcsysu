@@ -156,8 +156,7 @@ if($auth & ModuleAuth::MMC_COMMENT_ADMIN){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'审核评论','url'=>array(''), 'icon'=>'filter'),
-                        array('label'=>'管理评论','url'=>array(''),'icon'=>'wrench'),
+                        array('label'=>'审核评论','url'=>array('comment/admin'),'icon'=>'wrench'),
                     ),
 		 )); ?>
 

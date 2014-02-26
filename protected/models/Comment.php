@@ -14,6 +14,12 @@
  */
 class Comment extends CActiveRecord
 {
+        static $STATUS_UNPASS=0;
+	static $STATUS_SET_TOP=1;
+	static $STATUS_PASS=2;
+	static $STATUS_DELETED=3;
+
+        
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -47,7 +53,8 @@ class Comment extends CActiveRecord
 			array('create_time', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('comment_id, create_time, author, email, content, status, reply', 'safe', 'on'=>'search'),
+			array('create_time, author, email, content, status', 'safe', 'on'=>'search'),
+			array('author, email, content,', 'safe', 'safe'=>false, 'on'=>'update'),
 		);
 	}
 
@@ -68,13 +75,13 @@ class Comment extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'comment_id' => 'Comment',
-			'create_time' => 'Create Time',
-			'author' => 'Author',
-			'email' => 'Email',
-			'content' => 'Content',
-			'status' => 'Status',
-			'reply' => 'Reply',
+			'comment_id' => '评论ID',
+			'create_time' => '创建时间',
+			'author' => '评论人',
+			'email' => '邮箱',
+			'content' => '评论内容',
+			'status' => '评论状态',
+			'reply' => '回复内容',
 		);
 	}
 
@@ -88,17 +95,18 @@ class Comment extends CActiveRecord
 		// should not be searched.
 
 		$criteria=new CDbCriteria;
-
-		$criteria->compare('comment_id',$this->comment_id,true);
+                $criteria->select = 'comment_id, create_time, author, email, content, status';
 		$criteria->compare('create_time',$this->create_time,true);
 		$criteria->compare('author',$this->author,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('content',$this->content,true);
 		$criteria->compare('status',$this->status);
-		$criteria->compare('reply',$this->reply,true);
-
+		$criteria->addCondition('status!=' . Comment::$STATUS_DELETED);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
+                        'sort'=>array(
+                           'defaultOrder'=>'status, create_time DESC',
+                           ),
 		));
 	}
 }
