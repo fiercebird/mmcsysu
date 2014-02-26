@@ -14,12 +14,6 @@ $this->breadcrumbs=array(
 );
 
 
-
-function getNum(){
-   static $i=1;
-   echo $i;
-   $i++;
-}
 ?>
 <?php
 if(!empty($comments))
@@ -27,7 +21,14 @@ if(!empty($comments))
        echo '<h4>&emsp;用户留言</h4><hr />';
        $this->widget('zii.widgets.CListView', array(
                        'dataProvider'=>$comments,
-                               'itemView'=>'/comment/_view',
+                       'pager'=>array('class'=>'CLinkPager',
+                          'header'=>'', 
+                          'firstPageLabel'=>'首页', 
+                          'lastPageLabel'=>'末页',
+                          'prevPageLabel'=>'上一页',
+                          'nextPageLabel'=>'下一页',
+                          ),
+                       'itemView'=>'/comment/_view',
                )); 
 }
 ?>

@@ -9,7 +9,7 @@
 <div  class='name' style='text-align:center;'><?php echo $data->author; ?></div>
 </div>
 <div class="span10 well" style='' >
-<div ><?php echo substr($data->create_time,0,-3); ?>&emsp;&emsp;<a id="commentId-<?php echo $data->comment_id;?>">#<?php getNum(); ?></a></div>
+<div ><?php echo substr($data->create_time,0,-3); ?>&emsp;&emsp;<a id="commentId-<?php echo $data->comment_id;?>">#<?php Comment::getNum(); ?></a></div>
 <div><div id="content-<?php echo $data->comment_id;?>"><p><?php echo $data->content;?></p></div></div>
 </div>
 </div>

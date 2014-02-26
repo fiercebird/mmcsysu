@@ -132,4 +132,11 @@ class Comment extends CActiveRecord
 		);
 	}
 
+        public static function getNum()
+        {                                                                      
+              static $i=1;                                                                         
+                 echo $i;                                                                             
+                    $i++;
+        }
+
 }

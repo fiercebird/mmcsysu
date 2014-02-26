@@ -157,6 +157,7 @@ if($auth & ModuleAuth::MMC_COMMENT_ADMIN){
                  'type'=>'list',
 		 'items'=>array(
                         array('label'=>'审核评论','url'=>array('comment/admin'),'icon'=>'wrench'),
+                        array('label'=>'评论清单','url'=>array('comment/index'),'icon'=>'th-list'),
                     ),
 		 )); ?>
 
@@ -195,8 +196,8 @@ if($auth & ModuleAuth::MMC_TRASH_ADMIN){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'文章回收站','url'=>array(''), 'icon'=>'th-list'),
-                        array('label'=>'评论回收站','url'=>array(''),'icon'=>'th'),
+                        array('label'=>'文章回收站','url'=>array('article/trash'), 'icon'=>'th-list'),
+                        array('label'=>'评论回收站','url'=>array('comment/trash'),'icon'=>'th'),
                     ),
 		 )); ?>
 

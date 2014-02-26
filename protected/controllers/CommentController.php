@@ -27,17 +27,9 @@ class CommentController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
-				'users'=>array('*'),
-			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
 				'users'=>array('@'),
-			),
-			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+                                'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_COMMENT_ADMIN',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -156,7 +148,15 @@ class CommentController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Comment');
+                $criteria=new CDbCriteria;
+                $criteria->select = 'comment_id, create_time, author, email, content, status';
+                $criteria->addCondition('status!=' . Comment::$STATUS_DELETED);
+		$dataProvider=new CActiveDataProvider('Comment', array(
+                         'criteria'=>$criteria,
+                         'sort'=>array('defaultOrder'=>'status, create_time DESC',),
+                         )
+                      );
+
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
