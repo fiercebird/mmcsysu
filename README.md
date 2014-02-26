@@ -28,5 +28,6 @@ Installing Guide
 65         display:inline;
 66 }
 
-
+5.import DB schema into mysql.
+The schema file at /mmcsysu/protected/data/schema/*.sql
 
