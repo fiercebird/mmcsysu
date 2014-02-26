@@ -38,21 +38,20 @@ class ArticleController extends Controller
                    'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_TRASH_ADMIN',
                    ),
                 array('allow',
-                   'actions'=>array('SetContactTel'),
+                   'actions'=>array('setContactTel'),
                    'users'=>array('@'),
                    'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_HOMEPAGE_ADMIN',
                    ),
                 array('allow',
-                   'actions'=>array('UpdateSummary'),
+                   'actions'=>array('updateSummary'),
                    'users'=>array('@'),
                    'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_CLASSROOM_ADMIN',
                    ),
-
-
-
                  array(
                     'allow',             
+                   'actions'=>array('createArticle', 'manageArticle', 'view', 'update', 'delete'),
                     'users'=>array('@'),
+                   'expression'=>'(Yii::app()->user->auth & ModuleAuth::MMC_HOMEPAGE_ADMIN) | (Yii::app()->user->auth & ModuleAuth::MMC_CLASSROOM_ADMIN) | (Yii::app()->user->auth & ModuleAuth::MMC_RULE_ADMIN) | (Yii::app()->user->auth & ModuleAuth::MMC_TECH_EXPLORE)',
                     ),
                  array(
                     'deny',
