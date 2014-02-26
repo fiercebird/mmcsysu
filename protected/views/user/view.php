@@ -29,7 +29,7 @@ $auth = $model->authority;
 <tr><th>校区</th><th><?php echo Dictionary::Item(Yii::app()->params['dictTypeCampus'], $model->campus_id);?></th></tr>
 <tr><th>模块名</th><th>权限</th></tr>
 <tr><td>首页管理</td><td><?php showAuthIcon($auth & ModuleAuth::MMC_HOMEPAGE_ADMIN) ?></td></tr>
-<tr><td>特色课室</td><td><?php showAuthIcon($auth & ModuleAuth::MMC_SPECIAL_CLASSROOM) ?></td></tr>
+<tr><td>课室管理</td><td><?php showAuthIcon($auth & ModuleAuth::MMC_CLASSROOM_ADMIN) ?></td></tr>
 <tr><td>服务列表</td><td><?php showAuthIcon($auth & ModuleAuth::MMC_SERVICE_ADMIN) ?></td></tr>
 <tr><td>规章制度</td><td><?php showAuthIcon($auth & ModuleAuth::MMC_RULE_ADMIN) ?></td></tr>
 <tr><td>技术探索</td><td><?php showAuthIcon($auth & ModuleAuth::MMC_TECH_EXPLORE) ?></td></tr>

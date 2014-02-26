@@ -56,7 +56,7 @@ insert into mis_dictionary (dictionary_type, item_key, item_value, display_order
 
 insert into mis_dictionary (dictionary_type, item_key, item_value, display_order) values
 ('Module' , 2, '首页管理', 1),
-('Module' , 4, '特色课室', 2),
+('Module' , 4, '课室管理', 2),
 ('Module' , 8, '服务列表', 3),
 ('Module' , 16, '规章制度', 4),
 ('Module' , 32, '技术探索', 5),

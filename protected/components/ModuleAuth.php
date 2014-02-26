@@ -12,7 +12,7 @@ interface ModuleAuth
    /*  mmc  authority bit 0~8 bits used */
    const MMC_SUPER_ADMIN = 1;
    const MMC_HOMEPAGE_ADMIN = 2;
-   const MMC_SPECIAL_CLASSROOM = 4;
+   const MMC_CLASSROOM_ADMIN = 4;
    const MMC_SERVICE_ADMIN = 8;
    const MMC_RULE_ADMIN = 16;
    const MMC_TECH_EXPLORE = 32;

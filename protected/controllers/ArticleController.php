@@ -37,6 +37,18 @@ class ArticleController extends Controller
                    'users'=>array('@'),
                    'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_TRASH_ADMIN',
                    ),
+                array('allow',
+                   'actions'=>array('SetContactTel'),
+                   'users'=>array('@'),
+                   'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_HOMEPAGE_ADMIN',
+                   ),
+                array('allow',
+                   'actions'=>array('UpdateSummary'),
+                   'users'=>array('@'),
+                   'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_CLASSROOM_ADMIN',
+                   ),
+
+
 
                  array(
                     'allow',             

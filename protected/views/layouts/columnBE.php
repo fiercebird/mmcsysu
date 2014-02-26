@@ -39,7 +39,7 @@ if($auth & ModuleAuth::MMC_HOMEPAGE_ADMIN){
 </div>
 </div>
 <?php }
-if($auth & ModuleAuth::MMC_SPECIAL_CLASSROOM){
+if($auth & ModuleAuth::MMC_CLASSROOM_ADMIN){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">

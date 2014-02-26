@@ -206,8 +206,8 @@ class UserController extends Controller
                 $htmlStyle="";
                 if($data->authority & ModuleAuth::MMC_HOMEPAGE_ADMIN)
                    $htmlStyle.="<span class='label label-important'>首页管理</span>";
-                if($data->authority & ModuleAuth::MMC_SPECIAL_CLASSROOM)
-                   $htmlStyle.="<span class='label label-warning'>特色课室</span>";
+                if($data->authority & ModuleAuth::MMC_CLASSROOM_ADMIN)
+                   $htmlStyle.="<span class='label label-warning'>课室管理</span>";
                 if($data->authority & ModuleAuth::MMC_SERVICE_ADMIN) 
                    $htmlStyle.="<span class='label label-success'>服务列表</span>";
                 if($data->authority & ModuleAuth::MMC_RULE_ADMIN) 
