@@ -6,7 +6,7 @@ $this->pageTitle=Yii::app()->name;
 $articleList="";
 foreach($articles as $article)
 {
-  $articleList.='<div class="aritcleItem"><a class="row-fluid" title="' . $article->title . '" href="'. Yii::app()->createUrl("site/article", array("id"=>$article->article_id,"cate"=>'index'))  .'">'. $article->title .'</a></div>';
+  $articleList.='<div class="aritcleItem"><a class="row-fluid" title="' . $article->title . '" href="'. Yii::app()->createUrl("site/article", array("id"=>$article->article_id,"cate"=>Category::$CATE_SERVICE_INFO))  .'">'. $article->title .'</a></div>';
 }
 ?>
 

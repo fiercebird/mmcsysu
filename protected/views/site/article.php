@@ -9,11 +9,11 @@
 
 switch($cate)
 {
-        case 'index':
+        case Category::$CATE_SERVICE_INFO:
            $this->pageTitle=Yii::app()->name . ' - 服务信息';
            $this->breadcrumbs=array( '服务信息');
            break;
-        case 'rule':
+        case Category::$CATE_REGULATION_RULE:
            $this->pageTitle=Yii::app()->name . ' - 规章制度';
            $this->breadcrumbs=array( '规章制度');
            break;

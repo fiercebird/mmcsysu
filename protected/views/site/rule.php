@@ -17,7 +17,7 @@ $ruleList="";
 
 foreach($rules as $rule)
 {
-	$ruleList.='<div class="ruleItem"><div class="ruleTitle"><a href="' . Yii::app()->createUrl("site/article",array('id'=>$rule->article_id, 'cate'=>'rule')) . '">'. $rule->title .'</a></div><div class="ruleText">'. strip_tags($rule->content) .'......</div></div>';
+	$ruleList.='<div class="ruleItem"><div class="ruleTitle"><a href="' . Yii::app()->createUrl("site/article",array('id'=>$rule->article_id, 'cate'=>Category::$CATE_REGULATION_RULE)) . '">'. $rule->title .'</a></div><div class="ruleText">'. strip_tags($rule->content) .'......</div></div>';
 
 }
 
