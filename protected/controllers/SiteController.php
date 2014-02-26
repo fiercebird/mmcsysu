@@ -281,18 +281,17 @@ class SiteController extends Controller
                 $this->render('teamStyle',array());
         }
 
-        public function actionService()
+        public function actionServiceList()
         {
                 $this->layout='column5';
                 
-                $this->render('service',array());
+                $this->render('serviceList',array());
         }
 
 
         public function actionFeedback()
         {
            	$model=new CommentForm;
-
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='commentForm')
 		{
@@ -305,11 +304,39 @@ class SiteController extends Controller
 		{
 			$model->attributes=$_POST['CommentForm'];
 			// validate user input and redirect to the previous page if valid
-			if($model->validate() && $model->login())
-				$this->redirect(Yii::app()->user->returnUrl);
+                        $resCode = 0;
+                        $resMes = 'OK';
+                        if($model->validate())
+                        {
+                                $model->save();
+                        }
+                        else
+                        {
+                              $errors="";
+                              foreach($model->getErrors() as $k=>$a)
+                                 $errors .= implode($a,';');
+                              Yii::log( '不能提交评论！错误：' . $errors, 'warning','db' . $this->action->id);
+                              $resCode = 1;
+                              $resMes = '不能提交评论！错误: ' . $errors;
+                        }
+                        echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                        Yii::app()->end();
 		}
+
+                $criteria=new CDbCriteria(array(
+                         'condition'=>'status='. Comment::$STATUS_PASS . ' or status=' . Comment::$STATUS_SET_TOP,
+                         'order'=>'status, create_time DESC',
+                         ));
+
+                $dataProvider=new CActiveDataProvider('Comment', array(
+                         'pagination'=>array(
+                            'pageSize'=>Yii::app()->params['commentsPerPage'],
+                            ),
+                         'criteria'=>$criteria,
+                         ));
+
 		// display the login form
-		$this->render('feedBack',array('model'=>$model));
+		$this->render('feedBack',array('model'=>$model, 'comments'=>$dataProvider));
         }
 
 

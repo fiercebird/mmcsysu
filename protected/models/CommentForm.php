@@ -42,4 +42,13 @@ class CommentForm extends CFormModel
                         
 		);
 	}
+
+        public function save()
+        {
+               $model = new Comment();
+               $model->author = $this->author;
+               $model->email = $this->email;
+               $model->content = $this->content;
+               $model->save();
+        }
 }

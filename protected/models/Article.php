@@ -130,7 +130,10 @@ class Article extends CActiveRecord
 			'published'=>array('condition'=>'status=' . self::$STATUS_PUBLISHED),      
 			'deleted'=>array('condition'=>'status='. self::$STATUS_DELETED),
 			'serviceInfo'=>array('condition'=>'category_id='. Category::$CATE_SERVICE_INFO),
-			'publishedandSetTop'=>array('condition'=>'status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP),      
+			'publishedandSetTop'=>array(
+                           'condition'=>'status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP,
+                           'order'=>'status, update_time DESC',
+                           ),      
 			'recently'=>array(
 			   	'select'=>'article_id, campus_id, publisher, title, create_time, update_time, status',
 				'order'=>'status, update_time DESC',

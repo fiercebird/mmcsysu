@@ -14,7 +14,7 @@
  */
 class Comment extends CActiveRecord
 {
-        static $STATUS_UNPASS=0;
+        static $STATUS_PENDING=0;
 	static $STATUS_SET_TOP=1;
 	static $STATUS_PASS=2;
 	static $STATUS_DELETED=3;
@@ -109,4 +109,27 @@ class Comment extends CActiveRecord
                            ),
 		));
 	}
+        	
+	/**
+	 * Namedscope
+	 */
+	public function scopes()
+	{
+		return array(
+		     	'pending'=>array('condition'=>'status=' . self::$STATUS_PENDING),
+			'setTop'=>array('condition'=>'status='. self::$STATUS_SET_TOP),      
+			'pass'=>array('condition'=>'status=' . self::$STATUS_PASS),      
+			'deleted'=>array('condition'=>'status='. self::$STATUS_DELETED),
+			'passAndSetTop'=>array(
+                           'condition'=>'status=' . self::$STATUS_PASS . ' or status=' . self::$STATUS_SET_TOP,
+                           'order'=>'status, create_time DESC',
+                           ),      
+			'recently'=>array(
+			   	'select'=>'comment_id, author, email, create_time, content, status, reply',
+				'order'=>'status, create_time DESC',
+				'limit'=>12,
+			),
+		);
+	}
+
 }

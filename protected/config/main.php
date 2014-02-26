@@ -145,6 +145,7 @@ return array(
 		'adminEmail'=>'hehao5@mail2.sysu.edu.cn',
 		'recentlyNewsPerPage'=>12,	//首页上显示的最近服务咨询的条数
 		'techNewsPerPage'=>12,	//技术探索上显示的最近服务咨询的条数
+		'commentsPerPage'=>12,	//技术探索上显示的最近服务咨询的条数
 		'dictTypeSpecialClassroom'=>'SpecialClassroom',  //特色课室在KV字典表的类型名称
 		'dictTypeCampus'=>'Campus',                      //校区名称在KV字典表的类型名称
 		'dictTypeModule'=>'Module',                      //模块权限名称在KV字典表的类型名称
