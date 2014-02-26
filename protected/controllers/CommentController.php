@@ -27,9 +27,15 @@ class CommentController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'users'=>array('@'),
-                                'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_COMMENT_ADMIN',
+			array('allow',
+                           'actions'=>array('trash', 'PhysicalDelete', 'restore'),
+                           'users'=>array('@'),
+                           'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_TRASH_ADMIN',
+			),
+			array('allow', 
+                           'actions'=>array('view', 'create', 'update', 'delete', 'index', 'admin'),
+                           'users'=>array('@'),
+                           'expression'=>'Yii::app()->user->auth & ModuleAuth::MMC_COMMENT_ADMIN',
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -108,14 +114,69 @@ class CommentController extends Controller
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
 	 * @param integer $id the ID of the model to be deleted
 	 */
-	public function actionPhysicalDelete($id)
+	public function actionPhysicalDelete()
 	{
-		$this->loadModel($id)->delete();
+                if(Yii::app()->request->isAjaxRequest)
+                {
+                   $resCode = 0;
+                   $resMes = 'OK';
+                   $id = Yii::app()->request->getParam('id'); 
+                   $comment = Comment::model()->findByPk($id);
+                   if(!isset($comment))
+                   {
+                        $resCode = 1;
+                        $resMes = '评论ID: '. $id .' 不存在!';
+                        Yii::log($resMes,'error','db.actionDelete');
+                        echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                   }
+                   else{ 
+                        $comment->delete();
+                        echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                   }
+                }else
+                   throw new CHttpException(404, "请求页面不存在！禁止删除评论!");
 
-		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-		if(!isset($_GET['ajax']))
-			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
+
+       	public function actionRestore()
+	{
+                if(Yii::app()->request->isAjaxRequest)
+                {
+                   $resCode = 0;
+                   $resMes = 'OK';
+                   $id = Yii::app()->request->getParam('id'); 
+                   $comment = Comment::model()->findByPk($id);
+                   if(!isset($comment))
+                   {
+                        $resCode = 1;
+                        $resMes = '评论ID: '. $id .' 不存在!';
+                        Yii::log($resMes,'error','db.actionDelete');
+                        echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                   }
+                   else{ 
+                        $comment->status = Comment::$STATUS_PENDING;
+                        $comment->save();
+                        echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+                   }
+                }else
+                   throw new CHttpException(404, "请求页面不存在！禁止恢复评论!");
+
+	}
+
+
+
+        public function actionTrash()
+        {
+                $model=new Comment('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Comment']))
+			$model->attributes=$_GET['Comment'];
+
+		$this->render('trash',array(
+			'model'=>$model,
+		));
+        
+        }
 
         public function actionDelete()
         {

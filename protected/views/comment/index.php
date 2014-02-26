@@ -5,7 +5,7 @@
 
 
 $this->breadcrumbs=array(
-	'评论管理'=>array('index'),
+	'评论管理',
 	'评论清单',
 );
 

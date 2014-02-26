@@ -3,15 +3,15 @@
 /* @var $model Comment */
 
 $this->breadcrumbs=array(
-	'评论管理',
-	'评论列表',
+	'回收站',
+	'评论回收站',
 );
 
 
 
 $this->widget('zii.widgets.grid.CGridView', array(
          'id'=>'commentGrid',
-         'dataProvider'=>$model->search(),
+         'dataProvider'=>$model->searchTrash(),
          'pager'=>array('class'=>'CLinkPager',
             'maxButtonCount'=>10,
             'header'=>'', 
@@ -47,37 +47,25 @@ $this->widget('zii.widgets.grid.CGridView', array(
                'value'=>'substr($data->create_time,0,-3)',  
                ), 
             array(
-               'name'=>'status',
-               'type'=>'raw',
-               'htmlOptions'=>array('style'=>'width:70px'),
-               'value'=>'Dictionary::item(Yii::app()->params["dictTypeComment"], $data->status)',
-               'filter'=>Dictionary::items(Yii::app()->params["dictTypeComment"]),
-               ),  
-            array(
                'header'=>'操作',
                'class'=>'CButtonColumn',
-               'template'=>'{view} {update} {delete}',
-               'htmlOptions'=>array('style'=>'width:90px; text-align:center;'),
-               'deleteConfirmation'=>"js:'确定要把评论人为\"'+$(this).parent().parent().children(':eq(0)').html()+'\"的评论放入回收站？'",
+               'template'=>'{restore} {delete}',
+               'htmlOptions'=>array('style'=>'width:50px; text-align:center;'),
+               'deleteConfirmation'=>"js:'确定要彻底删除评论人\"'+$(this).parent().parent().children(':eq(0)').html()+'\"发表的评论？'",
                'afterDelete'=>'function(link,success,data){ if(success) {var res=JSON.parse(data);if(res.resCode){var hint="<div class=\'flash-error mesFade\'>" + res.resMes + "</div>"; }else{var hint="<div class=\'flash-success mesFade\'>删除评论成功！</div>";}$("#hint").html(hint); $(".mesFade").animate({opacity: 1.0}, 2000).fadeOut(3000); }}',
                'buttons'=>array(
-                  'view'=>array(      
+                  'restore'=>array(      
                      'label'=>'',      
                      'imageUrl'=>'',
-                     'url'=>'Yii::app()->controller->createUrl("view", array("id"=>$data->comment_id))',
-                     'options'=>array('class'=>'icon-search', 'title'=>'查看评论' ),
-                     ),  
-                  'update'=>array(      
-                     'label'=>'',      
-                     'imageUrl'=>'',
-                     'url'=>'Yii::app()->controller->createUrl("update", array("id"=>$data->comment_id))',
-                     'options'=>array('class'=>'icon-edit', 'title'=>'编辑评论' ),
+                     'click'=>'function(){ restore(this);return false;}',
+                     'url'=>'Yii::app()->controller->createUrl("restore", array("id"=>$data->comment_id))',
+                     'options'=>array('class'=>'icon-share', 'title'=>'恢复评论' ),
                      ),  
                   'delete'=>array(      
                      'label'=>'',          
                      'imageUrl'=>'',
-                     'url'=>'Yii::app()->controller->createUrl("delete", array("id"=>$data->comment_id))',
-                     'options'=>array('class'=>'icon-trash', 'title'=>'放入回收站', ),
+                     'url'=>'Yii::app()->controller->createUrl("physicalDelete", array("id"=>$data->comment_id))',
+                     'options'=>array('class'=>'icon-fire', 'title'=>'彻底删除', ),
                      ),
                  ),
                ),  
@@ -91,7 +79,36 @@ $this->widget('zii.widgets.grid.CGridView', array(
 
 
 <script language="javascript" type="text/javascript">
-$('#collapse7').addClass('in');
+$('#collapse9').addClass('in');
+var csrfToken='<?php echo Yii::app()->request->csrfToken; ?>';
+function restore(obj)
+{         
+   var username = $(obj).parent().parent().children(':eq(0)').html();
+   if(confirm("确定要恢复评论人为 "+ username  +" 的评论?"))
+   {
+      $.ajax({
+        type:'post',
+        url: $(obj).attr('href'),
+        data:{ "YII_CSRF_TOKEN":csrfToken},
+        dataType:'json',
+        success:function(resData){
+        if(resData.resCode)
+                alert(resData.resMes);
+        else{
+                $.fn.yiiGridView.update('commentGrid');
+                $("#hint").html('<div class="flash-success mesFade">成功恢复评论！</div>');
+                $(".mesFade").animate({opacity: 1.0}, 2000).fadeOut(3000); 
+        }
+        },
+        error:function(XMLHttpRequest, textStatus, errorThrown){
+                var errorMes ="状态: " + textStatus + "\n" + XMLHttpRequest.status  + " : " + XMLHttpRequest.statusText + "\n删除用户操作失败: \n" +XMLHttpRequest.responseText;
+                alert(errorMes);        
+                }
+                });
+   }
+}
+
+
 </script>
 
 

@@ -109,6 +109,27 @@ class Comment extends CActiveRecord
                            ),
 		));
 	}
+
+        public function searchTrash()
+	{
+		// Warning: Please modify the following code to remove attributes that
+		// should not be searched.
+
+		$criteria=new CDbCriteria;
+                $criteria->select = 'comment_id, create_time, author, email, content, status';
+		$criteria->compare('create_time',$this->create_time,true);
+		$criteria->compare('author',$this->author,true);
+		$criteria->compare('email',$this->email,true);
+		$criteria->compare('content',$this->content,true);
+		$criteria->compare('status',$this->status);
+		$criteria->addCondition('status=' . Comment::$STATUS_DELETED);
+		return new CActiveDataProvider($this, array(
+			'criteria'=>$criteria,
+                        'sort'=>array(
+                           'defaultOrder'=>'create_time DESC',
+                           ),
+		));
+	}
         	
 	/**
 	 * Namedscope
@@ -137,6 +158,20 @@ class Comment extends CActiveRecord
               static $i=1;                                                                         
                  echo $i;                                                                             
                     $i++;
+        }
+
+        protected function beforeSave()
+        {                
+           if(parent::beforeSave())
+           {
+              if($this->isNewRecord)
+              {
+                 $this->create_time = date( 'Y-m-d H:i:s', time() );
+              }
+              return true;
+           }
+           else
+              return false;
         }
 
 }
