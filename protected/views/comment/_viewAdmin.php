@@ -5,7 +5,7 @@
 
 <div class="row-fluid">
 <div class='pull-left inlineBlock'>
-<div  class='headPhoto'><img alt="" src="/mmcsysu/images/head/head4.jpg"  height="80" width="80"></div>
+<div  class='headPhoto'><img alt="" src="<?php echo Yii::app()->baseUrl; ?>/images/head/head4.jpg"  height="80" width="80"></div>
 <div  class='textCenter'><?php echo $data->author; ?></div>
 </div>
 <div class="span10 well">
@@ -26,7 +26,7 @@ echo $data->email;?>
 <?php if(isset($data->reply) && trim($data->reply) != ""  ) {?>
 <div class="row-fluid">
 <div class='pull-right inlineBlock'>
-<div  class='headPhoto'><img alt="" src="/mmcsysu/images/head/head3.jpg"  height="80" width="80"></div>
+<div  class='headPhoto'><img alt="" src="<?php echo Yii::app()->baseUrl;?>/images/head/head3.jpg"  height="80" width="80"></div>
 <div  class='textCenter'>多媒体中心</div>
 </div>
 <div class="span10 well">

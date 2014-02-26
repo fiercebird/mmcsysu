@@ -51,7 +51,7 @@ foreach($classroomItems as $classroom)
 	$('#specialClassroom li a').click(function(){
 		var id=$(this).attr('id');
 		$.ajax({
-                        url:"/mmcsysu/index.php/site/getSpecialRoom",
+                        url:"<?php echo Yii::app()->createUrl('site/getSpecialRoom');?>",
 			method:'post',
 			data:{"id":id },
 			dataType: 'json',
