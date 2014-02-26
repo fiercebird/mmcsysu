@@ -9,7 +9,17 @@
 <div  class='textCenter'><?php echo $data->author; ?></div>
 </div>
 <div class="span10 well">
-<div ><?php  echo substr($data->create_time,0,-3); ?>&emsp;&emsp;<a id="commentId-<?php echo $data->comment_id;?>">#<?php Comment::getNum(); ?></a></div>
+<div ><a id="commentId-<?php echo $data->comment_id;?>">#<?php Comment::getNum(); ?></a>&emsp;&emsp;
+<?php 
+echo Dictionary::item(Yii::app()->params['dictTypeComment'], $data->status) . ' | ';
+echo substr($data->create_time,0,-3) . ' | ';   
+echo $data->email;?>
+<div class='inlineBlock pull-right'>
+<a href="<?php echo Yii::app()->createUrl('comment/view', array('id'=>$data->comment_id)); ?>"><i class='icon-search'></i></a>
+<a href="<?php echo Yii::app()->createUrl('comment/update', array('id'=>$data->comment_id)); ?>"><i class='icon-edit'></i></a>
+<a href='#' class='deleteBtn' data-id="<?php echo $data->comment_id; ?>"><i class='icon-trash'></i></a>
+</div>
+</div>
 <div><div id="content-<?php echo $data->comment_id;?>"><p><?php echo $data->content;?></p></div></div>
 </div>
 </div>
@@ -24,3 +34,6 @@
 </div>
 </div>
 <?php } ?>
+
+
+

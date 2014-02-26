@@ -40,7 +40,7 @@ $this->breadcrumbs=array(
 <?php  if(isset($article)) {   ?> 
 <div class='pull-right'>
 <a class='label label-info'  href='<?php echo Yii::app()->createUrl('Article/update', array('id'=>$article->article_id, 'title'=>$article->title)) ?>' >编辑</a>
-<a class='label label-important'  id='deleteBtn'  data-id=<?php echo $article->article_id;?>  data-title='<?php echo $article->title; ?>' >删除</a>
+<a class='label label-important' href='#' id='deleteBtn'  data-id=<?php echo $article->article_id;?>  data-title='<?php echo $article->title; ?>' >删除</a>
 </div>
 <div class='text-center'><h4><?php echo $article->title; ?></h4> </div>
 <div class='articleInfo'><span>发布方:<?php  echo $article->publisher; ?></span><span>发布时间:<?php echo substr($article->update_time, 0, -3); ?></span></div>

@@ -816,3 +816,20 @@ tr> td > span.label, #article >div>a.label
 {
         margin:0px 0px 0px 80px; 
 }
+
+
+div.headPhoto
+{
+        height:80px;
+        min-width:80px;
+}
+
+.textCenter
+{
+        text-align:center;
+}
+
+div.inlineBlock
+{
+        display:inline-block;
+}

@@ -28,7 +28,7 @@ $this->widget('bootstrap.widgets.TbDetailView', array(
 	),
 )); ?>
 <br />
-<a class="btn btn-info span2" href="<?php echo Yii::app()->createUrl('comment/admin'); ?>">返回</a>
+<a class="btn btn-info span2" href="<?php echo Yii::app()->request->urlReferrer ?>">返回</a>
 
 
 <script language="javascript" type="text/javascript">
