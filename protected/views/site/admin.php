@@ -27,7 +27,7 @@ $auth = Yii::app()->user->auth;
 当前用户
 </div>
 <div id="currentUser" class="collapse in"> 
-<div class="alert">申请模块权限请把账号和模块名发邮件至mickeymousesysu@gmail.com</div>
+<div class="alert">申请模块权限请联系张梓滨，469917226@qq.com。</div>
 <table class="table table-striped table-hover">
 <thead><tr><th>用户名</th><th><?php echo Yii::app()->user->name;?></th></tr></thead>
 <tbody>
@@ -60,6 +60,7 @@ $auth = Yii::app()->user->auth;
 <tbody>
 <tr><th>系统版本</th><td>V 3.0</td></tr>
 <tr><th>系统开发</th><td>中山大学网络中心多媒体网络组</td></tr>
+<tr><th>浏览器支持</th><td>IE8-10、Chrome、Firefox、Safari</td></tr>
 </tbody>
 </table>
 <table class="table table-striped table-hover">

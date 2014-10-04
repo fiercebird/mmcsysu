@@ -60,7 +60,7 @@ addSlide(i);
 
 
 
-<div >
+<div class="team-main">
 
 <div class="slideBorder">
 <div class="slidePicture"  >

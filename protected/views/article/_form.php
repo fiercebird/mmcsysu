@@ -37,6 +37,15 @@ switch($model->category_id)
    case Category::$CATE_TECH_EXPLORE:
       $cid = 5;
       break;
+   case Category::$CATE_PERFECT_ASSISTANT:
+      $cid = 6;
+      break;
+   case Category::$CATE_WORK_FEELING:
+      $cid = 6;
+      break;
+   case Category::$CATE_ACTIVITY_REPORT:
+      $cid = 6;
+      break;
 }
 
 

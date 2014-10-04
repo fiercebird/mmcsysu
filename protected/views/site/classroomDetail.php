@@ -30,8 +30,10 @@ switch($bid)
 }
 $this->breadcrumbs=$breadcrumbs;
 
-echo $classroom;
-$cid=1;
+$cid = 1;
+$building = Building::model()->findByPk($bid);
+if($building)
+	$cid = $building->cid;
 $dir=Yii::app()->baseUrl;
 if($cid==1) $dir.= "/images/classroom/east/";
 if($cid==2) $dir.= "/images/classroom/south/";
@@ -82,15 +84,24 @@ PImgPlayer.init("imgPlayer", 434,300);
 <div class='span5   pull-left'><dl>
 <dt><h5>教室说明:</h5></dt>
 <dd><ul>
-<li>教室类型：<?php if(isset($className)) echo $className; else echo "暂无信息";?> </li>
-<li>教室座位数：<?php if(isset($seatNum)) echo $seatNum; else echo "暂无信息";?></li>
-<li>教室考位：<?php if(isset($examNum)) echo $examNum; else echo "暂无信息";?></li>
+<li>课室名：<?php  if($className) echo $className; else echo "暂无信息";?></li> 
+<li>教室座位数：<?php if($classDetail) echo $classDetail->seatNum; else echo "暂无信息";?></li>
+<li>教室考位：<?php if($classDetail) echo $classDetail->examNum; else echo "暂无信息";?></li>
 </ul><dd>
+<?php
+    if($classDetail)
+	    $com = $classDetail->computers;
+	if(isset($com[0]))
+		$com = $com[0];
+	else
+		$com = false;
+?>
 <dt><h5>计算机配置:</h5><dt>
 <dd><ul>
-<li>CPU：&nbsp;<?php  if(isset($cpu)) echo  $cpu; else echo "暂无信息";?></li> 
-<li>内存：&nbsp;<?php if(isset($memory)) echo $memory." GB"; else echo "暂无信息";?></li> 
-<li>硬盘：&nbsp;<?php if(isset($hardDisk)) echo $hardDisk." GB"; else echo "暂无信息";?></li> 
+<li>CPU：&nbsp;<?php  if($com) echo $com->cpu; else echo "暂无信息";?></li> 
+<li>内存：&nbsp;<?php if($com) echo $com->memory." GB"; else echo "暂无信息";?></li> 
+<li>硬盘：&nbsp;<?php if($com) echo $com->hardDisk." GB"; else echo "暂无信息";?></li> 
+<li>IP地址：&nbsp;<?php if($com) echo $com->ip; else echo "暂无信息";?></li> 
 <li>操作系统：&nbsp; win 7</li>
 <li>预装软件：&nbsp; Office 办公软件 | 常用播放器 | 杀毒软件</dd>
 </ul>

@@ -160,13 +160,38 @@ class Article extends CActiveRecord
 				'order'=>'status, update_time DESC',
 				'limit'=>Yii::app()->params['recentlyNewsPerPage'],
 			),
+                        //特色课室
 			'specialClassroom'=>array(
-			   'condition'=>'category_id=' . Category::$CATE_SPECIAL_CLASSROOM
+			   'condition'=>'category_id=' . Category::$CATE_SPECIAL_CLASSROOM . ' and (status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP . ')'
 			),
+                        //规章制度
 			'regulationRules'=>array(
 			   'select'=>"article_id, title,left(content,600) as content",
-			   'condition'=>'category_id='. Category::$CATE_REGULATION_RULE
+			   'condition'=>'category_id='. Category::$CATE_REGULATION_RULE . ' and (status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP . ')'
 			),
+                        //技术探索
+                        'techExplode'=>array(
+			   'select'=>"article_id, title,left(content,600) as content",
+			   'condition'=>'category_id='. Category::$CATE_TECH_EXPLORE . ' and (status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP . ')'
+			),
+                        //优秀助理
+                        'perfectAssistants'=>array(
+                           'select'=>"article_id, title,left(content,600) as content",
+                           'condition'=>'category_id='. Category::$CATE_PERFECT_ASSISTANT . ' and (status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP . ')'
+                        ),
+                     
+                        //工作感想
+                        'workFeelings'=>array(
+                           'select'=>"article_id, title,left(content,600) as content",
+                           'condition'=>'category_id='. Category::$CATE_WORK_FEELING . ' and (status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP . ')'
+                        ),
+
+                        //活动报道
+                        'activityReports'=>array(
+                           'select'=>"article_id, title,left(content,600) as content",
+                           'condition'=>'category_id='. Category::$CATE_ACTIVITY_REPORT . ' and (status=' . self::$STATUS_PUBLISHED . ' or status=' . self::$STATUS_SET_TOP . ')'
+                        ),
+
 		);
 	}
 
@@ -176,7 +201,7 @@ class Article extends CActiveRecord
          */
         public function getUrl()
         {
-           return Yii::app()->createUrl('article/view', array(
+           return Yii::app()->createUrl('site/article', array(
                     'id'=>$this->article_id,
                     'cate'=>$this->category_id,
                     ));
@@ -189,6 +214,13 @@ class Article extends CActiveRecord
         protected function afterDelete()
         {                
            parent::afterDelete();    
+
+           if($this->category_id == Category::$CATE_SPECIAL_CLASSROOM) //物理删除文章时吧字典表也删掉
+	   {
+                  $specialRoomItem = Dictionary::model()->findByAttributes(array('item_key'=>$this->article_id, 'dictionary_type'=> Yii::app()->params['dictTypeSpecialClassroom'])); 
+                  $specialRoomItem->delete();
+
+           }
         }
 
         /**
@@ -201,7 +233,7 @@ class Article extends CActiveRecord
            parent::afterSave();    
            if($this->category_id == Category::$CATE_SPECIAL_CLASSROOM)
            {
-              if($this->isNewRecord){
+              if($this->isNewRecord){   //新建记录
                 $model = new Dictionary();
                 $model->dictionary_type = Yii::app()->params['dictTypeSpecialClassroom'];
                 $model->item_key = $this->article_id;
@@ -209,10 +241,20 @@ class Article extends CActiveRecord
                 $n = Dictionary::getTypeCount(Yii::app()->params['dictTypeSpecialClassroom']);
                 $model->display_order = $n+1;
                 $model->save();
-              }else if ($this->status ==self::$STATUS_DELETED)
+              }else{        
+              if ($this->status == self::$STATUS_DELETED)  //把文章放入回收站
               {
-                      $specialRoomItem = Dictionary::model()->findByAttributes(array('item_key'=>$this->article_id, 'dictionary_type'=> Yii::app()->params['dictTypeSpecialClassroom'])); 
-                      $specialRoomItem->delete();
+                  $specialRoomItem = Dictionary::model()->findByAttributes(array('item_key'=>$this->article_id, 'dictionary_type'=> Yii::app()->params['dictTypeSpecialClassroom'])); 
+                  $specialRoomItem->display_order = -$specialRoomItem->display_order;
+                  $specialRoomItem->save();
+              }else{   //更新文章或者从回收站撤销文章
+                  $specialRoomItem = Dictionary::model()->findByAttributes(array('item_key'=>$this->article_id, 'dictionary_type'=> Yii::app()->params['dictTypeSpecialClassroom'])); 
+                  $specialRoomItem->item_value = $this->title;
+                  if( $specialRoomItem->display_order < 0 ) //从回收站回收文章时让序号为正
+                      $specialRoomItem->display_order = -$specialRoomItem->display_order;
+                  $specialRoomItem->save();
+                   
+	      }
               }
            }
            return true;
@@ -229,7 +271,7 @@ class Article extends CActiveRecord
                  $this->author_id=Yii::app()->user->id;
               }
               else
-                 $this->update_time=time();
+                 $this->update_time = date( 'Y-m-d H:i:s', time() );
               return true;
            }
            else

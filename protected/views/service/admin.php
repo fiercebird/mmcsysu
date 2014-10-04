@@ -1,12 +1,9 @@
 <?php
-/*
- *Author: hehao
- *Email:  mickeymousesysu@gmail.com
- *Date: 2014-01-01 
- *Function:
- *  
- */
 
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 switch($typeid) {
     case MisService::WEEK_SERVICE:
         $name = '周报表';
@@ -32,9 +29,12 @@ $this->breadcrumbs=array(
             '服务列表',
             $name,
 );        
+?>
 
-$this->widget('bootstrap.widgets.TbGridView', array(
-    'type'=>'striped bordered condensed',
+<?php
+if(Yii::app()->user->hasFlash('success'))
+   echo '<div class="flash-success mesFade">' . Yii::app()->user->getFlash('success') . '</div>';
+$this->widget('zii.widgets.grid.CGridView', array(
     'id' => 'mis-service-grid',
     'dataProvider' => $model->search($typeid),
     'pager'=>array('class'=>'CLinkPager',
@@ -49,14 +49,18 @@ $this->widget('bootstrap.widgets.TbGridView', array(
      'template'=>"{summary}{items}{pager}",
      'summaryText'=>"第{start}-{end}条 | 共{count}条 | {page}/{pages}页",
      'filter'=>$model,
-     'columns'=>array(
-        array('name' => 'content', 'type' => 'raw', 'value' => '$data->content'),
-        'date',
-    ),
-)); 
+     'columns' => array(
+         array('name' => 'content', 'type' => 'raw', 'value' => 'MisService::getLink($data->content)'),
+         'date',
+         array(
+               'header'=>'操作',
+               'class'=>'CButtonColumn',
+               'template'=>'{delete}',
+               'htmlOptions'=>array('style'=>'width:90px; text-align:center;')),
+         ),
+));
 ?>
 
-
-
-
-
+<script>
+    $('#collapse3').addClass('in');
+</script>    

@@ -28,7 +28,7 @@ $this->widget('zii.widgets.grid.CGridView', array(
             ),
          'nullDisplay'=>' ',
          'template'=>"{summary}{items}{pager}",
-         'summaryText'=>"第{start}-{end}条 | 共{count}条 | {page}/{pages}页",
+         'summaryText'=>"第{page}页，共{pages}页",
          'filter'=>$model,
          'columns'=>array(
              array(
@@ -54,12 +54,6 @@ $this->widget('zii.widgets.grid.CGridView', array(
                'htmlOptions'=>array('style'=>'width:130px'),
                'value'=>'substr($data->create_time,0,-3)',  
                ),  
-            array(
-               'name'=>'update_time',
-               'type'=>'raw',
-               'htmlOptions'=>array('style'=>'width:130px'),
-               'value'=>'substr($data->update_time,0,-3)',  
-               ),
             ),  
             )); 
 

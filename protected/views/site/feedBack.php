@@ -35,7 +35,7 @@ if(!empty($comments))
 <br />
 
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-         'id'=>'commentForm',
+        'id'=>'commentForm',
         'enableClientValidation'=>true,
 	'clientOptions'=>array(
 		'validateOnSubmit'=>true,

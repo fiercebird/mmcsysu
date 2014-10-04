@@ -21,6 +21,11 @@ switch($article->category_id)
       break;
    case Category::$CATE_TECH_EXPLORE:
       $cid = 5;
+	  break;
+   case Category::$CATE_PERFECT_ASSISTANT:
+   case Category::$CATE_ACTIVITY_REPORT:
+   case Category::$CATE_WORK_FEELING:
+      $cid = 6;
       break;
 }
 
@@ -43,7 +48,7 @@ $this->breadcrumbs=array(
 <a class='label label-important' href='#' id='deleteBtn'  data-id=<?php echo $article->article_id;?>  data-title='<?php echo $article->title; ?>' >删除</a>
 </div>
 <div class='text-center'><h4><?php echo $article->title; ?></h4> </div>
-<div class='articleInfo'><span>发布方:<?php  echo $article->publisher; ?></span><span>发布时间:<?php echo substr($article->update_time, 0, -3); ?></span></div>
+<div class='articleInfo'><span>发布方:<?php  echo $article->publisher; ?></span><span>发布时间:<?php echo substr($article->create_time, 0, -3); ?></span></div>
 <hr class='hr4'/>
 <div><?php  echo $article->content; ?></div>
 <?php } ?>

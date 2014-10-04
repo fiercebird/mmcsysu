@@ -64,18 +64,19 @@ if($auth & ModuleAuth::MMC_SERVICE_ADMIN){
 ?>
 <div class="accordion-group">
 <div class="accordion-heading">
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse3"><i class="icon-list"></i>&emsp;服务列表</a>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion1" href="#collapse3"><i class="icon-list"></i>&emsp;服务报表</a>
 </div>
 <div id="collapse3" class="accordion-body collapse ">
         <div class="accordion-inner">
 	<?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'周报表','url'=>array(''), 'icon'=>'list-alt'),
-                        array('label'=>'月报表','url'=>array(''),'icon'=>'list-alt'),
-                        array('label'=>'服务调查表','url'=>array(''), 'icon'=>'list-alt'),
-                        array('label'=>'服务统计表','url'=>array(''), 'icon'=>'list-alt'),
-                        array('label'=>'表格下载','url'=>array(''), 'icon'=>'list-alt'),
+                        array('label'=>'新增报表','url'=>array('service/create'), 'icon'=>'list-alt'),
+                        array('label'=>'周报表','url'=>array('service/admin', 'typeid' => MisService::WEEK_SERVICE), 'icon'=>'list-alt'),
+                        array('label'=>'月报表','url'=>array('service/admin', 'typeid' => MisService::MONTH_SERVICE),'icon'=>'list-alt'),
+                        array('label'=>'服务调查表','url'=>array('service/admin', 'typeid' => MisService::SURVEY_SERVICE), 'icon'=>'list-alt'),
+                        array('label'=>'服务统计表','url'=>array('service/admin', 'typeid' => MisService::STAT_SERVICE), 'icon'=>'list-alt'),
+                        array('label'=>'表格下载','url'=>array('service/admin', 'typeid' => MisService::TABLE_SERVICE), 'icon'=>'list-alt'),
                     ),
 		 )); ?>
         </div>
@@ -123,6 +124,7 @@ if($auth & ModuleAuth::MMC_TECH_EXPLORE){
         </div>
 </div>
 </div>
+
 <?php }
 if($auth & ModuleAuth::MMC_TEAMSTYLE){
 ?>
@@ -135,9 +137,12 @@ if($auth & ModuleAuth::MMC_TEAMSTYLE){
         <?php $this->widget('bootstrap.widgets.TbMenu', array(
                  'type'=>'list',
 		 'items'=>array(
-                        array('label'=>'优秀助理','url'=>array(''), 'icon'=>'thumbs-up'),
-                        array('label'=>'工作感想','url'=>array(''), 'icon'=>'pencil'),
-                        array('label'=>'活动报道','url'=>array(''), 'icon'=>'bullhorn'),
+                        array('label'=>'新增助理','url'=>array('article/createArticle','cate'=>Category::$CATE_PERFECT_ASSISTANT), 'icon'=>'plus'),
+                        array('label'=>'优秀助理','url'=>array('article/assistantAdmin','cate'=>Category::$CATE_PERFECT_ASSISTANT), 'icon'=>'thumbs-up'),
+                        array('label'=>'新增感想','url'=>array('article/createArticle','cate'=>Category::$CATE_WORK_FEELING), 'icon'=>'plus'),
+                        array('label'=>'工作感想','url'=>array('article/feelingAdmin','cate'=>Category::$CATE_WORK_FEELING), 'icon'=>'pencil'),
+                        array('label'=>'新增报道','url'=>array('article/createArticle','cate'=>Category::$CATE_ACTIVITY_REPORT), 'icon'=>'plus'),
+                        array('label'=>'活动报道','url'=>array('article/reportAdmin','cate'=>Category::$CATE_ACTIVITY_REPORT), 'icon'=>'bullhorn'),
                   ),
 		 )); ?>
 

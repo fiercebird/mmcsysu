@@ -7,10 +7,6 @@
  *  
  */
 
-
-
-
-
 class ArticleController extends Controller
 {
 
@@ -53,6 +49,15 @@ class ArticleController extends Controller
                     'users'=>array('@'),
                    'expression'=>'(Yii::app()->user->auth & ModuleAuth::MMC_HOMEPAGE_ADMIN) | (Yii::app()->user->auth & ModuleAuth::MMC_CLASSROOM_ADMIN) | (Yii::app()->user->auth & ModuleAuth::MMC_RULE_ADMIN) | (Yii::app()->user->auth & ModuleAuth::MMC_TECH_EXPLORE)',
                     ),
+
+                 //多媒体风采访问权限控制
+                 array(
+                    'allow',
+                   'actions'=>array('assistantAdmin', 'feelingAdmin','reportAdmin'),
+                    'users'=>array('@'),
+                   'expression'=>'(Yii::app()->user->auth & ModuleAuth::MMC_TEAMSTYLE)',
+                   ),
+
                  array(
                     'deny',
                     'users'=>array('*'),
@@ -158,6 +163,8 @@ class ArticleController extends Controller
                 if(isset($_POST['Article']))
                 {
                         $model->attributes = $_POST['Article'];
+                        $model->create_time = date('Y-m-d H:i:s');
+                        $model->update_time = date('Y-m-d H:i:s');
                         try{
                                 if($model->save())
                                       //  $data = implode($model->attributes , '::');
@@ -186,6 +193,7 @@ class ArticleController extends Controller
                 if(isset($_POST['Article']))
                 {
                         $model->attributes=$_POST['Article'];
+                        $model->update_time = date('Y-m-d H:i:s');
                         try{
                            if($model->save())
                               $this->redirect(array('view','id'=>$model->article_id));
@@ -313,5 +321,52 @@ class ArticleController extends Controller
            return $this->_model;
         }
 
+        //优秀助理后台管理
+        public function actionAssistantAdmin()
+        {
+                //根据columnBE中cate判定文章类别
+                if(!isset($_GET['cate']))
+                   throw new CHttpException(404,'非法请求');
+                $cate = $_GET['cate'];
+                //search是一个固定的方法，用于查询对应的model
+                //title文章标题当作助理姓名
+                $model = new Article('search');
+                //增加类别筛选，search中做不了
+                $model->dbCriteria->compare('category_id', $cate);
+                //固有函数Sets the attributes to be null.
+                //去除默认值
+                $model->unsetAttributes(); 
+                if(isset($_GET['Article']))
+                        $model->attributes=$_GET['Article'];
+                $this->render('assistantAdmin',array('model'=>$model,'cate'=>$cate));
+        }
 
+         //工作感想后台管理
+         public function actionFeelingAdmin()
+         {
+             if(!isset($_GET['cate']))
+                   throw new CHttpException(404,'非法请求');
+                $cate = $_GET['cate'];
+                $model = new Article('search');
+                $model->dbCriteria->compare('category_id', $cate);
+                $model->unsetAttributes(); //campus_id默认值为0,去除默认值，则GridView中会显示所有用户
+                if(isset($_GET['Article']))
+                        $model->attributes=$_GET['Article'];
+                $this->render('feelingAdmin',array('model'=>$model,'cate'=>$cate));
+
+         }
+     
+         //活动报道后台管理
+         public function actionReportAdmin()
+         {
+             if(!isset($_GET['cate']))
+                   throw new CHttpException(404,'非法请求');
+                $cate = $_GET['cate'];
+                $model = new Article('search');
+                $model->dbCriteria->compare('category_id', $cate);
+                $model->unsetAttributes(); //campus_id默认值为0,去除默认值，则GridView中会显示所有用户
+                if(isset($_GET['Article']))
+                        $model->attributes=$_GET['Article'];
+                $this->render('reportAdmin',array('model'=>$model,'cate'=>$cate));
+         }
 }

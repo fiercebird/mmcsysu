@@ -62,7 +62,7 @@ $this->breadcrumbs=array(
          )); ?>
 
 <fieldset><legend><strong><?php echo  $legend; ?> </strong></legend>
-<?
+<?php
 echo $form->textFieldRow($model,'title', array('class'=>'span9') ); 
 echo $form->labelEx($model,'content');
 echo $form->textArea($model,'content',  array('id'=>'serviceEditor','style'=>'height:500px;width:750px;')); 

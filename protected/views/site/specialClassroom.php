@@ -20,6 +20,7 @@ $item=array();
 $item[0]=array('label'=>'特色课室', 'icon'=>'star-empty' );
 foreach($classroomItems as $classroom)
 {
+    if($classroom->display_order >0)
 	$item[$classroom->display_order]=array('label'=>$classroom->item_value, 'url'=>'#', 'linkOptions'=>array('id'=>$classroom->item_key));
 }
 

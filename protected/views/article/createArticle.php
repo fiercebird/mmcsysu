@@ -17,6 +17,8 @@ $this->pageTitle=Yii::app()->name . ' - 添加' . $cate;
 $this->breadcrumbs=array(
             $prev,
            '添加'. $cate ,
+
+
 )
 
 
