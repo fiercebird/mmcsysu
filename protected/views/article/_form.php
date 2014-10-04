@@ -78,7 +78,7 @@ switch($model->category_id)
 <div class='span6'><?php echo $form->textFieldRow($model,'publisher' ,array('class'=>'inline') ); ?></div>
 </div>
 <?php } ?>
-<?
+<?php
 echo $form->textFieldRow($model,'title', array('class'=>'span9') ); 
 echo $form->labelEx($model,'content');
 echo $form->textArea($model,'content',  array('id'=>'serviceEditor','style'=>'height:500px;width:750px;')); 

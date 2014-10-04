@@ -18,7 +18,7 @@ if(Yii::app()->user->hasFlash('error'))
          )); ?>
 
 <fieldset><legend><strong>更新评论</strong></legend>
-<?
+<?php
 echo $form->textFieldRow($model,'author', array('disabled'=>true)); 
 echo $form->textFieldRow($model,'email', array('disabled'=>true)); 
 echo $form->textFieldRow($model,'create_time',array('disabled'=>true)); 
