@@ -49,11 +49,15 @@ Installing Guide
 		You must alter the status =1 which will be published at page.
 
 		7. Create a administrator user
-		Now You can see the WebSite successfully. If you want to login the backend of the WebSite, you need to create a user for youself.
+		Now You can see the WebSite successfully. If you want to login the backend of the WebSite, 
+		you need to create a user for youself.
 		1) alter the username and pwd variable in javascript at the file: /mmcsysu/genUser/genUser.php
 		2) open the genUser.php on the browser, and you can see something like this:
         2-1 Update User
-		update mis_user set password ='340b5f9511d72121354835b3f457996a62e764bab7a4c35e78fe4e33605c910729361c76' where username ='hh';
+		update mis_user set password ='340b5f9511d72121354835b3f457996a62e764bab7a4c35e78fe4e33605c910729361c76' 
+		where username ='hh';
 		2-2 Create User
-		insert into mis_user (username, password, authority ) value ('hh', '340b5f9511d72121354835b3f457996a62e764bab7a4c35e78fe4e33605c910729361c76', 984062);	
-		3) copy the "Create User" sql showed above and excute it in mysql.Then you can login backend with your own username and password.
+		insert into mis_user (username, password, authority ) value 
+		('hh', '340b5f9511d72121354835b3f457996a62e764bab7a4c35e78fe4e33605c910729361c76', 984062);	
+		3) copy the "Create User" sql showed above and excute it in mysql.
+		Then you can login backend with your own username and password.
