@@ -70,11 +70,11 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 	   	$articles=Article::model()->serviceInfo()->publishedandSetTop()->recently()->findAll();
-                $contactWay = Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['contactTelTitle']));
-                if(empty($articles))
-                   Yii::log('Article titles is null','warning','db.actionIndex');
-                if(!isset($contactWay))
-                   Yii::log( '首页不能获取联系人！错误：' . $errors ,'warning','db' . $this->action->id);
+		$contactWay = Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['contactTelTitle']));
+		if(empty($articles))
+		   Yii::log('Article titles is null','warning','db.actionIndex');
+		if(!isset($contactWay))
+		   Yii::log( '首页不能获取联系人！错误：', 'warning', 'db' . $this->action->id);
 		$this->render('index', array('articles'=>$articles, 'contactWay'=>$contactWay));
 	}
 
@@ -82,13 +82,13 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-                $model = new Article('search');
-                $model->dbCriteria->compare('category_id', Category::$CATE_SERVICE_INFO);
-                $model->unsetAttributes(); //campus_id默认值为0,去除默认值，则GridView中会显示所有用户
-                if(isset($_GET['Article']))
-                        $model->attributes=$_GET['Article'];
-                if(empty($articles))
-                   Yii::log('Article titles is null','warning','db.actionIndex');
+		$model = new Article('search');
+		$model->dbCriteria->compare('category_id', Category::$CATE_SERVICE_INFO);
+		$model->unsetAttributes(); //campus_id默认值为0,去除默认值，则GridView中会显示所有用户
+		if(isset($_GET['Article']))
+				$model->attributes=$_GET['Article'];
+		if(empty($articles))
+		   Yii::log('Article titles is null','warning','db.actionIndex');
 		$this->render('more', array('model'=>$model));
 	}
 
@@ -138,8 +138,8 @@ class SiteController extends Controller
 	public function actionLogin()
 	{
 
-           Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/sha256.js',CClientScript::POS_HEAD);
-                $model=new LoginForm;
+		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/sha256.js',CClientScript::POS_HEAD);
+			$model=new LoginForm;
 
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='loginForm')
@@ -173,125 +173,123 @@ class SiteController extends Controller
 	public function actionRule()
 	{
 		$rules=Article::model()->regulationRules()->findAll();			   
-                if(empty($rules))
-                       Yii::log('Article about rule is null', 'warning', 'db.actionRule');
-                $this->render('rule', array('rules'=>$rules));
+		if(empty($rules))
+			   Yii::log('Article about rule is null', 'warning', 'db.actionRule');
+		$this->render('rule', array('rules'=>$rules));
 	}
 	
 	public function actionTechExplore()
-        {
-                $criteria=new CDbCriteria(array(
-                    'select'=>'article_id, category_id, title, left(content,800)  as content, update_time, create_time',
-                    'condition'=>'category_id='. Category::$CATE_TECH_EXPLORE,
-                    'order'=>'create_time DESC',
-                    ));
-                $dataProvider=new CActiveDataProvider('Article', array(
-                    'pagination'=>array(
-                       'pageSize'=>Yii::app()->params['techArticlesPerPage'],
-                       ),
-                    'criteria'=>$criteria,
-                    ));
-                $this->render('techExplore', array('dataProvider'=>$dataProvider));
-      	}
+	{
+		$criteria=new CDbCriteria(array(
+			'select'=>'article_id, category_id, title, left(content,800)  as content, update_time, create_time',
+			'condition'=>'category_id='. Category::$CATE_TECH_EXPLORE,
+			'order'=>'create_time DESC',
+			));
+		$dataProvider=new CActiveDataProvider('Article', array(
+			'pagination'=>array(
+			   'pageSize'=>Yii::app()->params['techArticlesPerPage'],
+			   ),
+			'criteria'=>$criteria,
+			));
+		$this->render('techExplore', array('dataProvider'=>$dataProvider));
+	}
 
 	public function actionSpecial()
 	{
 		$specialClassroomItems=Dictionary::model()->specialClassroomItems()->findAll();
 		$siteSpecialArticle=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['siteSpecialArticle']));
-                if(empty($specialClassroomItems) || empty($siteSpecialArticle))
-                        Yii::log('Article about specialclassroom is null', 'warning', 'db.actionSpecial');
+		if(empty($specialClassroomItems) || empty($siteSpecialArticle))
+				Yii::log('Article about specialclassroom is null', 'warning', 'db.actionSpecial');
 		$this->render('specialClassroom',array('classroomItems'=>$specialClassroomItems, 'siteSpecialArticle'=>$siteSpecialArticle));
 	
 	}
 
-        public function actionIntroduce()
-        {
-                $this->layout='column3';
-                $siteIntroduceArticle=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['siteIntroduceArticle']));
-                if(empty($siteIntroduceArticle))
-                        Yii::log('Articla about classroom introduce is null','warning', 'db.actionIntroduce');
-                $this->render('classroomIntroduce', array('siteIntroduceArticle'=>$siteIntroduceArticle));
-        }
+	public function actionIntroduce()
+	{
+		$this->layout='column3';
+		$siteIntroduceArticle=Article::model()->findByAttributes(array('publisher'=>Yii::app()->params['siteIntroduceArticle']));
+		if(empty($siteIntroduceArticle))
+				Yii::log('Articla about classroom introduce is null','warning', 'db.actionIntroduce');
+		$this->render('classroomIntroduce', array('siteIntroduceArticle'=>$siteIntroduceArticle));
+	}
 
-        public function actionCampusBus()
-        {
-                $this->layout='column3';
-                $html=new simple_html_dom();
-                $html->load_file('./protected/data/zongwuchuCampusBus.html');	
-                $content=$html->find('div.cont',0)->children(3);
-                $res='';
-                while($content!=null)
-                {
-                        $res.=$content->outertext;
-                        $content=$content->next_sibling();
-                }
-                $html->clear();
-                if(empty($res))
-                   Yii::log('Article abou campus bus is null', 'warning', 'uc.actionCampusBus');
-                $this->render('campusBus',array('campusBus'=>$res));
-        }
-
-
-        public function actionArticle()
-        {
-                $id=Yii::app()->request->getParam('id');
-                $cate=Yii::app()->request->getParam('cate');
-                if(!isset($id) || !isset($cate))
-                   throw new CHttpException(404,'非法请求');
-                $article=Article::model()->findByPk($id);
-                if(empty($article))
-                    Yii::log('CAN NOT find article id='. $id, 'warning', 'db.actionArticle');
-                $this->render('article',array('article'=>$article,'cate'=>$cate));
-        }
+	public function actionCampusBus()
+	{
+		$this->layout='column3';
+		$html=new simple_html_dom();
+		$html->load_file('./protected/data/zongwuchuCampusBus.html');	
+		$content=$html->find('div.cont',0)->children(3);
+		$res='';
+		while($content!=null)
+		{
+				$res.=$content->outertext;
+				$content=$content->next_sibling();
+		}
+		$html->clear();
+		if(empty($res))
+		   Yii::log('Article abou campus bus is null', 'warning', 'uc.actionCampusBus');
+		$this->render('campusBus',array('campusBus'=>$res));
+	}
 
 
-        public function actionClassroomDetail()
-        {
-                Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/slider.js',CClientScript::POS_HEAD);
-                $this->layout='column3';
-                $bid=Yii::app()->request->getParam('bid');
-                $className=Yii::app()->request->getParam('className');
-                if(!isset($bid) || !isset($className))
-                   throw new CHttpException(404,'非法请求');
-                $classroom=$bid.'_'. $className;
-                $this->render('classroomDetail',array('classroom'=>$classroom,'bid'=>$bid, 'className'=>$className));
-        }
+	public function actionArticle()
+	{
+		$id=Yii::app()->request->getParam('id');
+		$cate=Yii::app()->request->getParam('cate');
+		if(!isset($id) || !isset($cate))
+		   throw new CHttpException(404,'非法请求');
+		$article=Article::model()->findByPk($id);
+		if(empty($article))
+			Yii::log('CAN NOT find article id='. $id, 'warning', 'db.actionArticle');
+		$this->render('article',array('article'=>$article,'cate'=>$cate));
+	}
 
 
-        public function actionGetSpecialRoom()
-        {
-                if(Yii::app()->request->isAjaxRequest)
-                {
-                        $id=Yii::app()->request->getParam('id');
-                        $article=Article::model()->findByPk($id);
-                        if(empty($article))
-                                Yii::log('CAN NOT find article id='. $id, 'error', 'db.actionArticle');
-                        $res=array('article'=>$article); 
-                         echo CJSON::encode($res);
-                }else
-                   throw new CHttpException('404','非法请求');
-        }
+	public function actionClassroomDetail()
+	{
+		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/slider.js',CClientScript::POS_HEAD);
+		$this->layout='column3';
+		$bid=Yii::app()->request->getParam('bid');
+		$className=Yii::app()->request->getParam('className');
+		if(!isset($bid) || !isset($className))
+		   throw new CHttpException(404,'非法请求');
+		$classroom=$bid.'_'. $className;
+		$this->render('classroomDetail',array('classroom'=>$classroom,'bid'=>$bid, 'className'=>$className));
+	}
 
 
-        public function actionTeamStyle()
-        {
-        
-                Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/slides.min.jquery.js',CClientScript::POS_HEAD);
-                $this->layout='column4';
-                $this->render('teamStyle',array());
-        }
+	public function actionGetSpecialRoom()
+	{
+		if(Yii::app()->request->isAjaxRequest)
+		{
+				$id=Yii::app()->request->getParam('id');
+				$article=Article::model()->findByPk($id);
+				if(empty($article))
+						Yii::log('CAN NOT find article id='. $id, 'error', 'db.actionArticle');
+				$res=array('article'=>$article); 
+				 echo CJSON::encode($res);
+		}else
+		   throw new CHttpException('404','非法请求');
+	}
 
-        public function actionServiceList()
-        {
-                $this->layout='column5';
-                
-                $this->render('serviceList',array());
-        }
+
+	public function actionTeamStyle()
+	{
+		Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl . '/js/slides.min.jquery.js',CClientScript::POS_HEAD);
+		$this->layout='column4';
+		$this->render('teamStyle',array());
+	}
+
+	public function actionServiceList()
+	{
+		$this->layout='column5';
+		$this->render('serviceList',array());
+	}
 
 
-        public function actionFeedback()
-        {
-           	$model=new CommentForm;
+	public function actionFeedback()
+	{
+		$model=new CommentForm;
 		// if it is ajax validation request
 		if(isset($_POST['ajax']) && $_POST['ajax']==='commentForm')
 		{
@@ -304,45 +302,45 @@ class SiteController extends Controller
 		{
 			$model->attributes=$_POST['CommentForm'];
 			// validate user input and redirect to the previous page if valid
-                        $resCode = 0;
-                        $resMes = 'OK';
-                        if($model->validate())
-                        {
-                                $model->save();
-                        }
-                        else
-                        {
-                              $errors="";
-                              foreach($model->getErrors() as $k=>$a)
-                                 $errors .= implode($a,';');
-                              Yii::log( '不能提交评论！错误：' . $errors, 'warning','db' . $this->action->id);
-                              $resCode = 1;
-                              $resMes = '不能提交评论！错误: ' . $errors;
-                        }
-                        echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
-                        Yii::app()->end();
+			$resCode = 0;
+			$resMes = 'OK';
+			if($model->validate())
+			{
+					$model->save();
+			}
+			else
+			{
+				  $errors="";
+				  foreach($model->getErrors() as $k=>$a)
+					 $errors .= implode($a,';');
+				  Yii::log( '不能提交评论！错误：' . $errors, 'warning','db' . $this->action->id);
+				  $resCode = 1;
+				  $resMes = '不能提交评论！错误: ' . $errors;
+			}
+			echo CJSON::encode(array('resCode'=>$resCode, 'resMes'=>$resMes));
+			Yii::app()->end();
 		}
 
-                $criteria=new CDbCriteria(array(
-                         'condition'=>'status='. Comment::$STATUS_PASS . ' or status=' . Comment::$STATUS_SET_TOP,
-                         'order'=>'status, create_time DESC',
-                         ));
+		$criteria=new CDbCriteria(array(
+				 'condition'=>'status='. Comment::$STATUS_PASS . ' or status=' . Comment::$STATUS_SET_TOP,
+				 'order'=>'status, create_time DESC',
+				 ));
 
-                $dataProvider=new CActiveDataProvider('Comment', array(
-                         'pagination'=>array(
-                            'pageSize'=>Yii::app()->params['commentsPerPage'],
-                            ),
-                         'criteria'=>$criteria,
-                         ));
+		$dataProvider=new CActiveDataProvider('Comment', array(
+				 'pagination'=>array(
+					'pageSize'=>Yii::app()->params['commentsPerPage'],
+					),
+				 'criteria'=>$criteria,
+				 ));
 
 		// display the login form
 		$this->render('feedBack',array('model'=>$model, 'comments'=>$dataProvider));
-        }
+	}
 
 
-        public function actionAdmin()
-        {
-                $this->layout='columnBE'; 
-                $this->render('admin', array());
-        }
+	public function actionAdmin()
+	{
+		$this->layout='columnBE'; 
+		$this->render('admin', array());
+	}
 }
